@@ -18,21 +18,24 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Button1"/>
+            android:text="START"
+            android:id="@+id/button_start"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Button2"/>
+            android:text="STOP"
+            android:id="@+id/button_stop"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:text="Button3"/>
+            android:text="CLEAR"
+            android:id="@+id/button_clear"/>
         </LinearLayout>
 
         <LinearLayout

@@ -27,8 +27,6 @@ import java.util.Date;
 
 public class PaintView extends View {
 
-    private int widthPixels;
-    private int heightPixels;
     private float mov_x;
     private float mov_y;
     private static boolean isFirstPenTouch = false;
@@ -38,7 +36,7 @@ public class PaintView extends View {
     private Canvas canvas;
     private Bitmap bitmap;
     private Path mPath = new Path();
-    private final String TAG = "[Kuanlin] ";
+    private final String TAG = "[PaintView] ";
 
     public PaintView(Context context) {
         super(context);
@@ -55,8 +53,6 @@ public class PaintView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        widthPixels = getMeasuredWidth();
-        heightPixels = getMeasuredHeight();
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom){
@@ -65,7 +61,7 @@ public class PaintView extends View {
 
     private void initPaintView() {
         paint = new Paint(Paint.DITHER_FLAG);
-        bitmap = Bitmap.createBitmap(widthPixels, heightPixels, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
 
