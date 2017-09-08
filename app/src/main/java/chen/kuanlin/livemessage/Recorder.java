@@ -9,12 +9,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -24,21 +26,36 @@ import java.util.Date;
 public class Recorder implements Runnable {
 
     private Context context;
+    private PaintView paintView;
+    private Bitmap image;
+    private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
+    private static boolean isContinue;
     private final String TAG = "[Recorder] ";
 
-    public Recorder(Context context){
+    public Recorder(Context context, PaintView paintView){
         this.context = context;
+        this.paintView = paintView;
+        isContinue = true;
+    }
+
+    public void terminate(){
+        isContinue = false;
+        Log.d(TAG, "terminate()");
     }
 
     @Override
     public void run(){
+        Log.d(TAG, "Recorder.run()");
         try {
-            Log.d(TAG, "Recorder.run()");
-            if(Thread.interrupted()){
-                throw new InterruptedIOException();
-        }
-        } catch(InterruptedIOException e){
-            Log.d(TAG, "InterruptedIOException");
+            while (isContinue){
+                image = getBitmapFromView(paintView);
+                bitmapList.add(image);
+                //storeImage(image);
+                Thread.sleep(1000);
+                Log.d(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
+            }
+        } catch(InterruptedException e){
+            Log.d(TAG, "InterruptedException");
             e.printStackTrace();
         }
     }
@@ -103,5 +120,35 @@ public class Recorder implements Runnable {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         //salt++;
         return mediaFile;
+    }
+
+    private byte[] generateGIF() {
+        Log.d(TAG,"generateGIF()");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        encoder.start(bos);
+        for (Bitmap bitmap : bitmapList) {
+            encoder.addFrame(bitmap);
+        }
+        encoder.finish();
+        Log.d(TAG,"encoder.finish()");
+        return bos.toByteArray();
+    }
+
+    public void storeGIF(){
+        File pictureFile = getOutputMediaFile();
+        if (pictureFile == null) {
+            Log.d(TAG, "Error creating media file, check storage permissions: ");
+            return;
+        }
+        try{
+            Log.d(TAG, "stroeGIF()");
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            fos.write(generateGIF());
+            fos.close();
+            Log.d(TAG, "fos.close()");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

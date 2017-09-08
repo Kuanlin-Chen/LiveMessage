@@ -1,12 +1,15 @@
 package chen.kuanlin.livemessage;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -31,9 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private Button button_start;
     private Button button_stop;
     private Button button_clear;
+    private PaintView paintView;
+    private Recorder recorder;
     private Thread thread;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private final String TAG = "[MainActivity] ";
+    //public static boolean isSaving = false;
+    //public static boolean keepGoing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         button_start = (Button)findViewById(R.id.button_start);
         button_stop = (Button)findViewById(R.id.button_stop);
         button_clear = (Button)findViewById(R.id.button_clear);
+        paintView = (PaintView)findViewById(R.id.paintview);
 
         checkPermission();
 
@@ -49,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "button_start");
-                thread = new Thread(new Recorder(getApplicationContext()));
+                recorder = new Recorder(getApplicationContext(), paintView);
+                thread = new Thread(recorder);
                 thread.start();
             }
         });
@@ -58,9 +67,56 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "button_stop");
-                thread.interrupt();
+                recorder.terminate();
+                if(!(thread.isInterrupted())){
+                    thread.interrupt();
+                }
+                new StoreDataAsyncTask().execute();
             }
         });
+    }
+
+    public class StoreDataAsyncTask extends AsyncTask<String, Integer, Integer>
+    {
+        private ProgressDialog myDialog;
+
+        @Override
+        protected void onPreExecute() {
+            //在背景執行之前要做的事，寫在這裡
+            //初始化進度條
+            myDialog = new ProgressDialog(MainActivity.this);
+            myDialog.setMessage("Saving Data");
+            myDialog.setCancelable(false);
+            myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            myDialog.show();
+            super.onPreExecute();
+        }
+        @Override
+        protected Integer doInBackground(String... param) {
+            //一定必須覆寫的方法
+            //背景執行的內容放此
+            //這裡不能和UI有任何互動
+            recorder.storeGIF();
+            return 1;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            //此方法會取得一個數值，可以用來計算目前執行進度
+            //通常用來改變進度列(Progressbar)
+            myDialog.setProgress(progress[0]);
+            super.onProgressUpdate(progress);
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            //doInBackground執行完後就會執行此方法
+            //通常用來傳資料給UI顯示
+            super.onPostExecute(result);
+            if(result.equals(1)){
+                myDialog.dismiss();
+            }
+        }
     }
 
     private void checkPermission(){
