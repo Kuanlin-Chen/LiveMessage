@@ -8,6 +8,11 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+/**
+ * Created by Daichi Furiya
+ * Reference:https://gist.github.com/wasabeef/8785346
+ */
+
 public class AnimatedGifEncoder {
 
     protected int width; // image size
