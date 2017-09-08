@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         button_stop.setOnClickListener(new ViewGroup.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "button_start");
+                Log.d(TAG, "button_stop");
                 thread.interrupt();
             }
         });

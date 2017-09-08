@@ -2,6 +2,7 @@ package chen.kuanlin.livemessage;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -70,5 +71,11 @@ public class MainView extends ViewGroup {
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MainView.LayoutParams(getContext(), attrs);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        super.onTouchEvent(event);
+        return true;
     }
 }
