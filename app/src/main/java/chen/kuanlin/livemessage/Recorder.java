@@ -30,6 +30,7 @@ public class Recorder implements Runnable {
     private Bitmap image;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
     private static boolean isContinue;
+    private boolean debugmode = true;
     private final String TAG = "[Recorder] ";
 
     public Recorder(Context context, PaintView paintView){
@@ -40,29 +41,29 @@ public class Recorder implements Runnable {
 
     public void terminate(){
         isContinue = false;
-        Log.d(TAG, "terminate()");
+        if(debugmode)Log.e(TAG, "terminate()");
     }
 
     @Override
     public void run(){
-        Log.d(TAG, "Recorder.run()");
+        if(debugmode)Log.e(TAG, "Recorder.run()");
         try {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
                 //storeImage(image);
                 Thread.sleep(1000);
-                Log.d(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
+                if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
             }
         } catch(InterruptedException e){
-            Log.d(TAG, "InterruptedException");
+            if(debugmode)Log.e(TAG, "InterruptedException");
             e.printStackTrace();
         }
     }
 
     public static Bitmap getBitmapFromView(View view) {
         //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap((view.getMeasuredWidth()/2), (view.getMeasuredHeight()/2), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
@@ -79,10 +80,11 @@ public class Recorder implements Runnable {
         return returnedBitmap;
     }
 
+
     private void storeImage(Bitmap image) {
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
-            Log.d(TAG, "Error creating media file, check storage permissions: ");
+            if(debugmode) Log.e(TAG, "Error creating media file, check storage permissions: ");
             return;
         }
         try {
@@ -90,9 +92,9 @@ public class Recorder implements Runnable {
             image.compress(Bitmap.CompressFormat.PNG, 90, fos);
             fos.close();
         } catch (FileNotFoundException e) {
-            Log.d(TAG, "File not found: " + e.getMessage());
+            if(debugmode)Log.e(TAG, "File not found: " + e.getMessage());
         } catch (IOException e) {
-            Log.d(TAG, "Error accessing file: " + e.getMessage());
+            if(debugmode)Log.e(TAG, "Error accessing file: " + e.getMessage());
         }
     }
 
@@ -116,37 +118,38 @@ public class Recorder implements Runnable {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("MMddHHmmss").format(new Date());
         File mediaFile;
-        String mImageName="MI_"+ timeStamp +".png";
+        String mImageName="MI_"+ timeStamp +".gif";
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         //salt++;
         return mediaFile;
     }
 
     private byte[] generateGIF() {
-        Log.d(TAG,"generateGIF()");
+        if(debugmode)Log.e(TAG,"generateGIF()");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        encoder.setFrameRate(10);
         encoder.start(bos);
         for (Bitmap bitmap : bitmapList) {
             encoder.addFrame(bitmap);
         }
         encoder.finish();
-        Log.d(TAG,"encoder.finish()");
+        if(debugmode)Log.e(TAG,"encoder.finish()");
         return bos.toByteArray();
     }
 
     public void storeGIF(){
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
-            Log.d(TAG, "Error creating media file, check storage permissions: ");
+            if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
             return;
         }
         try{
-            Log.d(TAG, "stroeGIF()");
+            if(debugmode)Log.e(TAG, "stroeGIF()");
             FileOutputStream fos = new FileOutputStream(pictureFile);
             fos.write(generateGIF());
             fos.close();
-            Log.d(TAG, "fos.close()");
+            if(debugmode)Log.e(TAG, "fos.close()");
         }catch(Exception e){
             e.printStackTrace();
         }

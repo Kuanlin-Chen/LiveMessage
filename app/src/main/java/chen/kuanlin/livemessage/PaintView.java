@@ -36,6 +36,7 @@ public class PaintView extends View {
     private Canvas canvas;
     private Bitmap bitmap;
     private Path mPath = new Path();
+    private boolean debugmode = false;
     private final String TAG = "[PaintView] ";
 
     public PaintView(Context context) {
@@ -62,6 +63,7 @@ public class PaintView extends View {
     private void initPaintView() {
         paint = new Paint(Paint.DITHER_FLAG);
         bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        if(debugmode)Log.e(TAG,"Width:"+String.valueOf(getMeasuredWidth())+" Height:"+String.valueOf(getMeasuredHeight()));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
 
@@ -84,14 +86,16 @@ public class PaintView extends View {
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
 
-        Log.e(TAG,"index:" + index );
-        Log.e(TAG,"ID:" + ID );
-        Log.e(TAG,"Action::" + event.getAction() );
+        if(debugmode){
+            Log.e(TAG,"index:" + index );
+            Log.e(TAG,"ID:" + ID );
+            Log.e(TAG,"Action::" + event.getAction() );
+        }
 
         switch(event.getAction())
         {
             case MotionEvent.ACTION_MOVE:
-                Log.e(TAG,"Action Move 2" + event.getX() + "/" + event.getY());
+                if(debugmode) Log.e(TAG,"Action Move 2" + event.getX() + "/" + event.getY());
                 paint.setColor(Color.RED);
                 paint.setAntiAlias(true);
                 paint.setDither(true);
@@ -113,11 +117,11 @@ public class PaintView extends View {
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN:
-                Log.e(TAG,"Point Down :" + event.getX() + "/" + event.getY());
+                if(debugmode) Log.e(TAG,"Point Down :" + event.getX() + "/" + event.getY());
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                Log.e(TAG,"Down :" + event.getX() + "/" + event.getY());
+                if(debugmode) Log.e(TAG,"Down :" + event.getX() + "/" + event.getY());
                 //單點觸控：僅第一個觸控點畫線或點，其餘皆過慮掉
                 if( isFirstPenTouch == false) {
                     isFirstPenTouch = true;
@@ -133,7 +137,7 @@ public class PaintView extends View {
                 break;
 
             case MotionEvent.ACTION_POINTER_UP:
-                Log.e(TAG,"Point UP");
+                if(debugmode) Log.e(TAG,"Point UP");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;
@@ -142,7 +146,7 @@ public class PaintView extends View {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.e(TAG,"UP :");
+                if(debugmode) Log.e(TAG,"UP :");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;
@@ -151,7 +155,7 @@ public class PaintView extends View {
                 break;
 
             case MotionEvent.ACTION_CANCEL:
-                Log.e(TAG,"Cancel");
+                if(debugmode) Log.e(TAG,"Cancel");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;

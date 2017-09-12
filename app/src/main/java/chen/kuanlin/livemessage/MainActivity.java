@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private Recorder recorder;
     private Thread thread;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private boolean debugmode = true;
     private final String TAG = "[MainActivity] ";
-    //public static boolean isSaving = false;
-    //public static boolean keepGoing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermission();
 
-        button_start.setOnClickListener(new View.OnClickListener() {
+        button_start.setOnClickListener(new ViewGroup.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "button_start");
+                if(debugmode)Log.e(TAG, "button_start");
                 recorder = new Recorder(getApplicationContext(), paintView);
                 thread = new Thread(recorder);
                 thread.start();
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         button_stop.setOnClickListener(new ViewGroup.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "button_stop");
+                if(debugmode)Log.e(TAG, "button_stop");
                 recorder.terminate();
                 if(!(thread.isInterrupted())){
                     thread.interrupt();
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             myDialog = new ProgressDialog(MainActivity.this);
             myDialog.setMessage("Saving Data");
             myDialog.setCancelable(false);
-            myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            //myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             myDialog.show();
             super.onPreExecute();
         }
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {
             //此方法會取得一個數值，可以用來計算目前執行進度
             //通常用來改變進度列(Progressbar)
-            myDialog.setProgress(progress[0]);
+            //myDialog.setProgress(progress[0]);
             super.onProgressUpdate(progress);
         }
 
