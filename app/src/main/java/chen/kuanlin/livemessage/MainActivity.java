@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
 
     private int user_rate = 4;
-    private String[] rateList;
     private static boolean isRecording = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private boolean debugmode = true;
@@ -42,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         button_color = (Button)findViewById(R.id.button_color);
         button_background = (Button)findViewById(R.id.button_background);
 
-        //create an instance of Recorder
-        //recorder = new Recorder(getApplicationContext(), paintView);
         checkPermission();
 
         button_start.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_resolution");
                 AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
-                        setItems(rateList = paintView.getResolution(),
+                        setItems(paintView.getResolution(),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -113,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
                 select_rate.show();
-                //recorder.setRate(user_rate);
             }
         });
 

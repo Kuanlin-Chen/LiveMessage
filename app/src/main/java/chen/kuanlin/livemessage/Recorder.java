@@ -124,7 +124,6 @@ public class Recorder implements Runnable {
         File mediaFile;
         String mImageName="My_"+ timeStamp +".gif";
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
-        //salt++;
         return mediaFile;
     }
 
