@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -196,5 +197,14 @@ public class PaintView extends View{
             canvas.drawPath(mPath, paint);
         }
         return areaToRefresh;
+    }
+
+    public void setPaintProperty(){
+
+    }
+
+    public void clearPaint(){
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        invalidate();
     }
 }

@@ -20,9 +20,12 @@ public class MainActivity extends AppCompatActivity {
     private Button button_start;
     private Button button_stop;
     private Button button_clear;
+
     private PaintView paintView;
     private Recorder recorder;
     private Thread thread;
+
+    private static boolean isRecording = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private boolean debugmode = true;
     private final String TAG = "[MainActivity] ";
@@ -42,9 +45,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_start");
-                recorder = new Recorder(getApplicationContext(), paintView);
-                thread = new Thread(recorder);
-                thread.start();
+                if(!isRecording){
+                    isRecording = true;
+                    recorder = new Recorder(getApplicationContext(), paintView);
+                    thread = new Thread(recorder);
+                    thread.start();
+                }else {
+                    if(debugmode)Log.e(TAG, "isRecording");
+                }
             }
         });
 
@@ -52,11 +60,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_stop");
-                recorder.terminate();
-                if(!(thread.isInterrupted())){
-                    thread.interrupt();
+                if(isRecording){
+                    recorder.terminate();
+                    if(!(thread.isInterrupted())){
+                        thread.interrupt();
+                    }
+                    new StoreDataAsyncTask().execute();
+                    isRecording = false;
+                }else {
+                    if(debugmode)Log.e(TAG,"is not Recording");
                 }
-                new StoreDataAsyncTask().execute();
+            }
+        });
+
+        button_clear.setOnClickListener(new ViewGroup.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(debugmode)Log.e(TAG, "button_clear");
+                paintView.clearPaint();
             }
         });
     }
