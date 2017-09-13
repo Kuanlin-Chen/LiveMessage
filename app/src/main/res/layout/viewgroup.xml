@@ -10,8 +10,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2">
 
         <Button
             android:layout_width="wrap_content"
@@ -40,8 +41,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="9">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <chen.kuanlin.livemessage.PaintView
                 android:layout_width="match_parent"
@@ -49,6 +51,37 @@
                 android:layout_margin="2dp"
                 android:id="@+id/paintview" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="START"
+                android:id="@+id/button_red"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="STOP"
+                android:id="@+id/button_black"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="CLEAR"
+                android:id="@+id/button_blue"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -63,7 +63,7 @@ public class Recorder implements Runnable {
 
     public static Bitmap getBitmapFromView(View view) {
         //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap((view.getMeasuredWidth()/2), (view.getMeasuredHeight()/2), Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
@@ -76,8 +76,10 @@ public class Recorder implements Runnable {
             canvas.drawColor(Color.WHITE);
         // draw the view on the canvas
         view.draw(canvas);
+        //resize the bitmap
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/4),(view.getMeasuredHeight()/4), true);
         //return the bitmap
-        return returnedBitmap;
+        return resizeBitmap;
     }
 
 

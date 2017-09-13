@@ -63,7 +63,7 @@ public class PaintView extends View {
     private void initPaintView() {
         paint = new Paint(Paint.DITHER_FLAG);
         bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        if(debugmode)Log.e(TAG,"Width:"+String.valueOf(getMeasuredWidth())+" Height:"+String.valueOf(getMeasuredHeight()));
+        Log.e(TAG,"Width:"+String.valueOf(getMeasuredWidth())+" Height:"+String.valueOf(getMeasuredHeight()));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
 
