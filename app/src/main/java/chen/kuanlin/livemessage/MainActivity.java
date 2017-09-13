@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Recorder recorder;
     private Thread thread;
 
+    private int user_rate = 4;
+    private String[] rateList;
     private static boolean isRecording = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private boolean debugmode = true;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         button_color = (Button)findViewById(R.id.button_color);
         button_background = (Button)findViewById(R.id.button_background);
 
+        //create an instance of Recorder
+        //recorder = new Recorder(getApplicationContext(), paintView);
         checkPermission();
 
         button_start.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 if(!isRecording){
                     isRecording = true;
                     recorder = new Recorder(getApplicationContext(), paintView);
+                    recorder.setRate(user_rate);
                     thread = new Thread(recorder);
                     thread.start();
                 }else {
@@ -87,6 +91,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_resolution");
+                AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
+                        setItems(rateList = paintView.getResolution(),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which){
+                                            case 0:
+                                                user_rate = 1;
+                                                break;
+                                            case 1:
+                                                user_rate = 2;
+                                                break;
+                                            case 2:
+                                                user_rate = 3;
+                                                break;
+                                            case 3:
+                                                user_rate = 4;
+                                                break;
+                                        }
+                                    }
+                                });
+                select_rate.show();
+                //recorder.setRate(user_rate);
             }
         });
 

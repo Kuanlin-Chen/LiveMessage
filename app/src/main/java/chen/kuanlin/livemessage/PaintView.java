@@ -24,6 +24,8 @@ public class PaintView extends View{
     private float pre_y;
     private float mCurveEndX;
     private float mCurveEndY;
+    private int widthPixels;
+    private int heightPixels;
     private static boolean isFirstPenTouch = false;
     private static boolean isMoving = false;
 
@@ -34,7 +36,7 @@ public class PaintView extends View{
     private Rect mInvalidRect = new Rect();
 
     private String TAG = "[PaintView] ";
-    private boolean debugmode = false;
+    private boolean debugmode = true;
 
     public PaintView(Context context) {
         super(context);
@@ -51,6 +53,7 @@ public class PaintView extends View{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if(debugmode)Log.e(TAG,"Width:"+String.valueOf(widthMeasureSpec)+" Height:"+String.valueOf(heightMeasureSpec));
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom){
@@ -59,8 +62,10 @@ public class PaintView extends View{
 
     private void initPaintView() {
         paint = new Paint(Paint.DITHER_FLAG);
+        widthPixels = getMeasuredWidth();
+        heightPixels = getMeasuredHeight();
         bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        if(debugmode)Log.e(TAG,"Width:"+String.valueOf(getMeasuredWidth())+" Height:"+String.valueOf(getMeasuredHeight()));
+        if(debugmode)Log.e(TAG,"widthPixels:"+String.valueOf(widthPixels)+" heightPixels:"+String.valueOf(heightPixels));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
 
@@ -206,5 +211,15 @@ public class PaintView extends View{
     public void clearPaint(){
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public String[] getResolution(){
+        String[] resolutionList = new String[4];
+        resolutionList[0] = "Origin("+widthPixels+"x"+heightPixels+")";
+        resolutionList[1] = "Half("+(widthPixels/2)+"x"+(heightPixels/2)+")";
+        resolutionList[2] = "One Third("+(widthPixels/3)+"x"+(heightPixels/3)+")";
+        resolutionList[3] = "Quarter("+(widthPixels/4)+"x"+(heightPixels/4)+")";
+
+        return resolutionList;
     }
 }

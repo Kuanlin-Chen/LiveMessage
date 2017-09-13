@@ -28,8 +28,10 @@ public class Recorder implements Runnable {
     private PaintView paintView;
     private Bitmap image;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
+
+    private static int rate = 4;
     private static boolean isContinue;
-    private boolean debugmode = true;
+    private static boolean debugmode = true;
     private final String TAG = "[Recorder] ";
 
     public Recorder(Context context, PaintView paintView){
@@ -76,7 +78,8 @@ public class Recorder implements Runnable {
         // draw the view on the canvas
         view.draw(canvas);
         //resize the bitmap
-        Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/4),(view.getMeasuredHeight()/4), true);
+        if(debugmode)Log.e("[Recorder] ", "rate="+String.valueOf(rate));
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/rate),(view.getMeasuredHeight()/rate), true);
         //return the bitmap
         return resizeBitmap;
     }
@@ -117,9 +120,9 @@ public class Recorder implements Runnable {
             }
         }
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("MMddHHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
         File mediaFile;
-        String mImageName="MI_"+ timeStamp +".gif";
+        String mImageName="My_"+ timeStamp +".gif";
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         //salt++;
         return mediaFile;
@@ -154,5 +157,9 @@ public class Recorder implements Runnable {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void setRate(int rate){
+        this.rate = rate;
     }
 }
