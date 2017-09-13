@@ -64,24 +64,24 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="START"
-                android:id="@+id/button_red"/>
+                android:text="Resolution"
+                android:id="@+id/button_resolution"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="STOP"
-                android:id="@+id/button_black"/>
+                android:text="Color"
+                android:id="@+id/button_color"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="CLEAR"
-                android:id="@+id/button_blue"/>
+                android:text="Background"
+                android:id="@+id/button_background"/>
         </LinearLayout>
 
     </LinearLayout>

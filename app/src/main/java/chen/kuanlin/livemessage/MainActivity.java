@@ -17,9 +17,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button_start;
-    private Button button_stop;
-    private Button button_clear;
+    private Button button_start, button_stop, button_clear,
+                   button_resolution, button_color, button_background;
 
     private PaintView paintView;
     private Recorder recorder;
@@ -34,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewgroup);
+        paintView = (PaintView)findViewById(R.id.paintview);
         button_start = (Button)findViewById(R.id.button_start);
         button_stop = (Button)findViewById(R.id.button_stop);
         button_clear = (Button)findViewById(R.id.button_clear);
-        paintView = (PaintView)findViewById(R.id.paintview);
+        button_resolution = (Button)findViewById(R.id.button_resolution);
+        button_color = (Button)findViewById(R.id.button_color);
+        button_background = (Button)findViewById(R.id.button_background);
 
         checkPermission();
 
-        button_start.setOnClickListener(new ViewGroup.OnClickListener() {
+        button_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_start");
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_stop.setOnClickListener(new ViewGroup.OnClickListener() {
+        button_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_stop");
@@ -73,11 +75,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_clear.setOnClickListener(new ViewGroup.OnClickListener(){
+        button_clear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 if(debugmode)Log.e(TAG, "button_clear");
                 paintView.clearPaint();
+            }
+        });
+
+        button_resolution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(debugmode)Log.e(TAG, "button_resolution");
+            }
+        });
+
+        button_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(debugmode)Log.e(TAG, "button_color");
+            }
+        });
+
+        button_background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(debugmode)Log.e(TAG, "button_background");
             }
         });
     }
@@ -93,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             myDialog = new ProgressDialog(MainActivity.this);
             myDialog.setMessage("Saving Data");
             myDialog.setCancelable(false);
-            //myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             myDialog.show();
             super.onPreExecute();
         }
@@ -110,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {
             //此方法會取得一個數值，可以用來計算目前執行進度
             //通常用來改變進度列(Progressbar)
-            //myDialog.setProgress(progress[0]);
             super.onProgressUpdate(progress);
         }
 
@@ -132,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 new AlertDialog.Builder(MainActivity.this)
-                        .setMessage("我真的沒有要做壞事, 給我權限吧?")
+                        .setMessage("Give Me Permission, Please!")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -149,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .show();
             } else {
-
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
