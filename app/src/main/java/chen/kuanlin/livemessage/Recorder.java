@@ -1,6 +1,7 @@
 package chen.kuanlin.livemessage;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -103,12 +104,14 @@ public class Recorder implements Runnable {
     }
 
     private File getOutputMediaFile(){
+        // String appName = getApplicationName(context);
+        // if(debugmode)Log.e(TAG, appName);
+        
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
         File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Android/data/"
-                + context.getPackageName()
-                + "/Files");
+                + "/Pictures/" + getApplicationName(context) );
+                //+ "/Android/data/" + context.getPackageName() + "/Files");
 
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
@@ -160,5 +163,11 @@ public class Recorder implements Runnable {
 
     public void setRate(int rate){
         this.rate = rate;
+    }
+
+    public String getApplicationName(Context context) {
+        ApplicationInfo applicationInfo = context.getApplicationInfo();
+        int stringId = applicationInfo.labelRes;
+        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 }
