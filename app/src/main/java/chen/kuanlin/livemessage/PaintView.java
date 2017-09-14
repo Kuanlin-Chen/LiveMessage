@@ -254,10 +254,10 @@ public class PaintView extends View{
 
     public String[] getResolution(){
         String[] resolutionList = new String[4];
-        resolutionList[0] = "Origin("+widthPixels+"x"+heightPixels+")";
-        resolutionList[1] = "Half("+(widthPixels/2)+"x"+(heightPixels/2)+")";
-        resolutionList[2] = "One Third("+(widthPixels/3)+"x"+(heightPixels/3)+")";
-        resolutionList[3] = "Quarter("+(widthPixels/4)+"x"+(heightPixels/4)+")";
+        resolutionList[0] = "Origin ("+widthPixels+"x"+heightPixels+")";
+        resolutionList[1] = "Half ("+(widthPixels/2)+"x"+(heightPixels/2)+")";
+        resolutionList[2] = "One Third ("+(widthPixels/3)+"x"+(heightPixels/3)+")";
+        resolutionList[3] = "Quarter ("+(widthPixels/4)+"x"+(heightPixels/4)+")";
 
         return resolutionList;
     }
