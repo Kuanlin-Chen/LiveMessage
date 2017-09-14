@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int user_rate = 4;
     private int user_color = 0;
+    private int user_background = 0;
     private static boolean isRecording = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private boolean debugmode = true;
@@ -164,6 +165,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
+                AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
+                        setSingleChoiceItems(new String[]{"WHITE","BLACK","TRANSPARENT"}, user_background,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which){
+                                            case 0:
+                                                user_background = which;
+                                                paintView.setCanvasBackground(user_background);
+                                                break;
+                                            case 1:
+                                                user_background = which;
+                                                paintView.setCanvasBackground(user_background);
+                                                break;
+                                            case 2:
+                                                user_background = which;
+                                                paintView.setCanvasBackground(user_background);
+                                                break;
+                                        }
+                                    }
+                                });
+                select_background.show();
             }
         });
     }
