@@ -230,6 +230,20 @@ public class PaintView extends View{
         }
     }
 
+    public void setCanvasBackground(int user_background){
+        switch (user_background){
+            case 0:
+                canvas.drawColor(Color.WHITE);
+                break;
+            case 1:
+                canvas.drawColor(Color.BLACK);
+                break;
+            case 2:
+                canvas.drawColor(Color.TRANSPARENT);
+                break;
+        }
+    }
+
     public void clearPaint(){
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
