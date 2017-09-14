@@ -16,7 +16,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button_start, button_stop, button_clear,
+    private Button button_record, button_save, button_clear,
                    button_resolution, button_color, button_background;
 
     private PaintView paintView;
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewgroup);
         paintView = (PaintView)findViewById(R.id.paintview);
-        button_start = (Button)findViewById(R.id.button_start);
-        button_stop = (Button)findViewById(R.id.button_stop);
+        button_record = (Button)findViewById(R.id.button_record);
+        button_save = (Button)findViewById(R.id.button_save);
         button_clear = (Button)findViewById(R.id.button_clear);
         button_resolution = (Button)findViewById(R.id.button_resolution);
         button_color = (Button)findViewById(R.id.button_color);
@@ -45,27 +45,34 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermission();
 
-        button_start.setOnClickListener(new View.OnClickListener() {
+        button_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_start");
                 if(!isRecording){
+                    if(debugmode)Log.e(TAG, "start");
                     isRecording = true;
                     recorder = new Recorder(getApplicationContext(), paintView);
                     recorder.setRate(user_rate);
                     thread = new Thread(recorder);
                     thread.start();
+                    button_record.setText("PAUSE");
                 }else {
-                    if(debugmode)Log.e(TAG, "isRecording");
+                    if(debugmode)Log.e(TAG, "pause");
+                    recorder.terminate();
+                    if(!(thread.isInterrupted())){
+                        thread.interrupt();
+                    }
+                    isRecording = false;
+                    button_record.setText("START");
                 }
             }
         });
 
-        button_stop.setOnClickListener(new View.OnClickListener() {
+        button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_stop");
-                if(isRecording){
+                if(debugmode)Log.e(TAG, "button_save");
+                /*if(isRecording){
                     recorder.terminate();
                     if(!(thread.isInterrupted())){
                         thread.interrupt();
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     isRecording = false;
                 }else {
                     if(debugmode)Log.e(TAG,"is not Recording");
-                }
+                }*/
             }
         });
 
