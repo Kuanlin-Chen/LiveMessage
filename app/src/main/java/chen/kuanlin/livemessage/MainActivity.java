@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 if(debugmode)Log.e(TAG, "button_clear");
                 paintView.clearPaint();
+                paintView.setCanvasBackground(user_background);
             }
         });
 

@@ -248,7 +248,7 @@ public class PaintView extends View{
     }
 
     public void clearPaint(){
-        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(0,PorterDuff.Mode.CLEAR);
         invalidate();
     }
 
