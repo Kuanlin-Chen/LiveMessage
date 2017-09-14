@@ -106,7 +106,7 @@ public class Recorder implements Runnable {
     private File getOutputMediaFile(){
         // String appName = getApplicationName(context);
         // if(debugmode)Log.e(TAG, appName);
-        
+
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
         File mediaStorageDir = new File(Environment.getExternalStorageDirectory()

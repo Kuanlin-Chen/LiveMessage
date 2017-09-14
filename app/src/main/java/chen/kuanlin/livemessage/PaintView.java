@@ -234,12 +234,15 @@ public class PaintView extends View{
         switch (user_background){
             case 0:
                 canvas.drawColor(Color.WHITE);
+                invalidate();
                 break;
             case 1:
                 canvas.drawColor(Color.BLACK);
+                invalidate();
                 break;
             case 2:
                 canvas.drawColor(Color.TRANSPARENT);
+                invalidate();
                 break;
         }
     }
