@@ -1,7 +1,8 @@
 <chen.kuanlin.livemessage.MainView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,10 @@
         <Button style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:text="START"
             android:id="@+id/button_start"/>
@@ -25,7 +29,10 @@
         <Button style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:text="STOP"
             android:id="@+id/button_stop"/>
@@ -33,7 +40,10 @@
         <Button style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:text="CLEAR"
             android:id="@+id/button_clear"/>
@@ -48,7 +58,10 @@
             <chen.kuanlin.livemessage.PaintView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:id="@+id/paintview" />
 
         </LinearLayout>
@@ -62,7 +75,10 @@
             <Button style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:text="Resolution"
                 android:id="@+id/button_resolution"/>
@@ -70,7 +86,10 @@
             <Button style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:text="Color"
                 android:id="@+id/button_color"/>
@@ -78,7 +97,10 @@
             <Button style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:text="Background"
                 android:id="@+id/button_background"/>
