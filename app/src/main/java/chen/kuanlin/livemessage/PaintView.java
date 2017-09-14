@@ -204,8 +204,30 @@ public class PaintView extends View{
         return areaToRefresh;
     }
 
-    public void setPaintProperty(){
-
+    public void setPaintColor(int user_color){
+        switch (user_color){
+            case 0:
+                paint.setColor(Color.RED);
+                break;
+            case 1:
+                paint.setColor(Color.YELLOW);
+                break;
+            case 2:
+                paint.setColor(Color.GREEN);
+                break;
+            case 3:
+                paint.setColor(Color.BLUE);
+                break;
+            case 4:
+                paint.setColor(Color.WHITE);
+                break;
+            case 5:
+                paint.setColor(Color.GRAY);
+                break;
+            case 6:
+                paint.setColor(Color.BLACK);
+                break;
+        }
     }
 
     public void clearPaint(){
