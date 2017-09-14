@@ -72,16 +72,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_save");
-                /*if(isRecording){
-                    recorder.terminate();
-                    if(!(thread.isInterrupted())){
-                        thread.interrupt();
-                    }
+                if( (!isRecording) && (recorder!=null) ){
                     new StoreDataAsyncTask().execute();
-                    isRecording = false;
                 }else {
-                    if(debugmode)Log.e(TAG,"is not Recording");
-                }*/
+                    if(debugmode){
+                        if(isRecording)Log.e(TAG,"Recording");
+                        if(recorder==null)Log.e(TAG,"recorder is null");
+                    }
+                }
             }
         });
 

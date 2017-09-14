@@ -170,4 +170,8 @@ public class Recorder implements Runnable {
         int stringId = applicationInfo.labelRes;
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
+
+    public boolean bitmapListIsEmpty(){
+        return bitmapList.isEmpty() ? true : false;
+    }
 }

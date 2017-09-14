@@ -34,7 +34,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:text="STOP"
+            android:text="SAVE"
             android:id="@+id/button_save"/>
 
         <Button style="@style/Base.Widget.AppCompat.Button.Colored"
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:text="Resolution"
+                android:text="RESOLUTION"
                 android:id="@+id/button_resolution"/>
 
             <Button style="@style/Base.Widget.AppCompat.Button.Colored"
@@ -91,7 +91,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:text="Color"
+                android:text="COLOR"
                 android:id="@+id/button_color"/>
 
             <Button style="@style/Base.Widget.AppCompat.Button.Colored"
@@ -102,7 +102,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:text="Background"
+                android:text="BACKGROUND"
                 android:id="@+id/button_background"/>
         </LinearLayout>
 
