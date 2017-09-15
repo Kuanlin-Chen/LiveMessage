@@ -52,10 +52,10 @@ FILE *pGif = NULL;
 
 extern "C"
 {
-JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_MainActivity_Init(JNIEnv *ioEnv, jobject ioThis, jstring gifName,
+JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_Recorder_Init(JNIEnv *ioEnv, jobject ioThis, jstring gifName,
                                                              jint w, jint h, jint numColors, jint quality, jint frameDelay);
-JNIEXPORT void JNICALL Java_chen_kuanlin_livemessage_MainActivity_Close(JNIEnv *ioEnv, jobject ioThis);
-JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_MainActivity_AddFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray);
+JNIEXPORT void JNICALL Java_chen_kuanlin_livemessage_Recorder_Close(JNIEnv *ioEnv, jobject ioThis);
+JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_Recorder_AddFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray);
 };
 
 int max_bits(int);
@@ -72,7 +72,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 }
 
 
-JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_MainActivity_Init(JNIEnv *ioEnv, jobject ioThis, jstring gifName,
+JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_Recorder_Init(JNIEnv *ioEnv, jobject ioThis, jstring gifName,
                                                              jint w, jint h, jint numColors, jint quality, jint frameDelay)
 {
 	const char *str;
@@ -130,7 +130,7 @@ JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_MainActivity_Init(JNIEnv *i
 }
 
 
-JNIEXPORT void JNICALL Java_chen_kuanlin_livemessage_MainActivity_Close(JNIEnv *ioEnv, jobject ioThis)
+JNIEXPORT void JNICALL Java_chen_kuanlin_livemessage_Recorder_Close(JNIEnv *ioEnv, jobject ioThis)
 {
 	if (data32bpp)
 	{
@@ -158,7 +158,7 @@ JNIEXPORT void JNICALL Java_chen_kuanlin_livemessage_MainActivity_Close(JNIEnv *
 
 
 
-JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_MainActivity_AddFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray)
+JNIEXPORT jint JNICALL Java_chen_kuanlin_livemessage_Recorder_AddFrame(JNIEnv *ioEnv, jobject ioThis, jintArray inArray)
 {
 	ioEnv->GetIntArrayRegion(inArray, (jint)0, (jint)(inDIB.width * inDIB.height), (jint*)(inDIB.bits));
 

@@ -35,6 +35,18 @@ public class Recorder implements Runnable {
     private static boolean debugmode = true;
     private final String TAG = "[Recorder] ";
 
+    static {
+        try{
+            System.loadLibrary("gifflen");
+        }catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    public native int Init(String gifName, int w, int h, int numColors, int quality, int frameDelay);
+    public native void Close();
+    public native int AddFrame(int[] inArray);
+
     public Recorder(Context context, PaintView paintView){
         this.context = context;
         this.paintView = paintView;
@@ -85,24 +97,6 @@ public class Recorder implements Runnable {
         return resizeBitmap;
     }
 
-
-    private void storeImage(Bitmap image) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            if(debugmode) Log.e(TAG, "Error creating media file, check storage permissions: ");
-            return;
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            fos.close();
-        } catch (FileNotFoundException e) {
-            if(debugmode)Log.e(TAG, "File not found: " + e.getMessage());
-        } catch (IOException e) {
-            if(debugmode)Log.e(TAG, "Error accessing file: " + e.getMessage());
-        }
-    }
-
     private File getOutputMediaFile(){
         // String appName = getApplicationName(context);
         // if(debugmode)Log.e(TAG, appName);
@@ -151,14 +145,40 @@ public class Recorder implements Runnable {
             return;
         }
         try{
-            if(debugmode)Log.e(TAG, "stroeGIF()");
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(generateGIF());
-            fos.close();
-            if(debugmode)Log.e(TAG, "fos.close()");
+            Bitmap[] bitmaps = bitmapList.toArray(new Bitmap[0]);
+            Encode(pictureFile.toString(), bitmaps, 10);
         }catch(Exception e){
+            Close();
             e.printStackTrace();
         }
+    }
+
+    public void Encode(String fileName, Bitmap[] bitmaps, int delay)
+    {
+        if(debugmode)Log.e(TAG, "Encode");
+        if(bitmaps==null||bitmaps.length==0) {
+            throw new NullPointerException("Bitmaps should have content!!!");
+        }
+
+        int width=bitmaps[0].getWidth();
+        int height=bitmaps[0].getHeight();
+
+        if(Init(fileName, width, height, 256, 100, delay)!=0)
+        {
+            if(debugmode)Log.e(TAG, "GifUtil init failed");
+            return;
+        }
+
+        for(Bitmap bp:bitmaps)
+        {
+
+            int pixels[]=new int[width*height];
+
+            bp.getPixels(pixels, 0, width, 0, 0, width, height);
+            AddFrame(pixels);
+        }
+
+        Close();
     }
 
     public void setRate(int rate){
