@@ -10,11 +10,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,7 +61,6 @@ public class Recorder implements Runnable {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
-                //storeImage(image);
                 Thread.sleep(1000);
                 if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
             }
@@ -122,20 +117,6 @@ public class Recorder implements Runnable {
         String mImageName="My_"+ timeStamp +".gif";
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         return mediaFile;
-    }
-
-    private byte[] generateGIF() {
-        if(debugmode)Log.e(TAG,"generateGIF()");
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.setFrameRate(10);
-        encoder.start(bos);
-        for (Bitmap bitmap : bitmapList) {
-            encoder.addFrame(bitmap);
-        }
-        encoder.finish();
-        if(debugmode)Log.e(TAG,"encoder.finish()");
-        return bos.toByteArray();
     }
 
     public void storeGIF(){
