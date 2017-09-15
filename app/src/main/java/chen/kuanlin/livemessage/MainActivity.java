@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if((System.currentTimeMillis()-exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "Double Click to Exit",
+                Toast.makeText(getApplicationContext(), "Click Back Button Twice to Exit",
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
