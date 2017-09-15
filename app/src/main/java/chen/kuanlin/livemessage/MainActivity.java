@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
                 AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                        setSingleChoiceItems(new String[]{"WHITE","BLACK","TRANSPARENT"}, user_background,
+                        setSingleChoiceItems(new String[]{"BLACK","WHITE","TRANSPARENT"}, user_background,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

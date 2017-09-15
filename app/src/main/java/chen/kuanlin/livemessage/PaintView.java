@@ -68,10 +68,11 @@ public class PaintView extends View{
         if(debugmode)Log.e(TAG,"widthPixels:"+String.valueOf(widthPixels)+" heightPixels:"+String.valueOf(heightPixels));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
+        setCanvasBackground(0);
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStrokeWidth((float) 3.0);
@@ -233,11 +234,11 @@ public class PaintView extends View{
     public void setCanvasBackground(int user_background){
         switch (user_background){
             case 0:
-                canvas.drawColor(Color.WHITE);
+                canvas.drawColor(Color.BLACK);
                 invalidate();
                 break;
             case 1:
-                canvas.drawColor(Color.BLACK);
+                canvas.drawColor(Color.WHITE);
                 invalidate();
                 break;
             case 2:
