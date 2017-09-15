@@ -66,8 +66,11 @@ public class MainActivity extends AppCompatActivity {
                     saveData.execute();
                 }else {
                     if(debugmode){
-                        if(isRecording)Log.e(TAG,"Recording");
-                        else if(recorder==null)Log.e(TAG,"recorder is null");
+                        if(isRecording){
+                            Toast.makeText(MainActivity.this,"Cannot Save While Recording", Toast.LENGTH_SHORT).show();
+                        } else if(recorder==null){
+                            Toast.makeText(MainActivity.this,"You Did Not Draw Anything", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -77,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(debugmode)Log.e(TAG, "button_clear");
+                if(isRecording){
+                    pauseRecord();
+                }
+                recorder = null; //There is no reference to the object, it will be deleted by the GC
                 paintView.clearPaint();
                 paintView.setCanvasBackground(user_background);
             }
