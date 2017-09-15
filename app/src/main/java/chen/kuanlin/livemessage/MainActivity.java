@@ -50,21 +50,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isRecording){
-                    if(debugmode)Log.e(TAG, "start record");
-                    isRecording = true;
-                    recorder = new Recorder(getApplicationContext(), paintView);
-                    recorder.setRate(user_rate);
-                    thread = new Thread(recorder);
-                    thread.start();
-                    button_record.setText("PAUSE");
+                    startRecord();
                 }else {
-                    if(debugmode)Log.e(TAG, "pause record");
-                    recorder.terminate();
-                    if(!(thread.isInterrupted())){
-                        thread.interrupt();
-                    }
-                    isRecording = false;
-                    button_record.setText("START");
+                    pauseRecord();
                 }
             }
         });
@@ -197,6 +185,26 @@ public class MainActivity extends AppCompatActivity {
                 select_background.show();
             }
         });
+    }
+
+    private void startRecord(){
+        if(debugmode)Log.e(TAG, "start record");
+        isRecording = true;
+        recorder = new Recorder(getApplicationContext(), paintView);
+        recorder.setRate(user_rate);
+        thread = new Thread(recorder);
+        thread.start();
+        button_record.setText("PAUSE");
+    }
+
+    private void pauseRecord(){
+        if(debugmode)Log.e(TAG, "pause record");
+        recorder.terminate();
+        if(!(thread.isInterrupted())){
+            thread.interrupt();
+        }
+        isRecording = false;
+        button_record.setText("START");
     }
 
     private void checkPermission(){
