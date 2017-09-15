@@ -1,10 +1,8 @@
 package chen.kuanlin.livemessage;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isRecording){
-                    if(debugmode)Log.e(TAG, "start");
+                    if(debugmode)Log.e(TAG, "start record");
                     isRecording = true;
                     recorder = new Recorder(getApplicationContext(), paintView);
                     recorder.setRate(user_rate);
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     thread.start();
                     button_record.setText("PAUSE");
                 }else {
-                    if(debugmode)Log.e(TAG, "pause");
+                    if(debugmode)Log.e(TAG, "pause record");
                     recorder.terminate();
                     if(!(thread.isInterrupted())){
                         thread.interrupt();
@@ -76,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_save");
                 if( (!isRecording) && (recorder!=null) ){
-                    new StoreDataAsyncTask().execute();
+                    SaveData saveData = new SaveData(MainActivity.this,recorder);
+                    saveData.execute();
                 }else {
                     if(debugmode){
                         if(isRecording)Log.e(TAG,"Recording");
@@ -198,47 +197,6 @@ public class MainActivity extends AppCompatActivity {
                 select_background.show();
             }
         });
-    }
-
-    public class StoreDataAsyncTask extends AsyncTask<String, Integer, Integer>
-    {
-        private ProgressDialog myDialog;
-
-        @Override
-        protected void onPreExecute() {
-            //在背景執行之前要做的事，寫在這裡
-            //初始化進度條
-            myDialog = new ProgressDialog(MainActivity.this);
-            myDialog.setMessage("Saving Data");
-            myDialog.setCancelable(false);
-            myDialog.show();
-            super.onPreExecute();
-        }
-        @Override
-        protected Integer doInBackground(String... param) {
-            //一定必須覆寫的方法
-            //背景執行的內容放此
-            //這裡不能和UI有任何互動
-            recorder.storeGIF();
-            return 1;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            //此方法會取得一個數值，可以用來計算目前執行進度
-            //通常用來改變進度列(Progressbar)
-            super.onProgressUpdate(progress);
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            //doInBackground執行完後就會執行此方法
-            //通常用來傳資料給UI顯示
-            super.onPostExecute(result);
-            if(result.equals(1)){
-                myDialog.dismiss();
-            }
-        }
     }
 
     private void checkPermission(){
