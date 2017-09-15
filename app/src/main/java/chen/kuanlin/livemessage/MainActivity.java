@@ -32,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
     private boolean debugmode = true;
     private final String TAG = "[MainActivity] ";
 
+    static {
+        try{
+            System.loadLibrary("gifflen");
+        }catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    public native int Init(String gifName, int w, int h, int numColors, int quality, int frameDelay);
+    public native void Close();
+    public native int AddFrame(int[] inArray);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

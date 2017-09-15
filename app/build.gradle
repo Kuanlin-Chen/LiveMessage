@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk{
+            moduleName "gifflen"
+            ldLibs "log"
+        }
     }
     buildTypes {
         release {
@@ -25,6 +29,11 @@ android {
                     output.outputFile = new File(output.outputFile.parent, newName)
                 }
             }
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
         }
     }
 }
