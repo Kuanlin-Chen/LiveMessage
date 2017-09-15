@@ -11,8 +11,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private int user_background = 0;
     private static boolean isRecording = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static long exitTime = 0;
     private boolean debugmode = true;
     private final String TAG = "[MainActivity] ";
 
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     if(debugmode){
                         if(isRecording)Log.e(TAG,"Recording");
-                        if(recorder==null)Log.e(TAG,"recorder is null");
+                        else if(recorder==null)Log.e(TAG,"recorder is null");
                     }
                 }
             }
@@ -267,5 +270,22 @@ public class MainActivity extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if((System.currentTimeMillis()-exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "Double Click to Exit",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
