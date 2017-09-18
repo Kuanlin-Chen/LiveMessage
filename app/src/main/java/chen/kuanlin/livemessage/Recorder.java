@@ -28,6 +28,7 @@ public class Recorder implements Runnable {
     private Context context;
     private PaintView paintView;
     private Bitmap image;
+    private File pictureFile;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 
     private static int rate = 4;
@@ -85,24 +86,6 @@ public class Recorder implements Runnable {
         return resizeBitmap;
     }
 
-
-    private void storeImage(Bitmap image) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            if(debugmode) Log.e(TAG, "Error creating media file, check storage permissions: ");
-            return;
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            fos.close();
-        } catch (FileNotFoundException e) {
-            if(debugmode)Log.e(TAG, "File not found: " + e.getMessage());
-        } catch (IOException e) {
-            if(debugmode)Log.e(TAG, "Error accessing file: " + e.getMessage());
-        }
-    }
-
     private File getOutputMediaFile(){
         // String appName = getApplicationName(context);
         // if(debugmode)Log.e(TAG, appName);
@@ -145,7 +128,7 @@ public class Recorder implements Runnable {
     }
 
     public void storeGIF(){
-        File pictureFile = getOutputMediaFile();
+        pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
             if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
             return;
@@ -171,7 +154,7 @@ public class Recorder implements Runnable {
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
-    public boolean bitmapListIsEmpty(){
-        return bitmapList.isEmpty() ? true : false;
+    public File getPictureFile(){
+        return pictureFile;
     }
 }

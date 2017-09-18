@@ -2,7 +2,12 @@ package chen.kuanlin.livemessage;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 /**
  * Created by kuanlin on 2017/9/15.
@@ -52,6 +57,21 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         super.onPostExecute(result);
         if(result.equals(1)){
             myDialog.dismiss();
+
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            intent.setData(Uri.fromFile(recorder.getPictureFile()));
+            context.sendBroadcast(intent);
+
+            AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
+            share_dialog.setMessage("Live Message Saved");
+            share_dialog.setNegativeButton("Done", null);
+            share_dialog.setPositiveButton("Share", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int fix) {
+                    Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show();
+                }
+            });
+            share_dialog.show();
         }
     }
 }
