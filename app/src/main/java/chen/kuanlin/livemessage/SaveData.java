@@ -65,7 +65,16 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
 
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
             share_dialog.setMessage("Live Message Saved");
-            share_dialog.setNegativeButton("Done", null);
+            share_dialog.setNeutralButton("Done", null);
+            share_dialog.setNegativeButton("Open", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int fix) {
+                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
+                    shareIntent.setType("image/gif");
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                    context.startActivity(Intent.createChooser(shareIntent, "Open Animated GIF"));
+                }
+            });
             share_dialog.setPositiveButton("Share", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int fix) {
