@@ -17,9 +17,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button_save, button_clear,
-                   button_resolution, button_color, button_background;
-    private ImageButton button_record;
+    private Button button_clear, button_resolution, button_color, button_background;
+    private ImageButton button_record, button_save;
 
     private PaintView paintView;
     private Recorder recorder;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.viewgroup);
         paintView = (PaintView)findViewById(R.id.paintview);
         button_record = (ImageButton)findViewById(R.id.button_record);
-        button_save = (Button)findViewById(R.id.button_save);
+        button_save = (ImageButton)findViewById(R.id.button_save);
         button_clear = (Button)findViewById(R.id.button_clear);
         button_resolution = (Button)findViewById(R.id.button_resolution);
         button_color = (Button)findViewById(R.id.button_color);
@@ -209,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         recorder.setRate(user_rate);
         thread = new Thread(recorder);
         thread.start();
-        button_record.setImageResource(R.drawable.pause_record);
+        button_record.setImageResource(R.drawable.ic_pause_record);
     }
 
     private void pauseRecord(){
@@ -219,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             thread.interrupt();
         }
         isRecording = false;
-        button_record.setImageResource(R.drawable.start_record);
+        button_record.setImageResource(R.drawable.ic_start_record);
     }
 
     private void checkPermission(){
