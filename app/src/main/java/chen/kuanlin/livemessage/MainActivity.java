@@ -196,6 +196,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRecord(){
         if(debugmode)Log.e(TAG, "start record");
+        if(recorder!=null){
+            //Clear canvas before recording
+            recorder = null;
+            paintView.clearPaint();
+            paintView.setCanvasBackground(user_background);
+        }
         isRecording = true;
         recorder = new Recorder(getApplicationContext(), paintView);
         recorder.setRate(user_rate);
