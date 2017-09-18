@@ -58,8 +58,10 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         if(result.equals(1)){
             myDialog.dismiss();
 
+            final Uri uri = Uri.fromFile(recorder.getPictureFile());
+
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            intent.setData(Uri.fromFile(recorder.getPictureFile()));
+            intent.setData(uri);
             context.sendBroadcast(intent);
 
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
@@ -68,7 +70,10 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
             share_dialog.setPositiveButton("Share", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int fix) {
-                    Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show();
+                    Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    shareIntent.setType("image/gif");
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                    context.startActivity(Intent.createChooser(shareIntent, "Share Animated GIF"));
                 }
             });
             share_dialog.show();
