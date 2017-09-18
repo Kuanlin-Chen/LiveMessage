@@ -241,10 +241,6 @@ public class PaintView extends View{
                 canvas.drawColor(Color.WHITE);
                 invalidate();
                 break;
-            case 2:
-                canvas.drawColor(Color.TRANSPARENT);
-                invalidate();
-                break;
         }
     }
 

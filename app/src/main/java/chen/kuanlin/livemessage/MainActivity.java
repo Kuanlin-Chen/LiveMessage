@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
                 AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                        setSingleChoiceItems(new String[]{"BLACK","WHITE","TRANSPARENT"}, user_background,
+                        setSingleChoiceItems(new String[]{"BLACK","WHITE"}, user_background,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -179,10 +179,6 @@ public class MainActivity extends AppCompatActivity {
                                                 paintView.setCanvasBackground(user_background);
                                                 break;
                                             case 1:
-                                                user_background = which;
-                                                paintView.setCanvasBackground(user_background);
-                                                break;
-                                            case 2:
                                                 user_background = which;
                                                 paintView.setCanvasBackground(user_background);
                                                 break;
