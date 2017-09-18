@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
 
 /**
  * Created by kuanlin on 2017/9/15.
