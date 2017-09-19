@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton button_record, button_save, button_clear,
-                        button_resolution, button_color, button_background;
+    private ImageButton button_record, button_save, button_share, button_clear,
+                        button_resolution, button_color, button_background, button_picture;
 
     private PaintView paintView;
     private Recorder recorder;
@@ -39,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
         paintView = (PaintView)findViewById(R.id.paintview);
         button_record = (ImageButton)findViewById(R.id.button_record);
         button_save = (ImageButton)findViewById(R.id.button_save);
+        button_share = (ImageButton)findViewById(R.id.button_share);
         button_clear = (ImageButton)findViewById(R.id.button_clear);
         button_resolution = (ImageButton)findViewById(R.id.button_resolution);
         button_color = (ImageButton)findViewById(R.id.button_color);
         button_background = (ImageButton)findViewById(R.id.button_background);
+        button_picture = (ImageButton)findViewById(R.id.button_picture);
 
         checkPermission();
 

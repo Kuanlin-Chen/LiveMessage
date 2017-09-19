@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="2dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:src="@drawable/ic_media_play"
@@ -45,13 +45,28 @@
             android:adjustViewBounds="true"
             android:id="@+id/button_save"/>
 
+            <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_media_share"
+                android:background="@color/colorAccent"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/button_share"/>
+
         <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:src="@drawable/ic_menu_clear"
             android:background="@color/colorAccent"
@@ -72,8 +87,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
                 android:id="@+id/paintview" />
 
         </LinearLayout>
@@ -89,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_resolution"
@@ -120,7 +135,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_background"
                 android:background="@color/colorAccent"
@@ -128,6 +143,21 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_background"/>
+
+            <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_picture"
+                android:background="@color/colorAccent"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/button_picture"/>
         </LinearLayout>
 
     </LinearLayout>
