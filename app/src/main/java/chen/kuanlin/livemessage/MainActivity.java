@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
                 paintView.setCanvasPicture(userDrawable);
             } catch (FileNotFoundException e) {
-                //userDrawable = getResources().getDrawable(R.drawable.default_image);
+                e.printStackTrace();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
