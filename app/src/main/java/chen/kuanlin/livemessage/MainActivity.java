@@ -95,28 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_resolution");
-                AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
-                        setSingleChoiceItems(paintView.getResolution(), user_rate-1,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which){
-                                            case 0:
-                                                user_rate = 1;
-                                                break;
-                                            case 1:
-                                                user_rate = 2;
-                                                break;
-                                            case 2:
-                                                user_rate = 3;
-                                                break;
-                                            case 3:
-                                                user_rate = 4;
-                                                break;
-                                        }
-                                    }
-                                });
-                select_rate.show();
+                resolutionDialog();
             }
         });
 
@@ -124,45 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_color");
-                final String[] colorList = new String[]{"RED", "YELLOW", "GREEN", "BLUE", "WHITE", "GRAY", "BLACK"};
-                AlertDialog.Builder select_color = new AlertDialog.Builder(MainActivity.this).
-                        setSingleChoiceItems(colorList, user_color,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which){
-                                            case 0:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 1:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 2:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 3:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 4:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 5:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                            case 6:
-                                                user_color = which;
-                                                paintView.setPaintColor(user_color);
-                                                break;
-                                        }
-                                    }
-                                });
-                select_color.show();
+                colorDialog();
             }
         });
 
@@ -170,24 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
-                AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                        setSingleChoiceItems(new String[]{"BLACK","WHITE"}, user_background,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which){
-                                            case 0:
-                                                user_background = which;
-                                                paintView.setCanvasBackground(user_background);
-                                                break;
-                                            case 1:
-                                                user_background = which;
-                                                paintView.setCanvasBackground(user_background);
-                                                break;
-                                        }
-                                    }
-                                });
-                select_background.show();
+                backgroundDialog();
             }
         });
     }
@@ -216,6 +140,93 @@ public class MainActivity extends AppCompatActivity {
         }
         isRecording = false;
         button_record.setImageResource(R.drawable.ic_media_play);
+    }
+
+    private void resolutionDialog(){
+        AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
+                setSingleChoiceItems(paintView.getResolution(), user_rate-1,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0:
+                                        user_rate = 1;
+                                        break;
+                                    case 1:
+                                        user_rate = 2;
+                                        break;
+                                    case 2:
+                                        user_rate = 3;
+                                        break;
+                                    case 3:
+                                        user_rate = 4;
+                                        break;
+                                }
+                            }
+                        });
+        select_rate.show();
+    }
+
+    private void colorDialog(){
+        AlertDialog.Builder select_color = new AlertDialog.Builder(MainActivity.this).
+                setSingleChoiceItems(new String[]{"RED", "YELLOW", "GREEN", "BLUE", "WHITE", "GRAY", "BLACK"}, user_color,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 1:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 2:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 3:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 4:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 5:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                    case 6:
+                                        user_color = which;
+                                        paintView.setPaintColor(user_color);
+                                        break;
+                                }
+                            }
+                        });
+        select_color.show();
+    }
+
+    private void backgroundDialog(){
+        AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
+                setSingleChoiceItems(new String[]{"BLACK","WHITE"}, user_background,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0:
+                                        user_background = which;
+                                        paintView.setCanvasBackground(user_background);
+                                        break;
+                                    case 1:
+                                        user_background = which;
+                                        paintView.setCanvasBackground(user_background);
+                                        break;
+                                }
+                            }
+                        });
+        select_background.show();
     }
 
     private void checkPermission(){
