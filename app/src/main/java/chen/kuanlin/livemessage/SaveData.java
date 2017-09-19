@@ -17,7 +17,6 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
     private ProgressDialog myDialog;
     private Context context;
     private Recorder recorder;
-    private Uri uri;
 
     public SaveData(Context context, Recorder recorder){
         this.context = context;
@@ -58,10 +57,8 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         if(result.equals(1)){
             myDialog.dismiss();
 
-            uri = Uri.fromFile(recorder.getPictureFile());
-
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            intent.setData(uri);
+            intent.setData(Uri.fromFile(recorder.getPictureFile()));
             context.sendBroadcast(intent);
 
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
