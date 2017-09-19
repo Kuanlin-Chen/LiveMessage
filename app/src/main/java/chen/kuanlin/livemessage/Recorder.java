@@ -58,6 +58,9 @@ public class Recorder implements Runnable {
         } catch(InterruptedException e){
             if(debugmode)Log.e(TAG, "InterruptedException");
             e.printStackTrace();
+            /*for (Bitmap preBitmap: bitmapList){
+                paintView.showPreview(preBitmap);
+            }*/
         }
     }
 

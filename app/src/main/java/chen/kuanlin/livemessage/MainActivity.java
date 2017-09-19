@@ -20,6 +20,10 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+/**
+ * Created by kuanlin on 2017/9/7.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton button_record, button_save, button_share, button_clear,
