@@ -190,11 +190,7 @@ public class MainActivity extends AppCompatActivity {
     private void shareDialog(final Uri uri){
         AlertDialog.Builder share_dialog = new AlertDialog.Builder(MainActivity.this);
         share_dialog.setMessage("Share Now ?");
-        share_dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int fix) {
-            }
-        });
+        share_dialog.setNegativeButton("No", null);
         share_dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int fix) {
@@ -229,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
+        select_rate.setPositiveButton("Confirm",null);
         select_rate.show();
     }
 
@@ -270,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
+        select_color.setPositiveButton("Confirm", null);
         select_color.show();
     }
 
@@ -292,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
                                 userDrawable = null;
                             }
                         });
+        select_background.setPositiveButton("Confirm", null);
         select_background.show();
     }
 

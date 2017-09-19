@@ -63,11 +63,7 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
 
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
             share_dialog.setMessage("Live Message Saved");
-            share_dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int fix) {
-                }
-            });
+            share_dialog.setPositiveButton("Done", null);
             share_dialog.show();
         }
     }
