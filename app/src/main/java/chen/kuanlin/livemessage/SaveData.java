@@ -17,6 +17,7 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
     private ProgressDialog myDialog;
     private Context context;
     private Recorder recorder;
+    private Uri uri;
 
     public SaveData(Context context, Recorder recorder){
         this.context = context;
@@ -57,7 +58,7 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         if(result.equals(1)){
             myDialog.dismiss();
 
-            final Uri uri = Uri.fromFile(recorder.getPictureFile());
+            uri = Uri.fromFile(recorder.getPictureFile());
 
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             intent.setData(uri);
@@ -65,23 +66,9 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
 
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
             share_dialog.setMessage("Live Message Saved");
-            share_dialog.setNeutralButton("Done", null);
-            share_dialog.setNegativeButton("Open", new DialogInterface.OnClickListener() {
+            share_dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int fix) {
-                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
-                    shareIntent.setType("image/gif");
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    context.startActivity(Intent.createChooser(shareIntent, "Open Animated GIF"));
-                }
-            });
-            share_dialog.setPositiveButton("Share", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int fix) {
-                    Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    shareIntent.setType("image/gif");
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    context.startActivity(Intent.createChooser(shareIntent, "Share Animated GIF"));
                 }
             });
             share_dialog.show();

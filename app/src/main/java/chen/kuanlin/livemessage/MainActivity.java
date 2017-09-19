@@ -2,7 +2,9 @@ package chen.kuanlin.livemessage;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int user_color = 0;
     private int user_background = 0;
     private static boolean isRecording = false;
+    private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static long exitTime = 0;
     private boolean debugmode = true;
@@ -66,12 +69,34 @@ public class MainActivity extends AppCompatActivity {
                 if( (!isRecording) && (recorder!=null) ){
                     SaveData saveData = new SaveData(MainActivity.this,recorder);
                     saveData.execute();
+                    isSaved = true;
                 }else {
                     if(debugmode){
                         if(isRecording){
                             Toast.makeText(MainActivity.this,"Cannot Save While Recording", Toast.LENGTH_SHORT).show();
                         } else if(recorder==null){
                             Toast.makeText(MainActivity.this,"You Did Not Draw Anything", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        });
+
+        button_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(debugmode)Log.e(TAG, "button_share");
+                if( (!isRecording) && (recorder!=null) && (isSaved)) {
+                    Uri uri = Uri.fromFile(recorder.getPictureFile());
+                    shareDialog(uri);
+                }else {
+                    if(debugmode){
+                        if(isRecording){
+                            Toast.makeText(MainActivity.this,"Cannot Share While Recording", Toast.LENGTH_SHORT).show();
+                        } else if(recorder==null){
+                            Toast.makeText(MainActivity.this,"You Did Not Draw Anything", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this,"You Did Not Save GIF", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -86,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     pauseRecord();
                 }
                 recorder = null; //There is no reference to the object, it will be deleted by the GC
+                isSaved = false;
                 paintView.clearPaint();
                 paintView.setCanvasBackground(user_background);
             }
@@ -140,6 +166,26 @@ public class MainActivity extends AppCompatActivity {
         }
         isRecording = false;
         button_record.setImageResource(R.drawable.ic_media_play);
+    }
+
+    private void shareDialog(final Uri uri){
+        AlertDialog.Builder share_dialog = new AlertDialog.Builder(MainActivity.this);
+        share_dialog.setMessage("Share Now ?");
+        share_dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int fix) {
+            }
+        });
+        share_dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int fix) {
+                        Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        shareIntent.setType("image/gif");
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                        startActivity(Intent.createChooser(shareIntent, "Share Animated GIF"));
+            }
+        });
+        share_dialog.show();
     }
 
     private void resolutionDialog(){

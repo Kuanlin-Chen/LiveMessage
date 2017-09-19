@@ -54,7 +54,6 @@ public class Recorder implements Runnable {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
-                //storeImage(image);
                 Thread.sleep(800);
                 if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
             }
