@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +17,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton button_record, button_save, button_share, button_clear,
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private PaintView paintView;
     private Recorder recorder;
     private Thread thread;
+    private Drawable userDrawable;
 
     private int user_rate = 4;
     private int user_color = 0;
@@ -138,6 +143,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
                 backgroundDialog();
+            }
+        });
+
+        button_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -273,6 +288,20 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
         select_background.show();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Uri pictureUri = data.getData();
+            try {
+                InputStream inputStream = this.getContentResolver().openInputStream(pictureUri);
+                userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
+                paintView.setCanvasPicture(userDrawable);
+            } catch (FileNotFoundException e) {
+                //userDrawable = getResources().getDrawable(R.drawable.default_image);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void checkPermission(){
