@@ -118,7 +118,11 @@ public class MainActivity extends AppCompatActivity {
                 recorder = null; //There is no reference to the object, it will be deleted by the GC
                 isSaved = false;
                 paintView.clearPaint();
-                paintView.setCanvasBackground(user_background);
+                if(userDrawable==null){
+                    paintView.setCanvasBackground(user_background);
+                }else{
+                    paintView.setCanvasPicture(userDrawable);
+                }
             }
         });
 
@@ -285,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
                                         paintView.setCanvasBackground(user_background);
                                         break;
                                 }
+                                userDrawable = null;
                             }
                         });
         select_background.show();
