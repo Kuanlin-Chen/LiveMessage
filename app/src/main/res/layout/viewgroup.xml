@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_weight="3">
 
         <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:src="@drawable/ic_media_play"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:id="@+id/button_record"/>
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:src="@drawable/ic_menu_save"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:id="@+id/button_save"/>
@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_media_share"
                 android:background="@color/colorAccent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_share"/>
@@ -70,7 +70,7 @@
             android:layout_weight="1"
             android:src="@drawable/ic_menu_clear"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:id="@+id/button_clear"/>
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_weight="3">
 
             <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_resolution"
                 android:background="@color/colorAccent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_resolution"/>
@@ -124,7 +124,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_pen_color"
                 android:background="@color/colorAccent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_color"/>
@@ -139,7 +139,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_background"
                 android:background="@color/colorAccent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_background"/>
@@ -154,7 +154,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_picture"
                 android:background="@color/colorAccent"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_picture"/>
