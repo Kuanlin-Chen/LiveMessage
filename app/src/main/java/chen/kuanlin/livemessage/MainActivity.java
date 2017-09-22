@@ -119,14 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 if(isRecording){
                     pauseRecord();
                 }
-                recorder = null; //There is no reference to the object, it will be deleted by the GC
-                isSaved = false;
-                paintView.clearPaint();
-                if(userDrawable==null){
-                    paintView.setCanvasBackground(user_background);
-                }else{
-                    paintView.setCanvasPicture(userDrawable);
-                }
+                clear();
             }
         });
 
@@ -169,10 +162,9 @@ public class MainActivity extends AppCompatActivity {
         if(debugmode)Log.e(TAG, "start record");
         if(recorder!=null){
             //Clear canvas before recording
-            recorder = null;
-            paintView.clearPaint();
-            paintView.setCanvasBackground(user_background);
+            clear();
         }
+
         isRecording = true;
         recorder = new Recorder(getApplicationContext(), paintView);
         recorder.setRate(user_rate);
@@ -189,6 +181,18 @@ public class MainActivity extends AppCompatActivity {
         }
         isRecording = false;
         button_record.setImageResource(R.drawable.ic_media_play);
+    }
+
+    private void clear(){
+        if(debugmode)Log.e(TAG, "clear()");
+        recorder = null; //There is no reference to the object, it will be deleted by the GC
+        isSaved = false;
+        paintView.clearPaint();
+        if(userDrawable==null){
+            paintView.setCanvasBackground(user_background);
+        }else{
+            paintView.setCanvasPicture(userDrawable);
+        }
     }
 
     private void shareDialog(final Uri uri){
@@ -304,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 InputStream inputStream = this.getContentResolver().openInputStream(pictureUri);
                 userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
+                paintView.clearPaint();
                 paintView.setCanvasPicture(userDrawable);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
