@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 /**
  * Created by kuanlin on 2017/9/15.
@@ -60,9 +63,18 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
             intent.setData(Uri.fromFile(recorder.getPictureFile()));
             context.sendBroadcast(intent);
 
+            //Setup WebView
+            WebView gifWebView = new WebView(context);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity=Gravity.CENTER;
+            gifWebView.setLayoutParams(params);
+            gifWebView.loadUrl(Uri.fromFile(recorder.getPictureFile()).toString());
+
             AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
             share_dialog.setMessage("Live Message Saved");
             share_dialog.setPositiveButton("Done", null);
+            share_dialog.setView(gifWebView);
             share_dialog.show();
         }
     }

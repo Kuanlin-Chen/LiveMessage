@@ -250,10 +250,6 @@ public class PaintView extends View{
         userDrawable.draw(canvas);
     }
 
-    public void showPreview(Bitmap preBitmap){
-        canvas.setBitmap(preBitmap);
-    }
-
     public void clearPaint(){
         canvas.drawColor(0,PorterDuff.Mode.CLEAR);
         invalidate();
