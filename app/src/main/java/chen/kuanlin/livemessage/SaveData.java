@@ -5,15 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-
-import java.io.File;
 
 /**
  * Created by kuanlin on 2017/9/15.
@@ -68,18 +59,8 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
             intent.setData(Uri.fromFile(recorder.getPictureFile()));
             context.sendBroadcast(intent);
 
-            LayoutInflater factory = LayoutInflater.from(context);
-            View view = factory.inflate(R.layout.preview_dialog, null);
-            ImageView gifImageView = (ImageView)view.findViewById(R.id.imageView_preview);
-
-            GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
-            Glide.with(context).load(recorder.getPictureFile()).into(imageViewTarget);
-
-            AlertDialog.Builder share_dialog = new AlertDialog.Builder(context);
-            share_dialog.setMessage("Live Message Saved");
-            share_dialog.setPositiveButton("Done", null);
-            share_dialog.setView(view);
-            share_dialog.show();
+            Preview_dialog preview_dialog = new Preview_dialog(context, recorder, 0, null);
+            preview_dialog.showPreviewDialog();
         }
     }
 }

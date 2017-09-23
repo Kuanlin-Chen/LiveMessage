@@ -196,19 +196,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void shareDialog(final Uri uri){
-        AlertDialog.Builder share_dialog = new AlertDialog.Builder(MainActivity.this);
-        share_dialog.setMessage("Share Now ?");
-        share_dialog.setNegativeButton("No", null);
-        share_dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int fix) {
-                        Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-                        shareIntent.setType("image/gif");
-                        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                        startActivity(Intent.createChooser(shareIntent, "Share Animated GIF"));
-            }
-        });
-        share_dialog.show();
+        Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
+        preview_dialog.showPreviewDialog();
     }
 
     private void resolutionDialog(){
