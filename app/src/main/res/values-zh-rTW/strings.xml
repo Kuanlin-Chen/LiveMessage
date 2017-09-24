@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">動態訊息</string>
+
+    <string name="button_save_is_recording">正在紀錄</string>
+    <string name="button_save_recorder_null">您還沒寫入訊息</string>
+    <string name="button_share_is_recording">正在紀錄</string>
+    <string name="button_share_recorder_null">您還沒寫入訊息</string>
+    <string name="button_share_not_save">您還沒儲存</string>
+
+    <string name="color_red">豔陽紅</string>
+    <string name="color_yellow">活力黃</string>
+    <string name="color_green">萊姆綠</string>
+    <string name="color_blue">寶石藍</string>
+    <string name="color_white">午夜黑</string>
+    <string name="color_gray">太空灰</string>
+    <string name="color_black">冰雪白</string>
+
+    <string name="dialog_saved">Live Message Saved</string>
+    <string name="dialog_saving">Saving Data</string>
+    <string name="dialog_share">Share this Live Message ?</string>
+    <string name="dialog_sharing">Share Live Message</string>
+
+    <string name="word_no">否</string>
+    <string name="word_ok">好</string>
+    <string name="word_yes">是</string>
+    <string name="word_confirm">確認</string>
+    <string name="word_done">完成</string>
+    <string name="word_english">英文</string>
+    <string name="word_chinese">中文</string>
+    <string name="word_origin">原始尺寸</string>
+    <string name="word_half">二分之一</string>
+    <string name="word_one_third">三分之一</string>
+    <string name="word_quarter">四分之一</string>
+
+    <string name="click_button_twice">點擊兩次返回鍵即可離開</string>
+    <string name="give_me_permission">拜託給我權限！</string>
+
+</resources>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">LiveMessage</string>
+
+    <string name="button_save_is_recording">Cannot Save While Recording</string>
+    <string name="button_save_recorder_null">You Did Not Draw Anything</string>
+    <string name="button_share_is_recording">Cannot Share While Recording</string>
+    <string name="button_share_recorder_null">You Did Not Draw Anything</string>
+    <string name="button_share_not_save">You Did Not Save GIF</string>
+
+    <string name="color_red">RED</string>
+    <string name="color_yellow">YELLOW</string>
+    <string name="color_green">GREEN</string>
+    <string name="color_blue">BLUE</string>
+    <string name="color_white">WHITE</string>
+    <string name="color_gray">GRAY</string>
+    <string name="color_black">BLACK</string>
+
+    <string name="dialog_saved">Live Message Saved</string>
+    <string name="dialog_saving">Saving Data</string>
+    <string name="dialog_share">Share this Live Message ?</string>
+    <string name="dialog_sharing">Share Live Message</string>
+
+    <string name="word_no">No</string>
+    <string name="word_ok">Ok</string>
+    <string name="word_yes">Yes</string>
+    <string name="word_confirm">Confirm</string>
+    <string name="word_done">Done</string>
+    <string name="word_english">English</string>
+    <string name="word_chinese">Chinese</string>
+    <string name="word_origin">Origin</string>
+    <string name="word_half">Half</string>
+    <string name="word_one_third">One Third</string>
+    <string name="word_quarter">Quarter</string>
+
+    <string name="click_button_twice">Click Back Button Twice to Exit</string>
+    <string name="give_me_permission">Give Me Permission, Please!</string>
+
+</resources>
