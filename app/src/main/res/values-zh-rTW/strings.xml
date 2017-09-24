@@ -15,10 +15,10 @@
     <string name="color_gray">太空灰</string>
     <string name="color_black">冰雪白</string>
 
-    <string name="dialog_saved">Live Message Saved</string>
-    <string name="dialog_saving">Saving Data</string>
-    <string name="dialog_share">Share this Live Message ?</string>
-    <string name="dialog_sharing">Share Live Message</string>
+    <string name="dialog_saved">已儲存動態訊息</string>
+    <string name="dialog_saving">正在儲存</string>
+    <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
+    <string name="dialog_sharing">分享動態訊息</string>
 
     <string name="word_no">否</string>
     <string name="word_ok">好</string>
