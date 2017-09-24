@@ -35,20 +35,24 @@ public class PaintView extends View{
     private Bitmap bitmap;
     private Path mPath = new Path();
     private Rect mInvalidRect = new Rect();
+    private Context context;
 
     private String TAG = "[PaintView] ";
     private boolean debugmode = true;
 
     public PaintView(Context context) {
         super(context);
+        this.context = context;
     }
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     public PaintView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.context = context;
     }
 
     @Override
@@ -257,10 +261,10 @@ public class PaintView extends View{
 
     public String[] getResolution(){
         String[] resolutionList = new String[4];
-        resolutionList[0] = "Origin ("+widthPixels+"x"+heightPixels+")";
-        resolutionList[1] = "Half ("+(widthPixels/2)+"x"+(heightPixels/2)+")";
-        resolutionList[2] = "One Third ("+(widthPixels/3)+"x"+(heightPixels/3)+")";
-        resolutionList[3] = "Quarter ("+(widthPixels/4)+"x"+(heightPixels/4)+")";
+        resolutionList[0] = context.getString(R.string.word_origin)+" ("+widthPixels+"x"+heightPixels+")";
+        resolutionList[1] = context.getString(R.string.word_half)+" ("+(widthPixels/2)+"x"+(heightPixels/2)+")";
+        resolutionList[2] = context.getString(R.string.word_one_third)+" ("+(widthPixels/3)+"x"+(heightPixels/3)+")";
+        resolutionList[3] = context.getString(R.string.word_quarter)+" ("+(widthPixels/4)+"x"+(heightPixels/4)+")";
 
         return resolutionList;
     }

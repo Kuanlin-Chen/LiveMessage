@@ -22,6 +22,7 @@ public class Preview_dialog {
     private Recorder recorder;
     private int mode;
     private Uri uri;
+
     public Preview_dialog(Context context, Recorder recorder, int mode, Uri uri){
         this.context = context;
         this.recorder = recorder;
@@ -40,19 +41,19 @@ public class Preview_dialog {
         AlertDialog.Builder preview_dialog = new AlertDialog.Builder(context);
         if(mode==0){
             //Display preview after saving
-            preview_dialog.setMessage("Live Message Saved");
-            preview_dialog.setPositiveButton("Done", null);
+            preview_dialog.setMessage(R.string.dialog_saved);
+            preview_dialog.setPositiveButton(R.string.word_done, null);
         }else if(mode==1){
             //Display preview before sharing
-            preview_dialog.setMessage("Share this Live Message ?");
-            preview_dialog.setNegativeButton("No", null);
-            preview_dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            preview_dialog.setMessage(R.string.dialog_share);
+            preview_dialog.setNegativeButton(R.string.word_no, null);
+            preview_dialog.setPositiveButton(R.string.word_yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int fix) {
                     Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
                     shareIntent.setType("image/gif");
                     shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    context.startActivity(Intent.createChooser(shareIntent, "Share Live Message"));
+                    context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.dialog_sharing)));
                 }
             });
         }

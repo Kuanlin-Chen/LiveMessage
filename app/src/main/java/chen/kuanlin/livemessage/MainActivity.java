@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     if(debugmode){
                         if(isRecording){
-                            Toast.makeText(MainActivity.this,"Cannot Save While Recording", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
                         } else if(recorder==null){
-                            Toast.makeText(MainActivity.this,"You Did Not Draw Anything", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     if(debugmode){
                         if(isRecording){
-                            Toast.makeText(MainActivity.this,"Cannot Share While Recording", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.button_share_is_recording, Toast.LENGTH_SHORT).show();
                         } else if(recorder==null){
-                            Toast.makeText(MainActivity.this,"You Did Not Draw Anything", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.button_share_recorder_null, Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this,"You Did Not Save GIF", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.button_share_not_save, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -225,13 +225,14 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-        select_rate.setPositiveButton("Confirm",null);
+        select_rate.setPositiveButton(R.string.word_confirm, null);
         select_rate.show();
     }
 
     private void colorDialog(){
         AlertDialog.Builder select_color = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{"RED", "YELLOW", "GREEN", "BLUE", "WHITE", "GRAY", "BLACK"}, user_color,
+                setSingleChoiceItems(new String[]{getString(R.string.color_red), getString(R.string.color_yellow), getString(R.string.color_green),
+                                getString(R.string.color_blue), getString(R.string.color_white), getString(R.string.color_gray), getString(R.string.color_black)}, user_color,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -267,13 +268,13 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-        select_color.setPositiveButton("Confirm", null);
+        select_color.setPositiveButton(R.string.word_confirm, null);
         select_color.show();
     }
 
     private void backgroundDialog(){
         AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{"BLACK","WHITE"}, user_background,
+                setSingleChoiceItems(new String[]{getString(R.string.color_black),getString(R.string.color_white)}, user_background,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -290,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                                 userDrawable = null;
                             }
                         });
-        select_background.setPositiveButton("Confirm", null);
+        select_background.setPositiveButton(R.string.word_confirm, null);
         select_background.show();
     }
 
@@ -316,8 +317,8 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 new AlertDialog.Builder(MainActivity.this)
-                        .setMessage("Give Me Permission, Please!")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setMessage(R.string.give_me_permission)
+                        .setPositiveButton(R.string.word_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ActivityCompat.requestPermissions(MainActivity.this,
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.word_no, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -345,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if((System.currentTimeMillis()-exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "Click Back Button Twice to Exit",
+                Toast.makeText(getApplicationContext(), R.string.click_button_twice,
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
@@ -375,10 +376,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.menu_english:
-                Toast.makeText(MainActivity.this,"English",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,R.string.word_english,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_chinese:
-                Toast.makeText(MainActivity.this,"Chinese",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,R.string.word_chinese,Toast.LENGTH_SHORT).show();
                 break;
         }
 

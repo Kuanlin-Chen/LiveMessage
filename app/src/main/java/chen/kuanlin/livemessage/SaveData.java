@@ -26,7 +26,7 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         //在背景執行之前要做的事，寫在這裡
         //初始化進度條
         myDialog = new ProgressDialog(context);
-        myDialog.setMessage("Saving Data");
+        myDialog.setMessage(context.getString(R.string.dialog_saving));
         myDialog.setCancelable(false);
         myDialog.show();
         super.onPreExecute();
