@@ -14,8 +14,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -27,7 +31,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton button_record, button_save, button_share, button_clear,
+    protected ImageButton button_record, button_save, button_share, button_clear,
                         button_resolution, button_color, button_background, button_picture;
 
     private PaintView paintView;
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         setLocale();
         checkPermission();
+
+        QuickGuide quickGuide = new QuickGuide(MainActivity.this);
+        quickGuide.registerGuide();
 
         button_record.setOnClickListener(new View.OnClickListener() {
             @Override
