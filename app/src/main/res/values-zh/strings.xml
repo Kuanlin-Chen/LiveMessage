@@ -11,9 +11,9 @@
     <string name="color_yellow">活力黃</string>
     <string name="color_green">萊姆綠</string>
     <string name="color_blue">寶石藍</string>
-    <string name="color_white">午夜黑</string>
+    <string name="color_white">冰雪白</string>
     <string name="color_gray">太空灰</string>
-    <string name="color_black">冰雪白</string>
+    <string name="color_black">午夜黑</string>
 
     <string name="dialog_saved">已儲存動態訊息</string>
     <string name="dialog_saving">正在儲存</string>
