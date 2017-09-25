@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Locale;
 
 /**
  * Created by kuanlin on 2017/9/7.
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         button_background = (ImageButton)findViewById(R.id.button_background);
         button_picture = (ImageButton)findViewById(R.id.button_picture);
 
+        setLocale();
         checkPermission();
 
         button_record.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +312,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void setLocale(){
+        Locale.setDefault(new Locale(Locale.getDefault().getLanguage()));
+    }
+
     private void checkPermission(){
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -376,9 +382,11 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.menu_english:
+                //changeLocale(MainActivity.this, "en");
                 Toast.makeText(MainActivity.this,R.string.word_english,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_chinese:
+                //changeLocale(MainActivity.this, "zh");
                 Toast.makeText(MainActivity.this,R.string.word_chinese,Toast.LENGTH_SHORT).show();
                 break;
         }
