@@ -374,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
                 quickGuide.showQuickGuide();
                 break;
             case R.id.menu_feedback:
-                Toast.makeText(MainActivity.this,"Feedback",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"Feedback",Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
