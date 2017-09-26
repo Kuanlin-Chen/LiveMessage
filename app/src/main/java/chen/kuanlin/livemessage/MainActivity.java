@@ -61,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
         setLocale();
         checkPermission();
+        MySharedPreference mySharedPreference = new MySharedPreference(MainActivity.this);
 
-        QuickGuide quickGuide = new QuickGuide(MainActivity.this);
-        quickGuide.showQuickGuide();
+        if(!mySharedPreference.getGuide()){
+            QuickGuide quickGuide = new QuickGuide(MainActivity.this);
+            quickGuide.showQuickGuide();
+            mySharedPreference.setGuide(true);
+        }
 
         button_record.setOnClickListener(new View.OnClickListener() {
             @Override
