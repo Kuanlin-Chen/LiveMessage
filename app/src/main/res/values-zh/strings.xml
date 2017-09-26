@@ -20,6 +20,25 @@
     <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
     <string name="dialog_sharing">分享動態訊息</string>
 
+    <string name="guide_next_step">下一步</string>
+    <string name="guide_end">開始使用</string>
+    <string name="guide_record_title">「紀錄」與「暫停」</string>
+    <string name="guide_record_text">請按此開始紀錄您描繪的動態訊息\n再按一次即可暫停紀錄</string>
+    <string name="guide_save_title">「儲存」</string>
+    <string name="guide_save_text">請按此儲存您的動態訊息\n要先暫停紀錄才能開始儲存喔</string>
+    <string name="guide_share_title">「分享」</string>
+    <string name="guide_share_text">請按此分享您的動態訊息\n要先儲存才能分享喔</string>
+    <string name="guide_clear_title">「清除」</string>
+    <string name="guide_clear_text">請按此清除您的畫布</string>
+    <string name="guide_resolution_title">「解析度」</string>
+    <string name="guide_resolution_text">請按此調整動態訊息儲存之後的解析度\n解析度越低儲存速度會越快</string>
+    <string name="guide_color_title">「畫筆顏色」</string>
+    <string name="guide_color_text">請按此選擇畫筆的顏色</string>
+    <string name="guide_background_title">「背景顏色」</string>
+    <string name="guide_background_text">請按此選擇畫布背景的顏色</string>
+    <string name="guide_picture_title">「插入圖片」</string>
+    <string name="guide_picture_text">請按此選擇您想插入的圖片\n圖片將會作為動態訊息的背景喔</string>
+
     <string name="word_no">否</string>
     <string name="word_ok">好</string>
     <string name="word_yes">是</string>

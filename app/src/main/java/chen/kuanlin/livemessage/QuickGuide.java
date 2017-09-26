@@ -1,6 +1,5 @@
 package chen.kuanlin.livemessage;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,39 +18,97 @@ public class QuickGuide{
         this.mainActivity = mainActivity;
     }
 
-    public void registerGuide(){
+    public void showQuickGuide(){
         ViewTarget recordTarget = new ViewTarget(mainActivity.button_record);
         ViewTarget saveTarget = new ViewTarget(mainActivity.button_save);
         ViewTarget shareTarget = new ViewTarget(mainActivity.button_share);
+        ViewTarget clearTarget = new ViewTarget(mainActivity.button_clear);
+        ViewTarget resolutionTarget = new ViewTarget(mainActivity.button_resolution);
+        ViewTarget colorTarget = new ViewTarget(mainActivity.button_color);
+        ViewTarget backgroundTarget = new ViewTarget(mainActivity.button_background);
+        ViewTarget pictureTarget = new ViewTarget(mainActivity.button_picture);
+
         Button recordButton=new Button(mainActivity);
-        recordButton.setText("下一步");
+        recordButton.setText(R.string.guide_next_step);
         Button saveButton=new Button(mainActivity);
-        saveButton.setText("下一步");
+        saveButton.setText(R.string.guide_next_step);
         Button shareButton=new Button(mainActivity);
-        shareButton.setText("開始使用");
+        shareButton.setText(R.string.guide_next_step);
+        Button clearButton=new Button(mainActivity);
+        clearButton.setText(R.string.guide_next_step);
+        Button resolutionButton=new Button(mainActivity);
+        resolutionButton.setText(R.string.guide_next_step);
+        Button colorButton=new Button(mainActivity);
+        colorButton.setText(R.string.guide_next_step);
+        Button backgroundButton=new Button(mainActivity);
+        backgroundButton.setText(R.string.guide_next_step);
+        Button pictureButton=new Button(mainActivity);
+        pictureButton.setText(R.string.guide_end);
+
         final ShowcaseView recordShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
                 .setTarget(recordTarget)
-                .setContentTitle("紀錄與暫停")
-                .setContentText("請按此")
+                .setContentTitle(R.string.guide_record_title)
+                .setContentText(R.string.guide_record_text)
                 .replaceEndButton(recordButton)
                 .build();
         final ShowcaseView saveShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
                 .setTarget(saveTarget)
-                .setContentTitle("儲存")
-                .setContentText("请输入密码")
+                .setContentTitle(R.string.guide_save_title)
+                .setContentText(R.string.guide_save_text)
                 .replaceEndButton(saveButton)
                 .build();
         saveShowcaseView.hide();
         final ShowcaseView shareShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
                 .setTarget(shareTarget)
-                .setContentTitle("第三步")
-                .setContentText("请点击注册按钮")
+                .setContentTitle(R.string.guide_share_title)
+                .setContentText(R.string.guide_share_text)
                 .replaceEndButton(shareButton)
                 .build();
         shareShowcaseView.hide();
+        final ShowcaseView clearShowcaseView=new ShowcaseView.Builder(mainActivity)
+                .withMaterialShowcase()
+                .setTarget(clearTarget)
+                .setContentTitle(R.string.guide_clear_title)
+                .setContentText(R.string.guide_clear_text)
+                .replaceEndButton(clearButton)
+                .build();
+        clearShowcaseView.hide();
+        final ShowcaseView resolutionShowcaseView=new ShowcaseView.Builder(mainActivity)
+                .withMaterialShowcase()
+                .setTarget(resolutionTarget)
+                .setContentTitle(R.string.guide_resolution_title)
+                .setContentText(R.string.guide_resolution_text)
+                .replaceEndButton(resolutionButton)
+                .build();
+        resolutionShowcaseView.hide();
+        final ShowcaseView colorShowcaseView=new ShowcaseView.Builder(mainActivity)
+                .withMaterialShowcase()
+                .setTarget(colorTarget)
+                .setContentTitle(R.string.guide_color_title)
+                .setContentText(R.string.guide_color_text)
+                .replaceEndButton(colorButton)
+                .build();
+        colorShowcaseView.hide();
+        final ShowcaseView backgroundShowcaseView=new ShowcaseView.Builder(mainActivity)
+                .withMaterialShowcase()
+                .setTarget(backgroundTarget)
+                .setContentTitle(R.string.guide_background_title)
+                .setContentText(R.string.guide_background_text)
+                .replaceEndButton(backgroundButton)
+                .build();
+        backgroundShowcaseView.hide();
+        final ShowcaseView pictureShowcaseView=new ShowcaseView.Builder(mainActivity)
+                .withMaterialShowcase()
+                .setTarget(pictureTarget)
+                .setContentTitle(R.string.guide_picture_title)
+                .setContentText(R.string.guide_picture_text)
+                .replaceEndButton(pictureButton)
+                .build();
+        pictureShowcaseView.hide();
+
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +127,41 @@ public class QuickGuide{
             @Override
             public void onClick(View v) {
                 shareShowcaseView.hide();
+                clearShowcaseView.show();
+            }
+        });
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearShowcaseView.hide();
+                resolutionShowcaseView.show();
+            }
+        });
+        resolutionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resolutionShowcaseView.hide();
+                colorShowcaseView.show();
+            }
+        });
+        colorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colorShowcaseView.hide();
+                backgroundShowcaseView.show();
+            }
+        });
+        backgroundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backgroundShowcaseView.hide();
+                pictureShowcaseView.show();
+            }
+        });
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pictureShowcaseView.hide();
             }
         });
     }

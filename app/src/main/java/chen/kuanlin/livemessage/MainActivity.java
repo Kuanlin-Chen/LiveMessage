@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         QuickGuide quickGuide = new QuickGuide(MainActivity.this);
-        quickGuide.registerGuide();
+        quickGuide.showQuickGuide();
 
         button_record.setOnClickListener(new View.OnClickListener() {
             @Override
