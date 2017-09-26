@@ -39,6 +39,9 @@
     <string name="guide_picture_title">「插入圖片」</string>
     <string name="guide_picture_text">請按此選擇您想插入的圖片\n圖片將會作為動態訊息的背景喔</string>
 
+    <string name="menu_guide">快速導覽</string>
+    <string name="menu_feedback">意見回饋</string>
+
     <string name="word_no">否</string>
     <string name="word_ok">好</string>
     <string name="word_yes">是</string>

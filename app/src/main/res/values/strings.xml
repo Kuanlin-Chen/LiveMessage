@@ -22,7 +22,7 @@
 
     <string name="guide_next_step">Next Step</string>
     <string name="guide_end">Get Started</string>
-    <string name="guide_record_title">[Record]and[Pause]</string>
+    <string name="guide_record_title">[Record] and [Pause]</string>
     <string name="guide_record_text">Click here to start recording\nClick again to pause recording</string>
     <string name="guide_save_title">[Save]</string>
     <string name="guide_save_text">Click here to save your live message\nPlease click pause before saving</string>
@@ -38,6 +38,9 @@
     <string name="guide_background_text">Click here to select the background of canvas</string>
     <string name="guide_picture_title">[Picture]</string>
     <string name="guide_picture_text">Click here to insert a picture as background</string>
+
+    <string name="menu_guide">Quick Guide</string>
+    <string name="menu_feedback">Feedback</string>
 
     <string name="word_no">No</string>
     <string name="word_ok">Ok</string>
