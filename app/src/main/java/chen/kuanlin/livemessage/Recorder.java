@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 
 import java.io.ByteArrayOutputStream;
@@ -31,8 +30,6 @@ public class Recorder implements Runnable {
 
     private static int rate = 4;
     private static boolean isContinue;
-    private static boolean debugmode = true;
-    private final String TAG = "[Recorder] ";
 
     public Recorder(Context context, PaintView paintView){
         this.context = context;
@@ -42,21 +39,17 @@ public class Recorder implements Runnable {
 
     public void terminate(){
         isContinue = false;
-        if(debugmode)Log.e(TAG, "terminate()");
     }
 
     @Override
     public void run(){
-        if(debugmode)Log.e(TAG, "Recorder.run()");
         try {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
                 Thread.sleep(800);
-                if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
             }
         } catch(InterruptedException e){
-            if(debugmode)Log.e(TAG, "InterruptedException");
             e.printStackTrace();
         }
     }
@@ -77,16 +70,12 @@ public class Recorder implements Runnable {
         // draw the view on the canvas
         view.draw(canvas);
         //resize the bitmap
-        if(debugmode)Log.e("[Recorder] ", "rate="+String.valueOf(rate));
         Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/rate),(view.getMeasuredHeight()/rate), true);
         //return the bitmap
         return resizeBitmap;
     }
 
     private File getOutputMediaFile(){
-        // String appName = getApplicationName(context);
-        // if(debugmode)Log.e(TAG, appName);
-
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
         File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
@@ -111,7 +100,6 @@ public class Recorder implements Runnable {
     }
 
     private byte[] generateGIF() {
-        if(debugmode)Log.e(TAG,"generateGIF()");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.setFrameRate(10);
@@ -120,22 +108,18 @@ public class Recorder implements Runnable {
             encoder.addFrame(bitmap);
         }
         encoder.finish();
-        if(debugmode)Log.e(TAG,"encoder.finish()");
         return bos.toByteArray();
     }
 
     public void storeGIF(){
         pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
-            if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
             return;
         }
         try{
-            if(debugmode)Log.e(TAG, "stroeGIF()");
             FileOutputStream fos = new FileOutputStream(pictureFile);
             fos.write(generateGIF());
             fos.close();
-            if(debugmode)Log.e(TAG, "fos.close()");
         }catch(Exception e){
             e.printStackTrace();
         }

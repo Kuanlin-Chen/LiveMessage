@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -37,9 +36,6 @@ public class PaintView extends View{
     private Rect mInvalidRect = new Rect();
     private Context context;
 
-    private String TAG = "[PaintView] ";
-    private boolean debugmode = true;
-
     public PaintView(Context context) {
         super(context);
         this.context = context;
@@ -58,7 +54,6 @@ public class PaintView extends View{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if(debugmode)Log.e(TAG,"Width:"+String.valueOf(widthMeasureSpec)+" Height:"+String.valueOf(heightMeasureSpec));
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom){
@@ -70,7 +65,6 @@ public class PaintView extends View{
         widthPixels = getMeasuredWidth();
         heightPixels = getMeasuredHeight();
         bitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        if(debugmode)Log.e(TAG,"widthPixels:"+String.valueOf(widthPixels)+" heightPixels:"+String.valueOf(heightPixels));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
         setCanvasBackground(0);
@@ -93,17 +87,9 @@ public class PaintView extends View{
         int index = event.getActionIndex();
         int ID = event.getPointerId(index);
 
-        if(debugmode){
-            Log.e(TAG,"index:" + index );
-            Log.e(TAG,"ID:" + ID );
-            Log.e(TAG,"Action::" + event.getAction() );
-        }
-
         switch(event.getAction())
         {
             case MotionEvent.ACTION_MOVE:
-                if(debugmode) Log.e(TAG,"Action Move 2" + event.getX() + "/" + event.getY());
-
                 if((ID == StylePenID)) {
                     isMoving = true;
                     Rect rect = RectMove(event);
@@ -115,11 +101,9 @@ public class PaintView extends View{
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN:
-                if(debugmode) Log.e(TAG,"Point Down :" + event.getX() + "/" + event.getY());
                 break;
 
             case MotionEvent.ACTION_DOWN:
-                if(debugmode) Log.e(TAG,"Down :" + event.getX() + "/" + event.getY());
                 //單點觸控：僅第一個觸控點畫線或點，其餘皆過慮掉
                 if( isFirstPenTouch == false) {
                     isFirstPenTouch = true;
@@ -135,7 +119,6 @@ public class PaintView extends View{
                 break;
 
             case MotionEvent.ACTION_POINTER_UP:
-                if(debugmode) Log.e(TAG,"Point UP");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;
@@ -144,7 +127,6 @@ public class PaintView extends View{
                 break;
 
             case MotionEvent.ACTION_UP:
-                if(debugmode) Log.e(TAG,"UP :");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;
@@ -153,7 +135,6 @@ public class PaintView extends View{
                 break;
 
             case MotionEvent.ACTION_CANCEL:
-                if(debugmode) Log.e(TAG,"Cancel");
                 if(ID == StylePenID) {
                     StylePenID = -1;
                     isFirstPenTouch = false;

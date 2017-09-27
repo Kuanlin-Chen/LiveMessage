@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static long exitTime = 0;
-    private boolean debugmode = true;
-    private final String TAG = "[MainActivity] ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,18 +83,15 @@ public class MainActivity extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_save");
                 if( (!isRecording) && (recorder!=null) ){
                     SaveData saveData = new SaveData(MainActivity.this,recorder);
                     saveData.execute();
                     isSaved = true;
                 }else {
-                    if(debugmode){
-                        if(isRecording){
-                            Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
-                        } else if(recorder==null){
-                            Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
-                        }
+                    if(isRecording){
+                        Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
+                    } else if(recorder==null){
+                        Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -106,19 +100,16 @@ public class MainActivity extends AppCompatActivity {
         button_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_share");
                 if( (!isRecording) && (recorder!=null) && (isSaved)) {
                     Uri uri = Uri.fromFile(recorder.getPictureFile());
                     shareDialog(uri);
                 }else {
-                    if(debugmode){
-                        if(isRecording){
-                            Toast.makeText(MainActivity.this, R.string.button_share_is_recording, Toast.LENGTH_SHORT).show();
-                        } else if(recorder==null){
-                            Toast.makeText(MainActivity.this, R.string.button_share_recorder_null, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, R.string.button_share_not_save, Toast.LENGTH_SHORT).show();
-                        }
+                    if(isRecording){
+                        Toast.makeText(MainActivity.this, R.string.button_share_is_recording, Toast.LENGTH_SHORT).show();
+                    } else if(recorder==null){
+                        Toast.makeText(MainActivity.this, R.string.button_share_recorder_null, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, R.string.button_share_not_save, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -127,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         button_clear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(debugmode)Log.e(TAG, "button_clear");
                 if(isRecording){
                     pauseRecord();
                 }
@@ -138,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         button_resolution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_resolution");
                 resolutionDialog();
             }
         });
@@ -146,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         button_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_color");
                 colorDialog();
             }
         });
@@ -154,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         button_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_background");
                 backgroundDialog();
             }
         });
@@ -171,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRecord(){
-        if(debugmode)Log.e(TAG, "start record");
         if(recorder!=null){
             //Clear canvas before recording
             clear();
@@ -186,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pauseRecord(){
-        if(debugmode)Log.e(TAG, "pause record");
         recorder.terminate();
         if(!(thread.isInterrupted())){
             thread.interrupt();
@@ -196,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clear(){
-        if(debugmode)Log.e(TAG, "clear()");
         recorder = null; //There is no reference to the object, it will be deleted by the GC
         isSaved = false;
         paintView.clearPaint();
