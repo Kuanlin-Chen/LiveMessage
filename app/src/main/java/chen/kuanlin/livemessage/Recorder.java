@@ -10,8 +10,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import com.waynejo.androidndkgif.GifEncoder;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +35,8 @@ public class Recorder implements Runnable {
     private static int rate = 4;
     private static boolean isContinue;
     private static boolean debugmode = true;
+    private static int bitmapWidth = 1; //for generateJniGIF()
+    private static int bitmapHeight = 1; //for generateJniGIF()
     private final String TAG = "[Recorder] ";
 
     public Recorder(Context context, PaintView paintView){
@@ -78,6 +83,8 @@ public class Recorder implements Runnable {
         view.draw(canvas);
         //resize the bitmap
         if(debugmode)Log.e("[Recorder] ", "rate="+String.valueOf(rate));
+        bitmapWidth = (view.getMeasuredWidth()/rate);
+        bitmapHeight = (view.getMeasuredHeight()/rate);
         Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/rate),(view.getMeasuredHeight()/rate), true);
         //return the bitmap
         return resizeBitmap;
@@ -122,6 +129,33 @@ public class Recorder implements Runnable {
         encoder.finish();
         if(debugmode)Log.e(TAG,"encoder.finish()");
         return bos.toByteArray();
+    }
+
+    public void generateJniGIF(){
+        pictureFile = getOutputMediaFile();
+        if (pictureFile == null) {
+            if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
+            return;
+        }
+
+        GifEncoder gifEncoder = new GifEncoder();
+        try {
+            gifEncoder.init(bitmapWidth, bitmapHeight, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
+            if(debugmode)Log.e(TAG, "gifEncoder.init completed");
+        }catch (FileNotFoundException ffe){
+            if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
+            ffe.printStackTrace();
+        }
+
+        if(debugmode)Log.e(TAG,"start encodeFrame");
+        // Bitmap is MUST ARGB_8888.
+        for (Bitmap bitmap : bitmapList){
+            gifEncoder.encodeFrame(bitmap, 10);
+            //gifEncoder.encodeFrame(bitmap2, delayMs);
+        }
+        if(debugmode)Log.e(TAG,"end encodeFrame");
+
+        gifEncoder.close();
     }
 
     public void storeGIF(){
