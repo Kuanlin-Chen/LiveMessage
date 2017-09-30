@@ -30,7 +30,7 @@ public class Recorder implements Runnable {
     private File pictureFile;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 
-    private static int rate = 4;
+    private static int rate = 1;
     private static boolean isContinue;
     private static boolean debugmode = true;
     private static int bitmapWidth = 1; //for generateJniGIF()

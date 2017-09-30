@@ -40,19 +40,24 @@ public class PaintView extends View{
     private String TAG = "[PaintView] ";
     private boolean debugmode = true;
 
+    MySharedPreference mySharedPreference;
+
     public PaintView(Context context) {
         super(context);
         this.context = context;
+        mySharedPreference = new MySharedPreference(context);
     }
 
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        mySharedPreference = new MySharedPreference(context);
     }
 
     public PaintView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
+        mySharedPreference = new MySharedPreference(context);
     }
 
     @Override
@@ -66,6 +71,7 @@ public class PaintView extends View{
     }
 
     private void initPaintView() {
+        if(debugmode)Log.e(TAG,"initPaintView()");
         paint = new Paint(Paint.DITHER_FLAG);
         widthPixels = getMeasuredWidth();
         heightPixels = getMeasuredHeight();
@@ -73,11 +79,11 @@ public class PaintView extends View{
         if(debugmode)Log.e(TAG,"widthPixels:"+String.valueOf(widthPixels)+" heightPixels:"+String.valueOf(heightPixels));
         canvas = new Canvas();
         canvas.setBitmap(bitmap);
-        setCanvasBackground(0);
+        setCanvasBackground(mySharedPreference.getUserBackground());
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
-        paint.setColor(Color.RED);
+        setPaintColor(mySharedPreference.getUserColor());
         paint.setAntiAlias(true);
         paint.setDither(true);
         paint.setStrokeWidth((float) 3.0);
