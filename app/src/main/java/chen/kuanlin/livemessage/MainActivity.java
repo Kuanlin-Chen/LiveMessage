@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private Drawable userDrawable;
 
-    private int user_rate = 4;
+    private int user_rate = 1;
     private int user_color = 0;
     private int user_background = 0;
     private static boolean isRecording = false;

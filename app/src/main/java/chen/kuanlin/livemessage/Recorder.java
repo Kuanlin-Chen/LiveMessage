@@ -57,7 +57,7 @@ public class Recorder implements Runnable {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
-                Thread.sleep(800);
+                Thread.sleep(500);
                 if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
             }
         } catch(InterruptedException e){
@@ -150,7 +150,7 @@ public class Recorder implements Runnable {
         if(debugmode)Log.e(TAG,"start encodeFrame");
         // Bitmap is MUST ARGB_8888.
         for (Bitmap bitmap : bitmapList){
-            gifEncoder.encodeFrame(bitmap, 10);
+            gifEncoder.encodeFrame(bitmap, 100);
             //gifEncoder.encodeFrame(bitmap2, delayMs);
         }
         if(debugmode)Log.e(TAG,"end encodeFrame");

@@ -7,10 +7,6 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
 
 import java.io.IOException;
 
@@ -46,9 +42,6 @@ public class Preview_dialog {
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
-
-        //DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(gifImageView);
-        //Glide.with(context).load(recorder.getPictureFile()).into(imageViewTarget);
 
         AlertDialog.Builder preview_dialog = new AlertDialog.Builder(context);
         if(mode==0){
