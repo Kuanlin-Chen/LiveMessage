@@ -10,7 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
+
+import java.io.IOException;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by kuanlin on 2017/9/23.
@@ -33,10 +38,17 @@ public class Preview_dialog {
     public void showPreviewDialog(){
         LayoutInflater factory = LayoutInflater.from(context);
         View view = factory.inflate(R.layout.preview_dialog, null);
-        ImageView gifImageView = (ImageView)view.findViewById(R.id.imageView_preview);
+        GifImageView gifImageView = (GifImageView)view.findViewById(R.id.imageView_preview);
 
-        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
-        Glide.with(context).load(recorder.getPictureFile()).into(imageViewTarget);
+        try {
+            GifDrawable gifFromPath = new GifDrawable(recorder.getPictureFile());
+            gifImageView.setImageDrawable(gifFromPath);
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+
+        //DrawableImageViewTarget imageViewTarget = new DrawableImageViewTarget(gifImageView);
+        //Glide.with(context).load(recorder.getPictureFile()).into(imageViewTarget);
 
         AlertDialog.Builder preview_dialog = new AlertDialog.Builder(context);
         if(mode==0){
