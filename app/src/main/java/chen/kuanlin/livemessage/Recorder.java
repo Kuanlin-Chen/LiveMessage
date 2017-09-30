@@ -12,10 +12,8 @@ import android.view.View;
 
 import com.waynejo.androidndkgif.GifEncoder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -117,20 +115,6 @@ public class Recorder implements Runnable {
         return mediaFile;
     }
 
-    private byte[] generateGIF() {
-        if(debugmode)Log.e(TAG,"generateGIF()");
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.setFrameRate(10);
-        encoder.start(bos);
-        for (Bitmap bitmap : bitmapList) {
-            encoder.addFrame(bitmap);
-        }
-        encoder.finish();
-        if(debugmode)Log.e(TAG,"encoder.finish()");
-        return bos.toByteArray();
-    }
-
     public void generateJniGIF(){
         pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
@@ -150,29 +134,12 @@ public class Recorder implements Runnable {
         if(debugmode)Log.e(TAG,"start encodeFrame");
         // Bitmap is MUST ARGB_8888.
         for (Bitmap bitmap : bitmapList){
+            //gifEncoder.encodeFrame(bitmap, delayMs);
             gifEncoder.encodeFrame(bitmap, 100);
-            //gifEncoder.encodeFrame(bitmap2, delayMs);
         }
         if(debugmode)Log.e(TAG,"end encodeFrame");
 
         gifEncoder.close();
-    }
-
-    public void storeGIF(){
-        pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
-            return;
-        }
-        try{
-            if(debugmode)Log.e(TAG, "stroeGIF()");
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(generateGIF());
-            fos.close();
-            if(debugmode)Log.e(TAG, "fos.close()");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
     public void setRate(int rate){
