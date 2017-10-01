@@ -161,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if(debugmode)Log.e(TAG, "onResume()");
         user_rate = mySharedPreference.getUserRate();
         user_color = mySharedPreference.getUserColor();
         user_background = mySharedPreference.getUserBackground();
@@ -170,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        if(debugmode)Log.e(TAG, "onPause()");
         mySharedPreference.savePreference(user_rate, user_color, user_background);
     }
 

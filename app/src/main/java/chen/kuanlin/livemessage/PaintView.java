@@ -66,7 +66,6 @@ public class PaintView extends View{
     }
 
     private void initPaintView() {
-        if(debugmode)Log.e(TAG,"initPaintView()");
         paint = new Paint(Paint.DITHER_FLAG);
         widthPixels = getMeasuredWidth();
         heightPixels = getMeasuredHeight();

@@ -114,19 +114,15 @@ public class Recorder implements Runnable {
         GifEncoder gifEncoder = new GifEncoder();
         try {
             gifEncoder.init(bitmapWidth, bitmapHeight, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
-            if(debugmode)Log.e(TAG, "gifEncoder.init completed");
         }catch (FileNotFoundException ffe){
-            if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
             ffe.printStackTrace();
         }
 
-        if(debugmode)Log.e(TAG,"start encodeFrame");
         // Bitmap is MUST ARGB_8888.
         for (Bitmap bitmap : bitmapList){
             //gifEncoder.encodeFrame(bitmap, delayMs);
             gifEncoder.encodeFrame(bitmap, 100);
         }
-        if(debugmode)Log.e(TAG,"end encodeFrame");
 
         gifEncoder.close();
     }
