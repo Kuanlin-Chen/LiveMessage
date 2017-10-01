@@ -37,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private Drawable userDrawable;
 
-    private int user_rate = 4;
-    private int user_color = 0;
-    private int user_background = 0;
+    private static int user_rate = 1;
+    private static int user_color = 0;
+    private static int user_background = 0;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static long exitTime = 0;
+
+    MySharedPreference mySharedPreference = new MySharedPreference(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         setLocale();
         checkPermission();
-        MySharedPreference mySharedPreference = new MySharedPreference(MainActivity.this);
 
         if(!mySharedPreference.getGuide()){
             QuickGuide quickGuide = new QuickGuide(MainActivity.this);
@@ -155,6 +156,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(debugmode)Log.e(TAG, "onResume()");
+        user_rate = mySharedPreference.getUserRate();
+        user_color = mySharedPreference.getUserColor();
+        user_background = mySharedPreference.getUserBackground();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(debugmode)Log.e(TAG, "onPause()");
+        mySharedPreference.savePreference(user_rate, user_color, user_background);
     }
 
     private void startRecord(){
@@ -373,6 +390,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
+                //Save user data while pressing keydown
+                mySharedPreference.savePreference(user_rate, user_color, user_background);
                 finish();
                 System.exit(0);
             }

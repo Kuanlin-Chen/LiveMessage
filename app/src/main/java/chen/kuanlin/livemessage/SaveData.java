@@ -36,7 +36,7 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         //一定必須覆寫的方法
         //背景執行的內容放此
         //這裡不能和UI有任何互動
-        recorder.storeGIF();
+        recorder.generateJniGIF();
         return 1;
     }
 

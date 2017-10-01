@@ -9,9 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.view.View;
 
-import java.io.ByteArrayOutputStream;
+import com.waynejo.androidndkgif.GifEncoder;
+
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,8 +29,11 @@ public class Recorder implements Runnable {
     private File pictureFile;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 
-    private static int rate = 4;
+    private static int rate = 1;
     private static boolean isContinue;
+
+    private static int bitmapWidth = 1; //for generateJniGIF()
+    private static int bitmapHeight = 1; //for generateJniGIF()
 
     public Recorder(Context context, PaintView paintView){
         this.context = context;
@@ -47,7 +51,7 @@ public class Recorder implements Runnable {
             while (isContinue){
                 image = getBitmapFromView(paintView);
                 bitmapList.add(image);
-                Thread.sleep(800);
+                Thread.sleep(500);
             }
         } catch(InterruptedException e){
             e.printStackTrace();
@@ -70,6 +74,8 @@ public class Recorder implements Runnable {
         // draw the view on the canvas
         view.draw(canvas);
         //resize the bitmap
+        bitmapWidth = (view.getMeasuredWidth()/rate);
+        bitmapHeight = (view.getMeasuredHeight()/rate);
         Bitmap resizeBitmap = Bitmap.createScaledBitmap(returnedBitmap, (view.getMeasuredWidth()/rate),(view.getMeasuredHeight()/rate), true);
         //return the bitmap
         return resizeBitmap;
@@ -99,30 +105,30 @@ public class Recorder implements Runnable {
         return mediaFile;
     }
 
-    private byte[] generateGIF() {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.setFrameRate(10);
-        encoder.start(bos);
-        for (Bitmap bitmap : bitmapList) {
-            encoder.addFrame(bitmap);
-        }
-        encoder.finish();
-        return bos.toByteArray();
-    }
-
-    public void storeGIF(){
+    public void generateJniGIF(){
         pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
             return;
         }
-        try{
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(generateGIF());
-            fos.close();
-        }catch(Exception e){
-            e.printStackTrace();
+
+        GifEncoder gifEncoder = new GifEncoder();
+        try {
+            gifEncoder.init(bitmapWidth, bitmapHeight, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
+            if(debugmode)Log.e(TAG, "gifEncoder.init completed");
+        }catch (FileNotFoundException ffe){
+            if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
+            ffe.printStackTrace();
         }
+
+        if(debugmode)Log.e(TAG,"start encodeFrame");
+        // Bitmap is MUST ARGB_8888.
+        for (Bitmap bitmap : bitmapList){
+            //gifEncoder.encodeFrame(bitmap, delayMs);
+            gifEncoder.encodeFrame(bitmap, 100);
+        }
+        if(debugmode)Log.e(TAG,"end encodeFrame");
+
+        gifEncoder.close();
     }
 
     public void setRate(int rate){
