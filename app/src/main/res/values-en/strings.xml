@@ -20,6 +20,12 @@
     <string name="dialog_share">Share this Live Message ?</string>
     <string name="dialog_sharing">Share Live Message</string>
 
+    <string name="feedback_title">Send feedback</string>
+    <string name="feedback_email">kuanlin81625@gmail.com</string>
+    <string name="feedback_subject">Thanks for your Feedback</string>
+    <string name="feedback_message">Hi,
+\n\nYour LiveMessage app rocks! I would like to give you some feedback:</string>
+
     <string name="guide_next_step">Next Step</string>
     <string name="guide_end">Get Started</string>
     <string name="guide_record_title">[Record] and [Pause]</string>
