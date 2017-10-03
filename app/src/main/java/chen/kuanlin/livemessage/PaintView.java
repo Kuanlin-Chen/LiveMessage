@@ -265,13 +265,12 @@ public class PaintView extends View{
         if(scaleWidth>scaleHeight) tempScale = scaleHeight;
         else tempScale = scaleWidth;
 
-        int boundWidth = (int)(userDrawable.getIntrinsicWidth()*tempScale);
+        int boundWidth = (widthPixels-(int)(userDrawable.getIntrinsicWidth()*tempScale))/2;
         if(debugmode) Log.e(TAG, "boundWidth="+String.valueOf(boundWidth));
-        int boundHeight = (int)(userDrawable.getIntrinsicHeight()*tempScale);
+        int boundHeight = (heightPixels-(int)(userDrawable.getIntrinsicHeight()*tempScale))/2;
         if(debugmode) Log.e(TAG, "boundHeight="+String.valueOf(boundHeight));
 
-        userDrawable.setBounds(0, 0, boundWidth, boundHeight);
-        //userDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        userDrawable.setBounds(boundWidth, boundHeight, canvas.getWidth()-boundWidth, canvas.getHeight()-boundHeight);
         userDrawable.draw(canvas);
     }
 
