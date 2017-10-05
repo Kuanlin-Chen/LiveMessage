@@ -219,25 +219,25 @@ public class PaintView extends View{
     public void setPaintColor(int user_color){
         switch (user_color){
             case 0:
-                paint.setColor(Color.RED);
+                paint.setColor(getResources().getColor(R.color.pencolor_red));
                 break;
             case 1:
-                paint.setColor(Color.YELLOW);
+                paint.setColor(getResources().getColor(R.color.pencolor_orange));
                 break;
             case 2:
-                paint.setColor(Color.GREEN);
+                paint.setColor(getResources().getColor(R.color.pencolor_yellow));
                 break;
             case 3:
-                paint.setColor(Color.BLUE);
+                paint.setColor(getResources().getColor(R.color.pencolor_green));
                 break;
             case 4:
-                paint.setColor(Color.WHITE);
+                paint.setColor(getResources().getColor(R.color.pencolor_darkgreen));
                 break;
             case 5:
-                paint.setColor(Color.GRAY);
+                paint.setColor(getResources().getColor(R.color.pencolor_blue));
                 break;
             case 6:
-                paint.setColor(Color.BLACK);
+                paint.setColor(getResources().getColor(R.color.pencolor_darkblue));
                 break;
         }
     }

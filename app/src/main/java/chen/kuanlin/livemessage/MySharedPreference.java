@@ -42,6 +42,11 @@ public class MySharedPreference {
                 .commit();
     }
 
+    public void saveUserColor(int color){
+        settings = context.getSharedPreferences(DATA,0);
+        settings.edit().putInt(COLOR, color).commit();
+    }
+
     public int getUserRate(){
         settings = context.getSharedPreferences(DATA,0);
         return settings.getInt(RATE, 1);
