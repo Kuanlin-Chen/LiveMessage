@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Drawable userDrawable;
 
     private static int user_rate = 1;
-    private static int user_color = 0;
+    public static int user_color = 0;
     private static int user_background = 0;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
@@ -256,46 +256,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void colorDialog(){
-        AlertDialog.Builder select_color = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{getString(R.string.color_red), getString(R.string.color_yellow), getString(R.string.color_green),
-                                getString(R.string.color_blue), getString(R.string.color_white), getString(R.string.color_gray), getString(R.string.color_black)}, user_color,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 1:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 2:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 3:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 4:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 5:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 6:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                }
-                            }
-                        });
-        select_color.setPositiveButton(R.string.word_confirm, null);
-        select_color.show();
+        PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
+        penColor_dialog.showPenColorDialog();
     }
 
     private void backgroundDialog(){
