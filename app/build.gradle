@@ -37,6 +37,7 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -57,5 +58,6 @@ dependencies {
     compile 'com.github.amlcurran.showcaseview:library:5.4.3'
     compile 'com.waynejo:androidndkgif:0.3.3'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
     testCompile 'junit:junit:4.12'
 }
