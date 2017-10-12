@@ -3,7 +3,6 @@ package chen.kuanlin.livemessage;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -221,16 +220,8 @@ public class PaintView extends View{
     }
 
     public void setCanvasBackground(int user_background){
-        switch (user_background){
-            case 0:
-                canvas.drawColor(Color.BLACK);
-                invalidate();
-                break;
-            case 1:
-                canvas.drawColor(Color.WHITE);
-                invalidate();
-                break;
-        }
+        canvas.drawColor(user_background);
+        invalidate();
     }
 
     public void setCanvasPicture(Drawable userDrawable){

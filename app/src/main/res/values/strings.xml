@@ -20,6 +20,7 @@
     <string name="dialog_share">Share this Live Message ?</string>
     <string name="dialog_sharing">Share Live Message</string>
     <string name="dialog_select_pen_color">Select Pen Color</string>
+    <string name="dialog_select_bg_color">Select Background Color</string>
 
     <string name="feedback_title">Send feedback</string>
     <string name="feedback_email">kuanlin81625@gmail.com</string>

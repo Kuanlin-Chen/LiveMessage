@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Drawable userDrawable;
 
     private static int user_rate = 1;
-    private static int user_background = 0;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -176,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(debugmode)Log.e(TAG, "onResume()");
         user_rate = mySharedPreference.getUserRate();
-        user_background = mySharedPreference.getUserBackground();
     }
 
     @Override
@@ -184,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if(debugmode)Log.e(TAG, "onPause()");
         mySharedPreference.saveUserRate(user_rate);
-        mySharedPreference.saveUserBackground(user_background);
     }
 
     private void startRecord(){
@@ -218,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
         isSaved = false;
         paintView.clearPaint();
         if(userDrawable==null){
-            paintView.setCanvasBackground(user_background);
+            paintView.setCanvasBackground(mySharedPreference.getUserBackground());
         }else{
             paintView.setCanvasPicture(userDrawable);
         }
@@ -261,26 +258,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void backgroundDialog(){
-        AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{getString(R.string.color_black),getString(R.string.color_white)}, user_background,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        user_background = which;
-                                        paintView.setCanvasBackground(user_background);
-                                        break;
-                                    case 1:
-                                        user_background = which;
-                                        paintView.setCanvasBackground(user_background);
-                                        break;
-                                }
-                                userDrawable = null;
-                            }
-                        });
-        select_background.setPositiveButton(R.string.word_confirm, null);
-        select_background.show();
+        BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+        backgroundColor_dialog.showBackgroundColorDialog();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -335,7 +314,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setMySharedPreference(){
         int init_color = 0xffff0000;
-        mySharedPreference.savePreference(user_rate, init_color, user_background);
+        int init_background = 0xffffffff;
+        mySharedPreference.saveUserRate(user_rate);
+        mySharedPreference.saveUserColor(init_color);
+        mySharedPreference.saveUserBackground(init_background);
     }
 
     @Override
@@ -376,7 +358,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 //Save user data while pressing keydown
                 mySharedPreference.saveUserRate(user_rate);
-                mySharedPreference.saveUserBackground(user_background);
                 finish();
                 System.exit(0);
             }
