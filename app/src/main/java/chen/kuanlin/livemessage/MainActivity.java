@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Drawable userDrawable;
 
     private static int user_rate = 1;
-    public static int user_color = 0;
     private static int user_background = 0;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         if(!mySharedPreference.getGuide()){
+            setMySharedPreference(); //initialize preference
             QuickGuide quickGuide = new QuickGuide(MainActivity.this);
             quickGuide.showQuickGuide();
             mySharedPreference.setGuide(true);
@@ -176,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(debugmode)Log.e(TAG, "onResume()");
         user_rate = mySharedPreference.getUserRate();
-        user_color = mySharedPreference.getUserColor();
         user_background = mySharedPreference.getUserBackground();
     }
 
@@ -184,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         if(debugmode)Log.e(TAG, "onPause()");
-        mySharedPreference.savePreference(user_rate, user_color, user_background);
+        mySharedPreference.saveUserRate(user_rate);
+        mySharedPreference.saveUserBackground(user_background);
     }
 
     private void startRecord(){
@@ -333,6 +333,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void setMySharedPreference(){
+        int init_color = 0xffff0000;
+        mySharedPreference.savePreference(user_rate, init_color, user_background);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -370,7 +375,8 @@ public class MainActivity extends AppCompatActivity {
                 exitTime = System.currentTimeMillis();
             } else {
                 //Save user data while pressing keydown
-                mySharedPreference.savePreference(user_rate, user_color, user_background);
+                mySharedPreference.saveUserRate(user_rate);
+                mySharedPreference.saveUserBackground(user_background);
                 finish();
                 System.exit(0);
             }

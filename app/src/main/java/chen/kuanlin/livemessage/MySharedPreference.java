@@ -42,9 +42,19 @@ public class MySharedPreference {
                 .commit();
     }
 
+    public void saveUserRate(int rate){
+        settings = context.getSharedPreferences(DATA,0);
+        settings.edit().putInt(RATE, rate).commit();
+    }
+
     public void saveUserColor(int color){
         settings = context.getSharedPreferences(DATA,0);
         settings.edit().putInt(COLOR, color).commit();
+    }
+
+    public void saveUserBackground(int background){
+        settings = context.getSharedPreferences(DATA,0);
+        settings.edit().putInt(BACKGROUND, background).commit();
     }
 
     public int getUserRate(){
