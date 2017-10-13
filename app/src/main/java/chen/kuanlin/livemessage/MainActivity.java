@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
                 backgroundDialog();
+                userDrawable = null;
             }
         });
 
