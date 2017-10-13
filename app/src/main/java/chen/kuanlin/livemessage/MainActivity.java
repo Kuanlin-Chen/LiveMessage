@@ -65,8 +65,13 @@ public class MainActivity extends AppCompatActivity {
         setLocale();
         checkPermission();
 
-        if(!mySharedPreference.getGuide()){
+        if(mySharedPreference.getUserVersion()!=2){
+            if(debugmode)Log.e(TAG, "Version != 2");
             setMySharedPreference(); //initialize preference
+            mySharedPreference.saveUserVersion(2);
+        }
+
+        if(!mySharedPreference.getGuide()){
             QuickGuide quickGuide = new QuickGuide(MainActivity.this);
             quickGuide.showQuickGuide();
             mySharedPreference.setGuide(true);
