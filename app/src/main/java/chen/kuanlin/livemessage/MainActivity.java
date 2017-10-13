@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         setLocale();
         checkPermission();
 
-        if(mySharedPreference.getUserVersion()!=2){
+        if(mySharedPreference.getUserVersion()!=3){
             setMySharedPreference(); //initialize preference
-            mySharedPreference.saveUserVersion(2);
+            mySharedPreference.saveUserVersion(3);
         }
 
         if(!mySharedPreference.getGuide()){
