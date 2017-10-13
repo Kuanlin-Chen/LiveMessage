@@ -4,4 +4,17 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorClick">#C10066</color>
+
+    <color name="pencolor_red">#FF0000</color>
+    <color name="pencolor_orange">#FF8000</color>
+    <color name="pencolor_yellow">#FFFF00</color>
+    <color name="pencolor_green">#77FF00</color>
+    <color name="pencolor_darkgreen">#227700</color>
+    <color name="pencolor_blue">#00DDDD</color>
+    <color name="pencolor_darkblue">#000088</color>
+    <color name="pencolor_purple">#990099</color>
+    <color name="pencolor_pink">#FF4081</color>
+    <color name="pencolor_white">#FFFFFF</color>
+    <color name="pencolor_grey">#888888</color>
+    <color name="pencolor_black">#000000</color>
 </resources>

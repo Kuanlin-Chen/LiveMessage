@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private Drawable userDrawable;
 
     private static int user_rate = 1;
-    private static int user_color = 0;
-    private static int user_background = 0;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -65,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         if(!mySharedPreference.getGuide()){
+            setMySharedPreference(); //initialize preference
             QuickGuide quickGuide = new QuickGuide(MainActivity.this);
             quickGuide.showQuickGuide();
             mySharedPreference.setGuide(true);
@@ -144,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 backgroundDialog();
+                userDrawable = null;
             }
         });
 
@@ -162,14 +162,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         user_rate = mySharedPreference.getUserRate();
-        user_color = mySharedPreference.getUserColor();
-        user_background = mySharedPreference.getUserBackground();
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        mySharedPreference.savePreference(user_rate, user_color, user_background);
+        mySharedPreference.saveUserRate(user_rate);
     }
 
     private void startRecord(){
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         isSaved = false;
         paintView.clearPaint();
         if(userDrawable==null){
-            paintView.setCanvasBackground(user_background);
+            paintView.setCanvasBackground(mySharedPreference.getUserBackground());
         }else{
             paintView.setCanvasPicture(userDrawable);
         }
@@ -238,69 +236,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void colorDialog(){
-        AlertDialog.Builder select_color = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{getString(R.string.color_red), getString(R.string.color_yellow), getString(R.string.color_green),
-                                getString(R.string.color_blue), getString(R.string.color_white), getString(R.string.color_gray), getString(R.string.color_black)}, user_color,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 1:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 2:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 3:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 4:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 5:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                    case 6:
-                                        user_color = which;
-                                        paintView.setPaintColor(user_color);
-                                        break;
-                                }
-                            }
-                        });
-        select_color.setPositiveButton(R.string.word_confirm, null);
-        select_color.show();
+        PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
+        penColor_dialog.showPenColorDialog();
     }
 
     private void backgroundDialog(){
-        AlertDialog.Builder select_background = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{getString(R.string.color_black),getString(R.string.color_white)}, user_background,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        user_background = which;
-                                        paintView.setCanvasBackground(user_background);
-                                        break;
-                                    case 1:
-                                        user_background = which;
-                                        paintView.setCanvasBackground(user_background);
-                                        break;
-                                }
-                                userDrawable = null;
-                            }
-                        });
-        select_background.setPositiveButton(R.string.word_confirm, null);
-        select_background.show();
+        BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+        backgroundColor_dialog.showBackgroundColorDialog();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -353,6 +295,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void setMySharedPreference(){
+        int init_color = 0xffff0000;
+        int init_background = 0xffffffff;
+        mySharedPreference.saveUserRate(user_rate);
+        mySharedPreference.saveUserColor(init_color);
+        mySharedPreference.saveUserBackground(init_background);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -390,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
                 exitTime = System.currentTimeMillis();
             } else {
                 //Save user data while pressing keydown
-                mySharedPreference.savePreference(user_rate, user_color, user_background);
+                mySharedPreference.saveUserRate(user_rate);
                 finish();
                 System.exit(0);
             }

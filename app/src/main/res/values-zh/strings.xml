@@ -19,6 +19,8 @@
     <string name="dialog_saving">正在儲存</string>
     <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
     <string name="dialog_sharing">分享動態訊息</string>
+    <string name="dialog_select_pen_color">請選擇畫筆顏色</string>
+    <string name="dialog_select_bg_color">請選擇背景顏色</string>
 
     <string name="feedback_title">意見回饋</string>
     <string name="feedback_email">kuanlin81625@gmail.com</string>

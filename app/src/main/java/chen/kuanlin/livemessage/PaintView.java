@@ -3,7 +3,6 @@ package chen.kuanlin.livemessage;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -197,46 +196,30 @@ public class PaintView extends View{
     }
 
     public void setPaintColor(int user_color){
-        switch (user_color){
-            case 0:
-                paint.setColor(Color.RED);
-                break;
-            case 1:
-                paint.setColor(Color.YELLOW);
-                break;
-            case 2:
-                paint.setColor(Color.GREEN);
-                break;
-            case 3:
-                paint.setColor(Color.BLUE);
-                break;
-            case 4:
-                paint.setColor(Color.WHITE);
-                break;
-            case 5:
-                paint.setColor(Color.GRAY);
-                break;
-            case 6:
-                paint.setColor(Color.BLACK);
-                break;
-        }
+        paint.setColor(user_color);
     }
 
     public void setCanvasBackground(int user_background){
-        switch (user_background){
-            case 0:
-                canvas.drawColor(Color.BLACK);
-                invalidate();
-                break;
-            case 1:
-                canvas.drawColor(Color.WHITE);
-                invalidate();
-                break;
-        }
+        canvas.drawColor(user_background);
+        invalidate();
     }
 
     public void setCanvasPicture(Drawable userDrawable){
-        userDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        float tempScale;
+        float scaleWidth = evaluateDrawableWidth(userDrawable);
+        if(debugmode) Log.e(TAG, "scaleWidth="+String.valueOf(scaleWidth));
+        float scaleHeight = evaluateDrawableHeight(userDrawable);
+        if(debugmode) Log.e(TAG, "scaleHeight="+String.valueOf(scaleHeight));
+
+        if(scaleWidth>scaleHeight) tempScale = scaleHeight;
+        else tempScale = scaleWidth;
+
+        int boundWidth = (widthPixels-(int)(userDrawable.getIntrinsicWidth()*tempScale))/2;
+        if(debugmode) Log.e(TAG, "boundWidth="+String.valueOf(boundWidth));
+        int boundHeight = (heightPixels-(int)(userDrawable.getIntrinsicHeight()*tempScale))/2;
+        if(debugmode) Log.e(TAG, "boundHeight="+String.valueOf(boundHeight));
+
+        userDrawable.setBounds(boundWidth, boundHeight, canvas.getWidth()-boundWidth, canvas.getHeight()-boundHeight);
         userDrawable.draw(canvas);
     }
 
@@ -253,5 +236,21 @@ public class PaintView extends View{
         resolutionList[3] = context.getString(R.string.word_quarter)+" ("+(widthPixels/4)+"x"+(heightPixels/4)+")";
 
         return resolutionList;
+    }
+
+    private float evaluateDrawableWidth(Drawable userDrawable){
+        float pictureWidth = userDrawable.getIntrinsicWidth();
+        if(debugmode) Log.e(TAG, "pictureWidth="+String.valueOf(pictureWidth));
+        float tempScale = (widthPixels/pictureWidth);
+        if(debugmode) Log.e(TAG, "width tempScale="+String.valueOf(tempScale));
+        return tempScale;
+    }
+
+    private float evaluateDrawableHeight(Drawable userDrawable){
+        float pictureHeight = userDrawable.getIntrinsicHeight();
+        if(debugmode) Log.e(TAG, "pictureHeight="+String.valueOf(pictureHeight));
+        float tempScale = (heightPixels/pictureHeight);
+        if(debugmode) Log.e(TAG, "height tempScale="+String.valueOf(tempScale));
+        return tempScale;
     }
 }

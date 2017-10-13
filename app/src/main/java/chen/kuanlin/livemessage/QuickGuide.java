@@ -47,6 +47,7 @@ public class QuickGuide{
 
         final ShowcaseView recordShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(recordTarget)
                 .setContentTitle(R.string.guide_record_title)
                 .setContentText(R.string.guide_record_text)
@@ -54,6 +55,7 @@ public class QuickGuide{
                 .build();
         final ShowcaseView saveShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(saveTarget)
                 .setContentTitle(R.string.guide_save_title)
                 .setContentText(R.string.guide_save_text)
@@ -62,6 +64,7 @@ public class QuickGuide{
         saveShowcaseView.hide();
         final ShowcaseView shareShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(shareTarget)
                 .setContentTitle(R.string.guide_share_title)
                 .setContentText(R.string.guide_share_text)
@@ -70,6 +73,7 @@ public class QuickGuide{
         shareShowcaseView.hide();
         final ShowcaseView clearShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(clearTarget)
                 .setContentTitle(R.string.guide_clear_title)
                 .setContentText(R.string.guide_clear_text)
@@ -78,6 +82,7 @@ public class QuickGuide{
         clearShowcaseView.hide();
         final ShowcaseView resolutionShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(resolutionTarget)
                 .setContentTitle(R.string.guide_resolution_title)
                 .setContentText(R.string.guide_resolution_text)
@@ -86,6 +91,7 @@ public class QuickGuide{
         resolutionShowcaseView.hide();
         final ShowcaseView colorShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(colorTarget)
                 .setContentTitle(R.string.guide_color_title)
                 .setContentText(R.string.guide_color_text)
@@ -94,6 +100,7 @@ public class QuickGuide{
         colorShowcaseView.hide();
         final ShowcaseView backgroundShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(backgroundTarget)
                 .setContentTitle(R.string.guide_background_title)
                 .setContentText(R.string.guide_background_text)
@@ -102,6 +109,7 @@ public class QuickGuide{
         backgroundShowcaseView.hide();
         final ShowcaseView pictureShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
+                .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(pictureTarget)
                 .setContentTitle(R.string.guide_picture_title)
                 .setContentText(R.string.guide_picture_text)
