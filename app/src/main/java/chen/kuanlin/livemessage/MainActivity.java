@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         if(mySharedPreference.getUserVersion()!=2){
-            if(debugmode)Log.e(TAG, "Version != 2");
             setMySharedPreference(); //initialize preference
             mySharedPreference.saveUserVersion(2);
         }
