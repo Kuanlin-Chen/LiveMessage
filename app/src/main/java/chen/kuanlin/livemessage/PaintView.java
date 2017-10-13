@@ -207,17 +207,13 @@ public class PaintView extends View{
     public void setCanvasPicture(Drawable userDrawable){
         float tempScale;
         float scaleWidth = evaluateDrawableWidth(userDrawable);
-        if(debugmode) Log.e(TAG, "scaleWidth="+String.valueOf(scaleWidth));
         float scaleHeight = evaluateDrawableHeight(userDrawable);
-        if(debugmode) Log.e(TAG, "scaleHeight="+String.valueOf(scaleHeight));
 
         if(scaleWidth>scaleHeight) tempScale = scaleHeight;
         else tempScale = scaleWidth;
 
         int boundWidth = (widthPixels-(int)(userDrawable.getIntrinsicWidth()*tempScale))/2;
-        if(debugmode) Log.e(TAG, "boundWidth="+String.valueOf(boundWidth));
         int boundHeight = (heightPixels-(int)(userDrawable.getIntrinsicHeight()*tempScale))/2;
-        if(debugmode) Log.e(TAG, "boundHeight="+String.valueOf(boundHeight));
 
         userDrawable.setBounds(boundWidth, boundHeight, canvas.getWidth()-boundWidth, canvas.getHeight()-boundHeight);
         userDrawable.draw(canvas);
@@ -240,17 +236,13 @@ public class PaintView extends View{
 
     private float evaluateDrawableWidth(Drawable userDrawable){
         float pictureWidth = userDrawable.getIntrinsicWidth();
-        if(debugmode) Log.e(TAG, "pictureWidth="+String.valueOf(pictureWidth));
         float tempScale = (widthPixels/pictureWidth);
-        if(debugmode) Log.e(TAG, "width tempScale="+String.valueOf(tempScale));
         return tempScale;
     }
 
     private float evaluateDrawableHeight(Drawable userDrawable){
         float pictureHeight = userDrawable.getIntrinsicHeight();
-        if(debugmode) Log.e(TAG, "pictureHeight="+String.valueOf(pictureHeight));
         float tempScale = (heightPixels/pictureHeight);
-        if(debugmode) Log.e(TAG, "height tempScale="+String.valueOf(tempScale));
         return tempScale;
     }
 }

@@ -17,8 +17,6 @@ public class BackgroundColor_dialog {
 
     private Context context;
     private PaintView paintView;
-    private boolean debugmode = true;
-    private final String TAG = "[BgColor_dialog] ";
 
     MySharedPreference mySharedPreference;
 
@@ -40,7 +38,7 @@ public class BackgroundColor_dialog {
                 .setOnColorSelectedListener(new OnColorSelectedListener() {
                     @Override
                     public void onColorSelected(int selectedColor) {
-                        if(debugmode) Log.e(TAG,"onColorSelected: 0x"+Integer.toHexString(selectedColor));
+
                     }
                 })
                 .setPositiveButton(R.string.word_confirm, new ColorPickerClickListener() {
