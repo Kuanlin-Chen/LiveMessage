@@ -81,11 +81,10 @@ public class PaintView extends View{
         setCanvasBackground(mySharedPreference.getUserBackground());
 
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5);
         setPaintColor(mySharedPreference.getUserColor());
         paint.setAntiAlias(true);
         paint.setDither(true);
-        paint.setStrokeWidth((float) 3.0);
+        paint.setStrokeWidth(mySharedPreference.getUserStyle());
     }
 
     @Override
@@ -215,6 +214,10 @@ public class PaintView extends View{
         return areaToRefresh;
     }
 
+    public void setPenStyle(int user_style){
+        paint.setStrokeWidth(user_style);
+    }
+
     public void setPaintColor(int user_color){
         paint.setColor(user_color);
     }
@@ -246,16 +249,6 @@ public class PaintView extends View{
     public void clearPaint(){
         canvas.drawColor(0,PorterDuff.Mode.CLEAR);
         invalidate();
-    }
-
-    public String[] getResolution(){
-        String[] resolutionList = new String[4];
-        resolutionList[0] = context.getString(R.string.word_origin)+" ("+widthPixels+"x"+heightPixels+")";
-        resolutionList[1] = context.getString(R.string.word_half)+" ("+(widthPixels/2)+"x"+(heightPixels/2)+")";
-        resolutionList[2] = context.getString(R.string.word_one_third)+" ("+(widthPixels/3)+"x"+(heightPixels/3)+")";
-        resolutionList[3] = context.getString(R.string.word_quarter)+" ("+(widthPixels/4)+"x"+(heightPixels/4)+")";
-
-        return resolutionList;
     }
 
     private float evaluateDrawableWidth(Drawable userDrawable){

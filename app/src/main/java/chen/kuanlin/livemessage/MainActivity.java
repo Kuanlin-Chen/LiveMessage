@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private Drawable userDrawable;
 
-    private static int user_rate = 1;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_resolution");
-                resolutionDialog();
+                penstyleDialog();
             }
         });
 
@@ -191,14 +190,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         if(debugmode)Log.e(TAG, "onResume()");
-        user_rate = mySharedPreference.getUserRate();
+        //user_rate = mySharedPreference.getUserRate();
     }
 
     @Override
     protected void onPause(){
         super.onPause();
         if(debugmode)Log.e(TAG, "onPause()");
-        mySharedPreference.saveUserRate(user_rate);
+        //mySharedPreference.saveUserRate(user_rate);
     }
 
     private void startRecord(){
@@ -210,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
         isRecording = true;
         recorder = new Recorder(getApplicationContext(), paintView);
-        recorder.setRate(user_rate);
         thread = new Thread(recorder);
         thread.start();
         button_record.setImageResource(R.drawable.ic_media_pause);
@@ -243,30 +241,30 @@ public class MainActivity extends AppCompatActivity {
         preview_dialog.showPreviewDialog();
     }
 
-    private void resolutionDialog(){
-        AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(paintView.getResolution(), user_rate-1,
+    private void penstyleDialog(){
+        AlertDialog.Builder select_style = new AlertDialog.Builder(MainActivity.this).
+                setSingleChoiceItems(new String[]{"Fine","Medium","Broad"}, (mySharedPreference.getUserStyle()/3)-1,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which){
                                     case 0:
-                                        user_rate = 1;
+                                        mySharedPreference.saveUserStyle(3);
+                                        paintView.setPenStyle(3);
                                         break;
                                     case 1:
-                                        user_rate = 2;
+                                        mySharedPreference.saveUserStyle(6);
+                                        paintView.setPenStyle(6);
                                         break;
                                     case 2:
-                                        user_rate = 3;
-                                        break;
-                                    case 3:
-                                        user_rate = 4;
+                                        mySharedPreference.saveUserStyle(10);
+                                        paintView.setPenStyle(10);
                                         break;
                                 }
                             }
                         });
-        select_rate.setPositiveButton(R.string.word_confirm, null);
-        select_rate.show();
+        select_style.setPositiveButton(R.string.word_confirm, null);
+        select_style.show();
     }
 
     private void colorDialog(){
@@ -332,7 +330,8 @@ public class MainActivity extends AppCompatActivity {
     private void setMySharedPreference(){
         int init_color = 0xffff0000;
         int init_background = 0xffffffff;
-        mySharedPreference.saveUserRate(user_rate);
+        int init_style = 3;
+        mySharedPreference.saveUserStyle(init_style);
         mySharedPreference.saveUserColor(init_color);
         mySharedPreference.saveUserBackground(init_background);
     }
@@ -373,8 +372,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                //Save user data while pressing keydown
-                mySharedPreference.saveUserRate(user_rate);
                 finish();
                 System.exit(0);
             }

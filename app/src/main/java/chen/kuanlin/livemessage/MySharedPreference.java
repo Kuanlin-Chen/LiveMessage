@@ -19,7 +19,7 @@ public class MySharedPreference {
     private SharedPreferences settings;
     private static final String DATA = "DATA";
     private static final String GUIDE = "GUIDE";
-    private static final String RATE = "RATE";
+    private static final String STYLE = "STYLE";
     private static final String COLOR = "COLOR";
     private static final String BACKGROUND = "BACKGROUND";
     private static final String VERSION = "VERSION";
@@ -34,18 +34,18 @@ public class MySharedPreference {
         return settings.getBoolean(GUIDE, false);
     }
 
-    public void savePreference(int rate, int color, int background){
+    public void savePreference(int style, int color, int background){
         settings = context.getSharedPreferences(DATA,0);
         settings.edit()
-                .putInt(RATE, rate)
+                .putInt(STYLE, style)
                 .putInt(COLOR, color)
                 .putInt(BACKGROUND, background)
                 .commit();
     }
 
-    public void saveUserRate(int rate){
+    public void saveUserStyle(int style){
         settings = context.getSharedPreferences(DATA,0);
-        settings.edit().putInt(RATE, rate).commit();
+        settings.edit().putInt(STYLE, style).commit();
     }
 
     public void saveUserColor(int color){
@@ -63,9 +63,9 @@ public class MySharedPreference {
         settings.edit().putInt(VERSION, version).commit();
     }
 
-    public int getUserRate(){
+    public int getUserStyle(){
         settings = context.getSharedPreferences(DATA,0);
-        return settings.getInt(RATE, 1);
+        return settings.getInt(STYLE, 0);
     }
 
     public int getUserColor(){
