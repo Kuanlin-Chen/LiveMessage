@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                         button_resolution, button_color, button_background, button_picture;
 
     private PaintView paintView;
+    private AdView adView;
     private Recorder recorder;
     private Thread thread;
     private Drawable userDrawable;
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewgroup);
         paintView = (PaintView)findViewById(R.id.paintview);
+        adView = (AdView)findViewById(R.id.adView);
         button_record = (ImageButton)findViewById(R.id.button_record);
         button_save = (ImageButton)findViewById(R.id.button_save);
         button_share = (ImageButton)findViewById(R.id.button_share);
@@ -64,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
         setLocale();
         checkPermission();
+
+        MobileAds.initialize(this, String.valueOf(R.string.app_id));
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("B345AB459874874CFC3C6AAF58B44A07").build();
+        adView.loadAd(adRequest);
 
         if(mySharedPreference.getUserVersion()!=2){
             if(debugmode)Log.e(TAG, "Version != 2");

@@ -9,41 +9,54 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/unit_id">
+        </com.google.android.gms.ads.AdView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="3">
+            android:layout_weight="7">
 
-        <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_media_play"
-            android:background="@drawable/custom_background"
-            android:padding="10dp"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:id="@+id/button_record"/>
+            <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_media_play"
+                android:background="@drawable/custom_background"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/button_record"/>
 
-        <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_menu_save"
-            android:background="@drawable/custom_background"
-            android:padding="10dp"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:id="@+id/button_save"/>
+            <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_menu_save"
+                android:background="@drawable/custom_background"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/button_save"/>
 
             <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
@@ -55,32 +68,32 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_media_share"
                 android:background="@drawable/custom_background"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_share"/>
 
-        <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_menu_clear"
-            android:background="@drawable/custom_background"
-            android:padding="10dp"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:id="@+id/button_clear"/>
+            <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_menu_clear"
+                android:background="@drawable/custom_background"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/button_clear"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <chen.kuanlin.livemessage.PaintView
                 android:layout_width="match_parent"
@@ -97,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="3">
+            android:layout_weight="7">
 
             <ImageButton style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
@@ -109,7 +122,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_resolution"
                 android:background="@drawable/custom_background"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_resolution"/>
@@ -124,7 +137,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_pen_color"
                 android:background="@drawable/custom_background"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_color"/>
@@ -139,7 +152,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_background"
                 android:background="@drawable/custom_background"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_background"/>
@@ -154,7 +167,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_picture"
                 android:background="@drawable/custom_background"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/button_picture"/>
