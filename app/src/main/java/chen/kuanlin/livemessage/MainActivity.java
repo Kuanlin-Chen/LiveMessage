@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(this, String.valueOf(R.string.app_id));
         //AdRequest adRequest = new AdRequest.Builder().build();
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("B345AB459874874CFC3C6AAF58B44A07").build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(String.valueOf(R.string.test_device)).build();
         adView.loadAd(adRequest);
 
         if(mySharedPreference.getUserVersion()!=2){
