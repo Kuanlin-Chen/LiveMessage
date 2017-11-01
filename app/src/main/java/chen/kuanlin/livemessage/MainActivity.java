@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
                 if(debugmode)Log.e(TAG, "button_share");
                 if( (!isRecording) && (recorder!=null) && (isSaved)) {
                     Uri uri = Uri.fromFile(recorder.getPictureFile());
-                    shareDialog(uri);
+                    Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
+                    preview_dialog.showPreviewDialog();
                 }else {
                     if(debugmode){
                         if(isRecording){
@@ -154,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_style");
-                penstyleDialog();
+                PenStyle_dialog penStyle_dialog = new PenStyle_dialog(MainActivity.this, paintView);
+                penStyle_dialog.showPenStyleDialog();
             }
         });
 
@@ -162,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_color");
-                colorDialog();
+                PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
+                penColor_dialog.showPenColorDialog();
             }
         });
 
@@ -170,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
-                backgroundDialog();
+                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+                backgroundColor_dialog.showBackgroundColorDialog();
                 userDrawable = null;
             }
         });
@@ -234,47 +238,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             paintView.setCanvasPicture(userDrawable);
         }
-    }
-
-    private void shareDialog(final Uri uri){
-        Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
-        preview_dialog.showPreviewDialog();
-    }
-
-    private void penstyleDialog(){
-        AlertDialog.Builder select_style = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(new String[]{"Fine","Medium","Broad"}, (mySharedPreference.getUserStyle()/3)-1,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        mySharedPreference.saveUserStyle(3);
-                                        paintView.setPenStyle(3);
-                                        break;
-                                    case 1:
-                                        mySharedPreference.saveUserStyle(6);
-                                        paintView.setPenStyle(6);
-                                        break;
-                                    case 2:
-                                        mySharedPreference.saveUserStyle(10);
-                                        paintView.setPenStyle(10);
-                                        break;
-                                }
-                            }
-                        });
-        select_style.setPositiveButton(R.string.word_confirm, null);
-        select_style.show();
-    }
-
-    private void colorDialog(){
-        PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
-        penColor_dialog.showPenColorDialog();
-    }
-
-    private void backgroundDialog(){
-        BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
-        backgroundColor_dialog.showBackgroundColorDialog();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
