@@ -35,7 +35,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     protected ImageButton button_record, button_save, button_share, button_clear,
-                        button_resolution, button_color, button_background, button_picture;
+                        button_style, button_color, button_background, button_picture;
 
     private PaintView paintView;
     private AdView adView;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         button_save = (ImageButton)findViewById(R.id.button_save);
         button_share = (ImageButton)findViewById(R.id.button_share);
         button_clear = (ImageButton)findViewById(R.id.button_clear);
-        button_resolution = (ImageButton)findViewById(R.id.button_resolution);
+        button_style = (ImageButton)findViewById(R.id.button_style);
         button_color = (ImageButton)findViewById(R.id.button_color);
         button_background = (ImageButton)findViewById(R.id.button_background);
         button_picture = (ImageButton)findViewById(R.id.button_picture);
@@ -150,10 +150,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_resolution.setOnClickListener(new View.OnClickListener() {
+        button_style.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(debugmode)Log.e(TAG, "button_resolution");
+                if(debugmode)Log.e(TAG, "button_style");
                 penstyleDialog();
             }
         });

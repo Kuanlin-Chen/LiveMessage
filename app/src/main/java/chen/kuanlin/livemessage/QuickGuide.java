@@ -23,7 +23,7 @@ public class QuickGuide{
         ViewTarget saveTarget = new ViewTarget(mainActivity.button_save);
         ViewTarget shareTarget = new ViewTarget(mainActivity.button_share);
         ViewTarget clearTarget = new ViewTarget(mainActivity.button_clear);
-        ViewTarget resolutionTarget = new ViewTarget(mainActivity.button_resolution);
+        ViewTarget styleTarget = new ViewTarget(mainActivity.button_style);
         ViewTarget colorTarget = new ViewTarget(mainActivity.button_color);
         ViewTarget backgroundTarget = new ViewTarget(mainActivity.button_background);
         ViewTarget pictureTarget = new ViewTarget(mainActivity.button_picture);
@@ -36,8 +36,8 @@ public class QuickGuide{
         shareButton.setText(R.string.guide_next_step);
         Button clearButton=new Button(mainActivity);
         clearButton.setText(R.string.guide_next_step);
-        Button resolutionButton=new Button(mainActivity);
-        resolutionButton.setText(R.string.guide_next_step);
+        Button styleButton=new Button(mainActivity);
+        styleButton.setText(R.string.guide_next_step);
         Button colorButton=new Button(mainActivity);
         colorButton.setText(R.string.guide_next_step);
         Button backgroundButton=new Button(mainActivity);
@@ -80,15 +80,15 @@ public class QuickGuide{
                 .replaceEndButton(clearButton)
                 .build();
         clearShowcaseView.hide();
-        final ShowcaseView resolutionShowcaseView=new ShowcaseView.Builder(mainActivity)
+        final ShowcaseView styleShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
                 .setStyle(R.style.CustomShowcaseTheme)
-                .setTarget(resolutionTarget)
+                .setTarget(styleTarget)
                 .setContentTitle(R.string.guide_resolution_title)
                 .setContentText(R.string.guide_resolution_text)
-                .replaceEndButton(resolutionButton)
+                .replaceEndButton(styleButton)
                 .build();
-        resolutionShowcaseView.hide();
+        styleShowcaseView.hide();
         final ShowcaseView colorShowcaseView=new ShowcaseView.Builder(mainActivity)
                 .withMaterialShowcase()
                 .setStyle(R.style.CustomShowcaseTheme)
@@ -142,13 +142,13 @@ public class QuickGuide{
             @Override
             public void onClick(View v) {
                 clearShowcaseView.hide();
-                resolutionShowcaseView.show();
+                styleShowcaseView.show();
             }
         });
-        resolutionButton.setOnClickListener(new View.OnClickListener() {
+        styleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resolutionShowcaseView.hide();
+                styleShowcaseView.hide();
                 colorShowcaseView.show();
             }
         });
