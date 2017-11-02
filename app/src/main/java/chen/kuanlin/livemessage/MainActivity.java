@@ -19,6 +19,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -30,14 +34,14 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     protected ImageButton button_record, button_save, button_share, button_clear,
-                        button_resolution, button_color, button_background, button_picture;
+                        button_style, button_color, button_background, button_picture;
 
     private PaintView paintView;
+    private AdView adView;
     private Recorder recorder;
     private Thread thread;
     private Drawable userDrawable;
 
-    private static int user_rate = 1;
     private static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -50,17 +54,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewgroup);
         paintView = (PaintView)findViewById(R.id.paintview);
+        adView = (AdView)findViewById(R.id.adView);
         button_record = (ImageButton)findViewById(R.id.button_record);
         button_save = (ImageButton)findViewById(R.id.button_save);
         button_share = (ImageButton)findViewById(R.id.button_share);
         button_clear = (ImageButton)findViewById(R.id.button_clear);
-        button_resolution = (ImageButton)findViewById(R.id.button_resolution);
+        button_style = (ImageButton)findViewById(R.id.button_style);
         button_color = (ImageButton)findViewById(R.id.button_color);
         button_background = (ImageButton)findViewById(R.id.button_background);
         button_picture = (ImageButton)findViewById(R.id.button_picture);
 
         setLocale();
         checkPermission();
+
+        MobileAds.initialize(this, String.valueOf(R.string.app_id));
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(String.valueOf(R.string.test_device)).build();
+        adView.loadAd(adRequest);
 
         if(mySharedPreference.getUserVersion()!=3){
             setMySharedPreference(); //initialize preference
@@ -106,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if( (!isRecording) && (recorder!=null) && (isSaved)) {
                     Uri uri = Uri.fromFile(recorder.getPictureFile());
-                    shareDialog(uri);
+                    Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
+                    preview_dialog.showPreviewDialog();
                 }else {
                     if(isRecording){
                         Toast.makeText(MainActivity.this, R.string.button_share_is_recording, Toast.LENGTH_SHORT).show();
@@ -129,24 +140,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_resolution.setOnClickListener(new View.OnClickListener() {
+        button_style.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resolutionDialog();
+                PenStyle_dialog penStyle_dialog = new PenStyle_dialog(MainActivity.this, paintView);
+                penStyle_dialog.showPenStyleDialog();
             }
         });
 
         button_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                colorDialog();
+                PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
+                penColor_dialog.showPenColorDialog();
             }
         });
 
         button_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backgroundDialog();
+                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+                backgroundColor_dialog.showBackgroundColorDialog();
                 userDrawable = null;
             }
         });
@@ -165,13 +179,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        user_rate = mySharedPreference.getUserRate();
+        //user_rate = mySharedPreference.getUserRate();
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        mySharedPreference.saveUserRate(user_rate);
+        //mySharedPreference.saveUserRate(user_rate);
     }
 
     private void startRecord(){
@@ -182,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
         isRecording = true;
         recorder = new Recorder(getApplicationContext(), paintView);
-        recorder.setRate(user_rate);
         thread = new Thread(recorder);
         thread.start();
         button_record.setImageResource(R.drawable.ic_media_pause);
@@ -206,47 +219,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             paintView.setCanvasPicture(userDrawable);
         }
-    }
-
-    private void shareDialog(final Uri uri){
-        Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
-        preview_dialog.showPreviewDialog();
-    }
-
-    private void resolutionDialog(){
-        AlertDialog.Builder select_rate = new AlertDialog.Builder(MainActivity.this).
-                setSingleChoiceItems(paintView.getResolution(), user_rate-1,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        user_rate = 1;
-                                        break;
-                                    case 1:
-                                        user_rate = 2;
-                                        break;
-                                    case 2:
-                                        user_rate = 3;
-                                        break;
-                                    case 3:
-                                        user_rate = 4;
-                                        break;
-                                }
-                            }
-                        });
-        select_rate.setPositiveButton(R.string.word_confirm, null);
-        select_rate.show();
-    }
-
-    private void colorDialog(){
-        PenColor_dialog penColor_dialog = new PenColor_dialog(MainActivity.this, paintView);
-        penColor_dialog.showPenColorDialog();
-    }
-
-    private void backgroundDialog(){
-        BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
-        backgroundColor_dialog.showBackgroundColorDialog();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -302,7 +274,8 @@ public class MainActivity extends AppCompatActivity {
     private void setMySharedPreference(){
         int init_color = 0xffff0000;
         int init_background = 0xffffffff;
-        mySharedPreference.saveUserRate(user_rate);
+        int init_style = 3;
+        mySharedPreference.saveUserStyle(init_style);
         mySharedPreference.saveUserColor(init_color);
         mySharedPreference.saveUserBackground(init_background);
     }
@@ -343,8 +316,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                //Save user data while pressing keydown
-                mySharedPreference.saveUserRate(user_rate);
                 finish();
                 System.exit(0);
             }

@@ -47,6 +47,7 @@ allprojects {
     repositories {
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
     }
 }
 
@@ -68,5 +69,6 @@ dependencies {
     compile 'com.waynejo:androidndkgif:0.3.3'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
+    compile 'com.google.android.gms:play-services-ads:11.4.2'
     testCompile 'junit:junit:4.12'
 }

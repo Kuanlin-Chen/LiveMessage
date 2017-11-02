@@ -127,10 +127,6 @@ public class Recorder implements Runnable {
         gifEncoder.close();
     }
 
-    public void setRate(int rate){
-        this.rate = rate;
-    }
-
     public String getApplicationName(Context context) {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         int stringId = applicationInfo.labelRes;

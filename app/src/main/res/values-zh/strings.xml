@@ -19,6 +19,7 @@
     <string name="dialog_saving">正在儲存</string>
     <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
     <string name="dialog_sharing">分享動態訊息</string>
+    <string name="dialog_select_pen_style">請選擇畫筆樣式</string>
     <string name="dialog_select_pen_color">請選擇畫筆顏色</string>
     <string name="dialog_select_bg_color">請選擇背景顏色</string>
 
@@ -38,8 +39,8 @@
     <string name="guide_share_text">請按此分享您的動態訊息\n要先儲存才能分享喔</string>
     <string name="guide_clear_title">「清除」</string>
     <string name="guide_clear_text">請按此清除您的畫布</string>
-    <string name="guide_resolution_title">「解析度」</string>
-    <string name="guide_resolution_text">請按此調整動態訊息儲存之後的解析度\n解析度越低儲存速度會越快</string>
+    <string name="guide_style_title">[畫筆樣式]</string>
+    <string name="guide_style_text">請按此選擇畫筆的樣式</string>
     <string name="guide_color_title">「畫筆顏色」</string>
     <string name="guide_color_text">請按此選擇畫筆的顏色</string>
     <string name="guide_background_title">「背景顏色」</string>
@@ -65,4 +66,9 @@
     <string name="click_button_twice">點擊兩次返回鍵即可離開</string>
     <string name="give_me_permission">拜託給我權限！</string>
 
+    <string-array name="penstyle">
+        <item>精細</item>
+        <item>中庸</item>
+        <item>粗獷</item>
+    </string-array>
 </resources>
