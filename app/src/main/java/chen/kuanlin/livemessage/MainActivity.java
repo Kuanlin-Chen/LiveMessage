@@ -68,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         MobileAds.initialize(this, String.valueOf(R.string.app_id));
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(String.valueOf(R.string.test_device)).build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        if(mySharedPreference.getUserVersion()!=3){
+        if(mySharedPreference.getUserVersion()!=4){
             setMySharedPreference(); //initialize preference
-            mySharedPreference.saveUserVersion(3);
+            mySharedPreference.saveUserVersion(4);
         }
 
         if(!mySharedPreference.getGuide()){

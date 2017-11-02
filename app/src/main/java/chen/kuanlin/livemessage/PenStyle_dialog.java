@@ -12,8 +12,6 @@ public class PenStyle_dialog {
 
     private Context context;
     private PaintView paintView;
-    private boolean debugmode = true;
-    private final String TAG = "[PenStyle_dialog] ";
 
     MySharedPreference mySharedPreference;
 
