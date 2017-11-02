@@ -19,6 +19,7 @@
     <string name="dialog_saving">正在儲存</string>
     <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
     <string name="dialog_sharing">分享動態訊息</string>
+    <string name="dialog_select_pen_style">請選擇畫筆樣式</string>
     <string name="dialog_select_pen_color">請選擇畫筆顏色</string>
     <string name="dialog_select_bg_color">請選擇背景顏色</string>
 
@@ -65,4 +66,9 @@
     <string name="click_button_twice">點擊兩次返回鍵即可離開</string>
     <string name="give_me_permission">拜託給我權限！</string>
 
+    <string-array name="penstyle">
+        <item>精細</item>
+        <item>中庸</item>
+        <item>粗獷</item>
+    </string-array>
 </resources>

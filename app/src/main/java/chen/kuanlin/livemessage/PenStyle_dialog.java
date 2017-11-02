@@ -25,7 +25,8 @@ public class PenStyle_dialog {
 
     public void showPenStyleDialog(){
         AlertDialog.Builder select_style = new AlertDialog.Builder(context).
-                setSingleChoiceItems(new String[]{"Fine","Medium","Broad"}, (mySharedPreference.getUserStyle()/3)-1,
+                setTitle(R.string.dialog_select_pen_style).
+                setSingleChoiceItems(R.array.penstyle, (mySharedPreference.getUserStyle()/3)-1,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

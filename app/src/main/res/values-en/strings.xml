@@ -19,6 +19,7 @@
     <string name="dialog_saving">Saving Data</string>
     <string name="dialog_share">Share this Live Message ?</string>
     <string name="dialog_sharing">Share Live Message</string>
+    <string name="dialog_select_pen_style">Select Pen Style</string>
     <string name="dialog_select_pen_color">Select Pen Color</string>
     <string name="dialog_select_bg_color">Select Background Color</string>
 
@@ -65,4 +66,9 @@
     <string name="click_button_twice">Click Back Button Twice to Exit</string>
     <string name="give_me_permission">Give Me Permission, Please!</string>
 
+    <string-array name="penstyle">
+        <item>Fine</item>
+        <item>Medium</item>
+        <item>Bold</item>
+    </string-array>
 </resources>
