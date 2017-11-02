@@ -84,8 +84,8 @@ public class QuickGuide{
                 .withMaterialShowcase()
                 .setStyle(R.style.CustomShowcaseTheme)
                 .setTarget(styleTarget)
-                .setContentTitle(R.string.guide_resolution_title)
-                .setContentText(R.string.guide_resolution_text)
+                .setContentTitle(R.string.guide_style_title)
+                .setContentText(R.string.guide_style_text)
                 .replaceEndButton(styleButton)
                 .build();
         styleShowcaseView.hide();

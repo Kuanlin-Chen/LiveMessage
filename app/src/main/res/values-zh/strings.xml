@@ -39,8 +39,8 @@
     <string name="guide_share_text">請按此分享您的動態訊息\n要先儲存才能分享喔</string>
     <string name="guide_clear_title">「清除」</string>
     <string name="guide_clear_text">請按此清除您的畫布</string>
-    <string name="guide_resolution_title">「解析度」</string>
-    <string name="guide_resolution_text">請按此調整動態訊息儲存之後的解析度\n解析度越低儲存速度會越快</string>
+    <string name="guide_style_title">[畫筆樣式]</string>
+    <string name="guide_style_text">請按此選擇畫筆的樣式</string>
     <string name="guide_color_title">「畫筆顏色」</string>
     <string name="guide_color_text">請按此選擇畫筆的顏色</string>
     <string name="guide_background_title">「背景顏色」</string>

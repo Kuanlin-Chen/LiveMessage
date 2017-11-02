@@ -39,8 +39,8 @@
     <string name="guide_share_text">Click here to share your live message\nPlease click save before sharing</string>
     <string name="guide_clear_title">[Clear]</string>
     <string name="guide_clear_text">Click here to clear your canvas</string>
-    <string name="guide_resolution_title">[Resolution]</string>
-    <string name="guide_resolution_text">Click here to adjust the resolution of live message\nThe higer solution will reduce the speed</string>
+    <string name="guide_style_title">[Style]</string>
+    <string name="guide_style_text">Click here to select the style of pen</string>
     <string name="guide_color_title">[Color]</string>
     <string name="guide_color_text">Click here to select the color of pen</string>
     <string name="guide_background_title">[Background]</string>
