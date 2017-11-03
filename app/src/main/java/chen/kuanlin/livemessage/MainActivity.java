@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         if(mySharedPreference.getUserVersion()!=4){
             setMySharedPreference(); //initialize preference
             mySharedPreference.saveUserVersion(4);
+            if(mySharedPreference.getGuide()){
+                UpdateGuide updateGuide = new UpdateGuide(MainActivity.this);
+                updateGuide.showUpdateGuide();
+            }
         }
 
         if(!mySharedPreference.getGuide()){
