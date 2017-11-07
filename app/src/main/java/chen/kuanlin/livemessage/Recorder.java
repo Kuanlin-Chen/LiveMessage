@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -29,6 +30,8 @@ public class Recorder implements Runnable {
     private Bitmap image;
     private File pictureFile;
     private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
+    private Handler handler = new Handler();
+    private MainActivity parent;
 
     private static int rate = 1;
     private static boolean isContinue;
@@ -37,7 +40,8 @@ public class Recorder implements Runnable {
     private static int bitmapHeight = 1; //for generateJniGIF()
     private final String TAG = "[Recorder] ";
 
-    public Recorder(Context context, PaintView paintView){
+    public Recorder(MainActivity parent, Context context, PaintView paintView){
+        this.parent = parent;
         this.context = context;
         this.paintView = paintView;
         isContinue = true;
@@ -61,7 +65,23 @@ public class Recorder implements Runnable {
         } catch(InterruptedException e){
             if(debugmode)Log.e(TAG, "InterruptedException");
             e.printStackTrace();
+        } catch(OutOfMemoryError outOfMemoryError){
+            if(debugmode)Log.e(TAG, "OutOfMemoryError");
+            terminate();
+            bitmapList.remove(bitmapList.size()-1); //remove last element
+            bitmapList.remove(bitmapList.size()-1); //remove second-last element
+            showDialog();
         }
+    }
+
+    private void showDialog(){
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                OutOfMemory_dialog outOfMemory_dialog = new OutOfMemory_dialog(parent, context);
+                outOfMemory_dialog.showOutOfMemoryDialog();
+            }
+        });
     }
 
     public static Bitmap getBitmapFromView(View view) {

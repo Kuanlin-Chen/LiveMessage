@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private Drawable userDrawable;
 
-    private static boolean isRecording = false;
+    protected static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static long exitTime = 0;
@@ -106,19 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_save");
-                if( (!isRecording) && (recorder!=null) ){
-                    SaveData saveData = new SaveData(MainActivity.this,recorder);
-                    saveData.execute();
-                    isSaved = true;
-                }else {
-                    if(debugmode){
-                        if(isRecording){
-                            Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
-                        } else if(recorder==null){
-                            Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
+                saveData();
             }
         });
 
@@ -216,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         isRecording = true;
-        recorder = new Recorder(getApplicationContext(), paintView);
+        recorder = new Recorder(this, MainActivity.this, paintView);
         thread = new Thread(recorder);
         thread.start();
         button_record.setImageResource(R.drawable.ic_media_pause);
@@ -230,6 +218,23 @@ public class MainActivity extends AppCompatActivity {
         }
         isRecording = false;
         button_record.setImageResource(R.drawable.ic_media_play);
+    }
+
+    protected void saveData(){
+        if(debugmode)Log.e(TAG, "saveData");
+        if( (!isRecording) && (recorder!=null) ){
+            SaveData saveData = new SaveData(MainActivity.this,recorder);
+            saveData.execute();
+            isSaved = true;
+        }else {
+            if(debugmode){
+                if(isRecording){
+                    Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
+                } else if(recorder==null){
+                    Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     private void clear(){
