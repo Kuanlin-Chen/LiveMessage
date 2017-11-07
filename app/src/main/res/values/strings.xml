@@ -22,6 +22,8 @@
     <string name="dialog_select_pen_style">Select Pen Style</string>
     <string name="dialog_select_pen_color">Select Pen Color</string>
     <string name="dialog_select_bg_color">Select Background Color</string>
+    <string name="dialog_outmemory_title">[Oops] Out Of Memory !</string>
+    <string name="dialog_outmemory_message">You don\'t have enough memory. Do you want to save now?</string>
 
     <string name="feedback_title">Send feedback</string>
     <string name="feedback_email">kuanlin81625@gmail.com</string>
@@ -62,6 +64,7 @@
     <string name="word_half">Half</string>
     <string name="word_one_third">One Third</string>
     <string name="word_quarter">Quarter</string>
+    <string name="word_save_now">Save Now</string>
 
     <string name="click_button_twice">Click Back Button Twice to Exit</string>
     <string name="give_me_permission">Give Me Permission, Please!</string>

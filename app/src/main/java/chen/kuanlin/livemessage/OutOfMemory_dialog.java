@@ -24,10 +24,10 @@ public class OutOfMemory_dialog {
         parent.button_record.setImageResource(R.drawable.ic_media_play);
         //show dialog
         AlertDialog.Builder outofmemory_dialog = new AlertDialog.Builder(context).
-                setTitle("Oops! Out Of Memory!").
-                setMessage("You don't have enough memory. Do you want to save now ?");
+                setTitle(R.string.dialog_outmemory_title).
+                setMessage(R.string.dialog_outmemory_message);
         outofmemory_dialog.setNegativeButton(R.string.word_no, null);
-        outofmemory_dialog.setPositiveButton(R.string.word_yes, new DialogInterface.OnClickListener() {
+        outofmemory_dialog.setPositiveButton(R.string.word_save_now, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int fix) {
                 parent.saveData();
