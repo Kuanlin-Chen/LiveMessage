@@ -17,10 +17,12 @@ public class BackgroundColor_dialog {
 
     private Context context;
     private PaintView paintView;
+    private MainActivity parent;
 
     MySharedPreference mySharedPreference;
 
-    public BackgroundColor_dialog(Context context, PaintView paintView){
+    public BackgroundColor_dialog(MainActivity parent, Context context, PaintView paintView){
+        this.parent = parent;
         this.context = context;
         this.paintView = paintView;
         mySharedPreference = new MySharedPreference(context);
@@ -44,6 +46,7 @@ public class BackgroundColor_dialog {
                 .setPositiveButton(R.string.word_confirm, new ColorPickerClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                        parent.clear();
                         paintView.setCanvasBackground(selectedColor);
                         mySharedPreference.saveUserBackground(selectedColor);
                     }

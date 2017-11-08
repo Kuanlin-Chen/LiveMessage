@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Thread thread;
     private Drawable userDrawable;
 
-    private static boolean isRecording = false;
+    protected static boolean isRecording = false;
     private static boolean isSaved = false;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static long exitTime = 0;
@@ -100,17 +100,7 @@ public class MainActivity extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( (!isRecording) && (recorder!=null) ){
-                    SaveData saveData = new SaveData(MainActivity.this,recorder);
-                    saveData.execute();
-                    isSaved = true;
-                }else {
-                    if(isRecording){
-                        Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
-                    } else if(recorder==null){
-                        Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
-                    }
-                }
+                saveData();
             }
         });
 
@@ -162,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         button_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, MainActivity.this, paintView);
                 backgroundColor_dialog.showBackgroundColorDialog();
                 userDrawable = null;
             }
@@ -198,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         isRecording = true;
-        recorder = new Recorder(getApplicationContext(), paintView);
+        recorder = new Recorder(this, MainActivity.this, paintView);
         thread = new Thread(recorder);
         thread.start();
         button_record.setImageResource(R.drawable.ic_media_pause);
@@ -213,7 +203,30 @@ public class MainActivity extends AppCompatActivity {
         button_record.setImageResource(R.drawable.ic_media_play);
     }
 
-    private void clear(){
+    protected void saveData(){
+        if( (!isRecording) && (recorder!=null) ){
+            if(isSaved){
+                Toast.makeText(MainActivity.this, R.string.dialog_saved, Toast.LENGTH_SHORT).show();
+            }else{
+                SaveData saveData = new SaveData(MainActivity.this,recorder);
+                saveData.execute();
+                isSaved = true;
+            }
+        }else {
+            if(debugmode){
+                if(isRecording){
+                    Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
+                } else if(recorder==null){
+                    Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    protected void clear(){
+        if(recorder!=null){
+            recorder.releaseBitmapList(); //release memory
+        }
         recorder = null; //There is no reference to the object, it will be deleted by the GC
         isSaved = false;
         paintView.clearPaint();
@@ -228,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Uri pictureUri = data.getData();
             try {
+                clear();
                 InputStream inputStream = this.getContentResolver().openInputStream(pictureUri);
                 userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
                 paintView.clearPaint();
