@@ -243,6 +243,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected void clear(){
         if(debugmode)Log.e(TAG, "clear()");
+        if(recorder!=null){
+            recorder.releaseBitmapList(); //release memory
+        }
         recorder = null; //There is no reference to the object, it will be deleted by the GC
         isSaved = false;
         paintView.clearPaint();

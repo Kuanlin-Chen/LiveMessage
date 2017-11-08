@@ -160,7 +160,7 @@ public class Recorder implements Runnable {
         if(debugmode)Log.e(TAG,"end encodeFrame");
 
         //release memory
-        bitmapList = null;
+        releaseBitmapList();
 
         gifEncoder.close();
     }
@@ -173,5 +173,9 @@ public class Recorder implements Runnable {
 
     public File getPictureFile(){
         return pictureFile;
+    }
+
+    public void releaseBitmapList(){
+        bitmapList = null;
     }
 }
