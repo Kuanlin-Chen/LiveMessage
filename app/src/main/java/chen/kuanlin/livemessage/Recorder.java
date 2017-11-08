@@ -159,6 +159,9 @@ public class Recorder implements Runnable {
         }
         if(debugmode)Log.e(TAG,"end encodeFrame");
 
+        //release memory
+        bitmapList = null;
+
         gifEncoder.close();
     }
 

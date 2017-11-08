@@ -223,9 +223,13 @@ public class MainActivity extends AppCompatActivity {
     protected void saveData(){
         if(debugmode)Log.e(TAG, "saveData");
         if( (!isRecording) && (recorder!=null) ){
-            SaveData saveData = new SaveData(MainActivity.this,recorder);
-            saveData.execute();
-            isSaved = true;
+            if(isSaved){
+                Toast.makeText(MainActivity.this, R.string.dialog_saved, Toast.LENGTH_SHORT).show();
+            }else{
+                SaveData saveData = new SaveData(MainActivity.this,recorder);
+                saveData.execute();
+                isSaved = true;
+            }
         }else {
             if(debugmode){
                 if(isRecording){
