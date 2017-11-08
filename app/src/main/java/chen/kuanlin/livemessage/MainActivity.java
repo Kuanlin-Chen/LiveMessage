@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_background");
-                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, paintView);
+                BackgroundColor_dialog backgroundColor_dialog = new BackgroundColor_dialog(MainActivity.this, MainActivity.this, paintView);
                 backgroundColor_dialog.showBackgroundColorDialog();
                 userDrawable = null;
             }
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void clear(){
+    protected void clear(){
         if(debugmode)Log.e(TAG, "clear()");
         recorder = null; //There is no reference to the object, it will be deleted by the GC
         isSaved = false;
@@ -257,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Uri pictureUri = data.getData();
             try {
+                clear();
                 InputStream inputStream = this.getContentResolver().openInputStream(pictureUri);
                 userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
                 paintView.clearPaint();
