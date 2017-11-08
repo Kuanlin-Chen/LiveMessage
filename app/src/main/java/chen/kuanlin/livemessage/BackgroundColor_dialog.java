@@ -2,7 +2,6 @@ package chen.kuanlin.livemessage;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;

@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        if(mySharedPreference.getUserVersion()!=5){
+        if(mySharedPreference.getUserVersion()!=6){
             setMySharedPreference(); //initialize preference
-            mySharedPreference.saveUserVersion(5);
+            mySharedPreference.saveUserVersion(6);
             if(mySharedPreference.getGuide()){
-                UpdateGuide updateGuide = new UpdateGuide(MainActivity.this);
-                updateGuide.showUpdateGuide();
+                //UpdateGuide updateGuide = new UpdateGuide(MainActivity.this);
+                //updateGuide.showUpdateGuide();
             }
         }
 
@@ -213,12 +213,10 @@ public class MainActivity extends AppCompatActivity {
                 isSaved = true;
             }
         }else {
-            if(debugmode){
-                if(isRecording){
-                    Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
-                } else if(recorder==null){
-                    Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
-                }
+            if(isRecording){
+                Toast.makeText(MainActivity.this, R.string.button_save_is_recording, Toast.LENGTH_SHORT).show();
+            } else if(recorder==null){
+                Toast.makeText(MainActivity.this, R.string.button_save_recorder_null, Toast.LENGTH_SHORT).show();
             }
         }
     }
