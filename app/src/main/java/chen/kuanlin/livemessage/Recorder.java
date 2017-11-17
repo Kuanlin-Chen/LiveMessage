@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.os.Handler;
@@ -55,9 +56,13 @@ public class Recorder implements Runnable {
     @Override
     public void run(){
         if(debugmode)Log.e(TAG, "Recorder.run()");
+        Matrix matrix = new Matrix();
+        matrix.setScale(0.5f, 0.5f);
         try {
             while (isContinue){
                 image = getBitmapFromView(paintView);
+                //reduce the size of bitmap
+                image = Bitmap.createBitmap(image,0,0,bitmapWidth,bitmapHeight,matrix,true);
                 bitmapList.add(image);
                 Thread.sleep(500);
                 if(debugmode)Log.e(TAG, "bitmapList:"+String.valueOf(bitmapList.size()));
@@ -144,7 +149,7 @@ public class Recorder implements Runnable {
 
         GifEncoder gifEncoder = new GifEncoder();
         try {
-            gifEncoder.init(bitmapWidth, bitmapHeight, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
+            gifEncoder.init(bitmapWidth/2, bitmapHeight/2, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
             if(debugmode)Log.e(TAG, "gifEncoder.init completed");
         }catch (FileNotFoundException ffe){
             if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
