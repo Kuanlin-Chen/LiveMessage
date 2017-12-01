@@ -1,14 +1,12 @@
 package chen.kuanlin.livemessage;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -65,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         button_picture = (ImageButton)findViewById(R.id.button_picture);
 
         setLocale();
-        checkPermission();
+        if(!hasPermission()){
+            setupPermission();
+        }
 
         MobileAds.initialize(this, String.valueOf(R.string.app_id));
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -208,9 +208,14 @@ public class MainActivity extends AppCompatActivity {
             if(isSaved){
                 Toast.makeText(MainActivity.this, R.string.dialog_saved, Toast.LENGTH_SHORT).show();
             }else{
-                SaveData saveData = new SaveData(MainActivity.this,recorder);
-                saveData.execute();
-                isSaved = true;
+                if(hasPermission()){
+                    SaveData saveData = new SaveData(MainActivity.this,recorder);
+                    saveData.execute();
+                    isSaved = true;
+                }else {
+                    Toast.makeText(MainActivity.this, R.string.give_me_permission, Toast.LENGTH_SHORT).show();
+                    setupPermission();
+                }
             }
         }else {
             if(isRecording){
@@ -255,34 +260,22 @@ public class MainActivity extends AppCompatActivity {
         Locale.setDefault(new Locale(Locale.getDefault().getLanguage()));
     }
 
-    private void checkPermission(){
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
+    private boolean hasPermission(){
+        return ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                new AlertDialog.Builder(MainActivity.this)
-                        .setMessage(R.string.give_me_permission)
-                        .setPositiveButton(R.string.word_ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-                            }
-                        })
-                        .setNegativeButton(R.string.word_no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .show();
-            } else {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            }
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void setupPermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
     }
 

@@ -67,7 +67,7 @@
     <string name="word_save_now">Save Now</string>
 
     <string name="click_button_twice">Click Back Button Twice to Exit</string>
-    <string name="give_me_permission">Give Me Permission, Please!</string>
+    <string name="give_me_permission">You Didn\'t Give LiveMessage Permission</string>
 
     <string-array name="penstyle">
         <item>Fine</item>
