@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Uri pictureUri = data.getData();
             try {
-                clear();
+                //clear();
                 InputStream inputStream = this.getContentResolver().openInputStream(pictureUri);
                 userDrawable = Drawable.createFromStream(inputStream, pictureUri.toString() );
                 paintView.clearPaint();

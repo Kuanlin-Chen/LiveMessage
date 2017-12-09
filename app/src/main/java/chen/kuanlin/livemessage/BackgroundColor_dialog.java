@@ -45,7 +45,7 @@ public class BackgroundColor_dialog {
                 .setPositiveButton(R.string.word_confirm, new ColorPickerClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-                        parent.clear();
+                        //parent.clear();
                         paintView.setCanvasBackground(selectedColor);
                         mySharedPreference.saveUserBackground(selectedColor);
                     }
