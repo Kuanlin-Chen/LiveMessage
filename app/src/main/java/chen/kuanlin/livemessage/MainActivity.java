@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        if(mySharedPreference.getUserVersion()!=8){
+        if(mySharedPreference.getUserVersion()!=9){
             setMySharedPreference(); //initialize preference
-            mySharedPreference.saveUserVersion(8);
+            mySharedPreference.saveUserVersion(9);
             if(mySharedPreference.getGuide()){
                 //UpdateGuide updateGuide = new UpdateGuide(MainActivity.this);
                 //updateGuide.showUpdateGuide();
