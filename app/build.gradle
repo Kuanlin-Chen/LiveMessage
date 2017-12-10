@@ -61,5 +61,6 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.google.android.gms:play-services-ads:11.4.2'
+    compile 'ch.acra:acra:4.9.2'
     testCompile 'junit:junit:4.12'
 }
