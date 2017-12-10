@@ -140,11 +140,12 @@ public class Recorder implements Runnable {
         return mediaFile;
     }
 
-    public void generateJniGIF(){
+    public boolean generateJniGIF(){
         pictureFile = getOutputMediaFile();
+        if(debugmode)Log.e(TAG, "pictureFile="+pictureFile.toString());
         if (pictureFile == null) {
             if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
-            return;
+            return false;
         }
 
         GifEncoder gifEncoder = new GifEncoder();
@@ -154,6 +155,7 @@ public class Recorder implements Runnable {
         }catch (FileNotFoundException ffe){
             if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
             ffe.printStackTrace();
+            return false;
         }
 
         if(debugmode)Log.e(TAG,"start encodeFrame");
@@ -168,6 +170,8 @@ public class Recorder implements Runnable {
         releaseBitmapList();
 
         gifEncoder.close();
+
+        return true;
     }
 
     public String getApplicationName(Context context) {

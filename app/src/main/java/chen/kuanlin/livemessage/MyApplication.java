@@ -11,7 +11,7 @@ import org.acra.annotation.ReportsCrashes;
  */
 
 @ReportsCrashes(
-        formUri = "http://www.backendofyourchoice.com/reportpath"
+        mailTo = "kuanlin81625＠gmail.com"
 )
 public class MyApplication extends Application {
     @Override
