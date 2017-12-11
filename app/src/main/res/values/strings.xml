@@ -15,6 +15,9 @@
     <string name="color_gray">GRAY</string>
     <string name="color_black">BLACK</string>
 
+    <string name="crash_dialog_text">Ooooops ! I crashed, please report to developer to help fix the issue !</string>
+    <string name="crash_dialog_title">LiveMessage has crashed</string>
+
     <string name="dialog_saved">Live Message Saved</string>
     <string name="dialog_saving">Saving Data</string>
     <string name="dialog_share">Share this Live Message ?</string>
@@ -30,6 +33,7 @@
     <string name="feedback_subject">Thanks for your Feedback</string>
     <string name="feedback_message">Hi,
 \n\nYour LiveMessage app rocks! I would like to give you some feedback:</string>
+    <string name="feedback_crash">Please report this issue to the developer!</string>
 
     <string name="guide_next_step">Next Step</string>
     <string name="guide_end">Get Started</string>
