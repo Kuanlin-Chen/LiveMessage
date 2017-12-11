@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 /**
  * Created by kuanlin on 2017/9/15.
@@ -68,7 +67,6 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
             preview_dialog.showPreviewDialog();
         }else {
             myDialog.dismiss();
-            Toast.makeText(context,"An unexpected error occurred, report has been sent to the developer!",Toast.LENGTH_SHORT).show();
         }
     }
 }

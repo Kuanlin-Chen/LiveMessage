@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.waynejo.androidndkgif.GifEncoder;
 
+import org.acra.ACRA;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -145,6 +147,7 @@ public class Recorder implements Runnable {
         if(debugmode)Log.e(TAG, "pictureFile="+pictureFile.toString());
         if (pictureFile == null) {
             if(debugmode)Log.e(TAG, "Error creating media file, check storage permissions: ");
+            ACRA.getErrorReporter().handleException(new NullPointerException());
             return false;
         }
 
@@ -155,6 +158,7 @@ public class Recorder implements Runnable {
         }catch (FileNotFoundException ffe){
             if(debugmode)Log.e(TAG, "FileNotFoundExcetion");
             ffe.printStackTrace();
+            ACRA.getErrorReporter().handleException(ffe);
             return false;
         }
 

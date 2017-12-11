@@ -15,8 +15,8 @@
     <string name="color_gray">GRAY</string>
     <string name="color_black">BLACK</string>
 
-    <string name="crash_dialog_text">Ooooops ! I crashed, please report to developer to help fix the issue !</string>
-    <string name="crash_dialog_title">LiveMessage has crashed</string>
+    <string name="crash_dialog_text">Oops! I have bugs, please report to developer to help fix the issue!</string>
+    <string name="crash_dialog_title">LiveMessage have some problem</string>
 
     <string name="dialog_saved">Live Message Saved</string>
     <string name="dialog_saving">Saving Data</string>
@@ -25,7 +25,7 @@
     <string name="dialog_select_pen_style">Select Pen Style</string>
     <string name="dialog_select_pen_color">Select Pen Color</string>
     <string name="dialog_select_bg_color">Select Background Color</string>
-    <string name="dialog_outmemory_title">[Oops] Out Of Memory !</string>
+    <string name="dialog_outmemory_title">[Oops] Out Of Memory!</string>
     <string name="dialog_outmemory_message">You don\'t have enough memory. Do you want to save now?</string>
 
     <string name="feedback_title">Send feedback</string>

@@ -15,8 +15,8 @@
     <string name="color_gray">太空灰</string>
     <string name="color_black">午夜黑</string>
 
-    <string name="crash_dialog_text">[悲劇]我壞了，請幫我回報給開發者!</string>
-    <string name="crash_dialog_title">動態訊息壞了</string>
+    <string name="crash_dialog_text">[悲劇]請幫我回報給開發者!</string>
+    <string name="crash_dialog_title">動態訊息有些問題</string>
 
     <string name="dialog_saved">已儲存動態訊息</string>
     <string name="dialog_saving">正在儲存</string>
