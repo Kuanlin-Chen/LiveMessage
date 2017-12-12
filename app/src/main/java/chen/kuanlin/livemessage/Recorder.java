@@ -131,6 +131,9 @@ public class Recorder implements Runnable {
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
+                if(isExternalStorageWritable()){
+                    mediaStorageDir = getAlbumStorageDir();
+                }
                 return null;
             }
         }
@@ -190,5 +193,24 @@ public class Recorder implements Runnable {
 
     public void releaseBitmapList(){
         bitmapList = null;
+    }
+
+    //Checks if external storage is available for read and write
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    private File getAlbumStorageDir() {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), getApplicationName(context));
+        if (!file.mkdirs()) {
+            if(debugmode)Log.e(TAG, "Directory not created");
+        }
+        return file;
     }
 }
