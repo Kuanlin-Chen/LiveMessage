@@ -133,8 +133,9 @@ public class Recorder implements Runnable {
             if (! mediaStorageDir.mkdirs()){
                 if(isExternalStorageWritable()){
                     mediaStorageDir = getAlbumStorageDir();
+                }else{
+                    return null;
                 }
-                return null;
             }
         }
         // Create a media file name
@@ -206,8 +207,8 @@ public class Recorder implements Runnable {
 
     private File getAlbumStorageDir() {
         // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), getApplicationName(context));
+        //context.getExternalFilesDirs("")[1].mkdirs();
+        File file = new File(context.getExternalFilesDirs("")[1].getAbsolutePath());
         if (!file.mkdirs()) {
             if(debugmode)Log.e(TAG, "Directory not created");
         }
