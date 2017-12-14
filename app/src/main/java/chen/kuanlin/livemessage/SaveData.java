@@ -36,8 +36,12 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
         //一定必須覆寫的方法
         //背景執行的內容放此
         //這裡不能和UI有任何互動
-        recorder.generateJniGIF();
-        return 1;
+        boolean myException = recorder.generateJniGIF();
+        if (myException){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @Override
@@ -61,6 +65,8 @@ public class SaveData extends AsyncTask<String, Integer, Integer> {
 
             Preview_dialog preview_dialog = new Preview_dialog(context, recorder, 0, null);
             preview_dialog.showPreviewDialog();
+        }else {
+            myDialog.dismiss();
         }
     }
 }

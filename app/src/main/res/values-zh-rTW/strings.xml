@@ -15,6 +15,9 @@
     <string name="color_gray">太空灰</string>
     <string name="color_black">午夜黑</string>
 
+    <string name="crash_dialog_text">[悲劇]請幫我回報給開發者!</string>
+    <string name="crash_dialog_title">動態訊息有些問題</string>
+
     <string name="dialog_saved">已儲存動態訊息</string>
     <string name="dialog_saving">正在儲存</string>
     <string name="dialog_share">確定要分享這個動態訊息嗎?</string>
@@ -30,6 +33,7 @@
     <string name="feedback_subject">非常感謝您寶貴的意見</string>
     <string name="feedback_message">你好,
 \n\n我使用了你的應用程式-動態訊息，我想分享使用經驗與意見:</string>
+    <string name="feedback_crash">請幫我回報此問題給開發者!</string>
 
     <string name="guide_next_step">下一步</string>
     <string name="guide_end">開始使用</string>

@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.waynejo.androidndkgif.GifEncoder;
 
+import org.acra.ACRA;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -108,9 +110,10 @@ public class Recorder implements Runnable {
     private File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Pictures/" + getApplicationName(context) );
-                //+ "/Android/data/" + context.getPackageName() + "/Files");
+
+        File mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        //File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+        //        + "/Pictures/" + getApplicationName(context) );
 
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
@@ -118,7 +121,11 @@ public class Recorder implements Runnable {
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                return null;
+                if(isExternalStorageWritable()){
+                    mediaStorageDir = getAlbumStorageDir();
+                }else{
+                    return null;
+                }
             }
         }
         // Create a media file name
@@ -129,10 +136,11 @@ public class Recorder implements Runnable {
         return mediaFile;
     }
 
-    public void generateJniGIF(){
+    public boolean generateJniGIF(){
         pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
-            return;
+            ACRA.getErrorReporter().handleException(new NullPointerException());
+            return false;
         }
 
         GifEncoder gifEncoder = new GifEncoder();
@@ -140,6 +148,8 @@ public class Recorder implements Runnable {
             gifEncoder.init(bitmapWidth/2, bitmapHeight/2, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
         }catch (FileNotFoundException ffe){
             ffe.printStackTrace();
+            ACRA.getErrorReporter().handleException(ffe);
+            return false;
         }
 
         // Bitmap is MUST ARGB_8888.
@@ -152,6 +162,8 @@ public class Recorder implements Runnable {
         releaseBitmapList();
 
         gifEncoder.close();
+
+        return true;
     }
 
     public String getApplicationName(Context context) {
@@ -166,5 +178,22 @@ public class Recorder implements Runnable {
 
     public void releaseBitmapList(){
         bitmapList = null;
+    }
+
+    //Checks if external storage is available for read and write
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    private File getAlbumStorageDir() {
+        // Get the directory for the user's public pictures directory.
+        //context.getExternalFilesDirs(null)[1].mkdirs();
+        //File externalfile = new File(context.getExternalFilesDirs("")[1].getAbsolutePath());
+        File externalfile = context.getExternalFilesDir(null);
+        return externalfile;
     }
 }
