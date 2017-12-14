@@ -121,9 +121,10 @@ public class Recorder implements Runnable {
 
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Pictures/" + getApplicationName(context) );
-                //+ "/Android/data/" + context.getPackageName() + "/Files");
+
+        File mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        //File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+        //        + "/Pictures/" + getApplicationName(context) );
 
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
@@ -207,11 +208,12 @@ public class Recorder implements Runnable {
 
     private File getAlbumStorageDir() {
         // Get the directory for the user's public pictures directory.
-        //context.getExternalFilesDirs("")[1].mkdirs();
-        File file = new File(context.getExternalFilesDirs("")[1].getAbsolutePath());
-        if (!file.mkdirs()) {
+        //context.getExternalFilesDirs(null)[1].mkdirs();
+        //File externalfile = new File(context.getExternalFilesDirs("")[1].getAbsolutePath());
+        File externalfile = context.getExternalFilesDir(null);
+        if (!externalfile.mkdirs()) {
             if(debugmode)Log.e(TAG, "Directory not created");
         }
-        return file;
+        return externalfile;
     }
 }
