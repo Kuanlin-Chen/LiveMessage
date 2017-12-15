@@ -145,7 +145,11 @@ public class Recorder implements Runnable {
 
         GifEncoder gifEncoder = new GifEncoder();
         try {
-            gifEncoder.init(bitmapWidth/2, bitmapHeight/2, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
+            //update the values of bitmapWidth and bitmapHeight
+            //Must same as image size
+            bitmapWidth = image.getWidth();
+            bitmapHeight = image.getHeight();
+            gifEncoder.init(bitmapWidth, bitmapHeight, pictureFile.toString(), GifEncoder.EncodingType.ENCODING_TYPE_SIMPLE_FAST);
         }catch (FileNotFoundException ffe){
             ffe.printStackTrace();
             ACRA.getErrorReporter().handleException(ffe);
