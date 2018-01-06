@@ -65,9 +65,9 @@ public class PenStyle_dialog {
         });
         //Create an instance of AlertDialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        dialog.setTitle(context.getString(R.string.dialog_select_pen_style));
+        dialog.setTitle(R.string.dialog_select_pen_style);
         dialog.setView(dialogView);
-        dialog.setPositiveButton("Done", null);
+        dialog.setPositiveButton(R.string.word_confirm, null);
         dialog.show();
     }
 }
