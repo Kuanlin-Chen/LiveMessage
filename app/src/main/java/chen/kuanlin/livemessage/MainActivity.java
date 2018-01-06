@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(debugmode)Log.e(TAG, "button_style");
-                PenStyle_dialog penStyle_dialog = new PenStyle_dialog(MainActivity.this, paintView);
+                PenStyle_dialog penStyle_dialog = new PenStyle_dialog(MainActivity.this, MainActivity.this, paintView);
                 penStyle_dialog.showPenStyleDialog();
             }
         });

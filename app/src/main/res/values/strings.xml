@@ -69,6 +69,9 @@
     <string name="word_one_third">One Third</string>
     <string name="word_quarter">Quarter</string>
     <string name="word_save_now">Save Now</string>
+    <string name="word_fine">Fine</string>
+    <string name="word_medium">Medium</string>
+    <string name="word_bold">Bold</string>
 
     <string name="click_button_twice">Click Back Button Twice to Exit</string>
     <string name="give_me_permission">You Didn\'t Give LiveMessage Permission</string>
