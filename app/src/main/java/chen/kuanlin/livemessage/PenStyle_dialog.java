@@ -1,7 +1,11 @@
 package chen.kuanlin.livemessage;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 /**
  * Created by kuanlin on 2017/11/1.
@@ -32,31 +36,38 @@ public class PenStyle_dialog {
     }
 
     public void showPenStyleDialog(){
-        /*AlertDialog.Builder select_style = new AlertDialog.Builder(context).
-                setTitle(R.string.dialog_select_pen_style).
-                setSingleChoiceItems(R.array.penstyle, (mySharedPreference.getUserStyle()/3)-1,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which){
-                                    case 0:
-                                        mySharedPreference.saveUserStyle(3);
-                                        paintView.setPenStyle(3);
-                                        break;
-                                    case 1:
-                                        mySharedPreference.saveUserStyle(6);
-                                        paintView.setPenStyle(6);
-                                        break;
-                                    case 2:
-                                        mySharedPreference.saveUserStyle(10);
-                                        paintView.setPenStyle(10);
-                                        break;
-                                }
-                            }
-                        });
-        select_style.setPositiveButton(R.string.word_confirm, null);
-        select_style.show();*/
-        SingleChoooiceListView singleChoooiceListView = new SingleChoooiceListView(activity, context, textResource, imageResource, defaultItem, context.getString(R.string.dialog_select_pen_style));
-        singleChoooiceListView.showDialog();
+        //Create an instance of MyAdapter for Listview
+        SingleChoooiceAdapter adapter = new SingleChoooiceAdapter(context, R.layout.list_item, textResource, imageResource);
+        //Create an instance of ListView for AlertDialog
+        View dialogView = activity.getLayoutInflater().inflate(R.layout.dialog_main, null);
+        final ListView simpleListView = (ListView)dialogView.findViewById(R.id.simpleListView);
+        simpleListView.setAdapter(adapter);
+        simpleListView.setItemChecked(defaultItem,true);
+        //Set up listener
+        simpleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        mySharedPreference.saveUserStyle(3);
+                        paintView.setPenStyle(3);
+                        break;
+                    case 1:
+                        mySharedPreference.saveUserStyle(6);
+                        paintView.setPenStyle(6);
+                        break;
+                    case 2:
+                        mySharedPreference.saveUserStyle(10);
+                        paintView.setPenStyle(10);
+                        break;
+                }
+            }
+        });
+        //Create an instance of AlertDialog
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(context.getString(R.string.dialog_select_pen_style));
+        dialog.setView(dialogView);
+        dialog.setPositiveButton("Done", null);
+        dialog.show();
     }
 }
