@@ -6,6 +6,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 /**
  * Created by kuanlin on 2017/11/1.
@@ -61,6 +63,27 @@ public class PenStyle_dialog {
                         paintView.setPenStyle(2);
                         break;
                 }
+            }
+        });
+        //Set up textView
+        final TextView textView_width = (TextView)dialogView.findViewById(R.id.textView_width);
+        textView_width.setText(context.getString(R.string.word_size)+":"+mySharedPreference.getUserWidth());
+        //Set up seekbar
+        final SeekBar seekBar_width = (SeekBar)dialogView.findViewById(R.id.seekBar_width);
+        seekBar_width.setProgress((mySharedPreference.getUserWidth()/2)-1);
+        seekBar_width.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textView_width.setText(context.getString(R.string.word_size)+":"+(progress+1)*2);
+                mySharedPreference.saveUserWidth((progress+1)*2);
+                paintView.setPenWidth((progress+1)*2);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
         //Create an instance of AlertDialog

@@ -282,11 +282,11 @@ public class PaintView extends View{
     }
 
     private void initPathEffects() {
-        //原版
+        //實線
         mPathEffects[0] = null;
         //虛線
         mPathEffects[1] = new DashPathEffect(new float[]{20, 10}, mySharedPreference.getUserWidth());
-        //毛毧
+        //毛刺
         mPathEffects[2] = new DiscretePathEffect(5.0f, 10.0f);
     }
 }

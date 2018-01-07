@@ -11,14 +11,16 @@
         android:choiceMode="singleChoice"/>
 
     <TextView
+        android:id="@+id/textView_width"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Size: 2dp"
+        android:text=""
         android:textSize="28dp"
         android:textAlignment="center"
         android:layout_weight="1"/>
 
     <SeekBar
+        android:id="@+id/seekBar_width"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="9"
