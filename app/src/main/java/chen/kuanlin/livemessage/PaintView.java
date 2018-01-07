@@ -3,10 +3,17 @@ package chen.kuanlin.livemessage;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.ComposePathEffect;
+import android.graphics.CornerPathEffect;
+import android.graphics.DashPathEffect;
+import android.graphics.DiscretePathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathDashPathEffect;
+import android.graphics.PathEffect;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.SumPathEffect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -35,6 +42,7 @@ public class PaintView extends View{
     private Path mPath = new Path();
     private Rect mInvalidRect = new Rect();
     private Context context;
+    private PathEffect[] mPathEffects = new PathEffect[3];
 
     private String TAG = "[PaintView] ";
     private boolean debugmode = true;
@@ -66,6 +74,7 @@ public class PaintView extends View{
     }
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom){
+        initPathEffects();
         initPaintView();
     }
 
@@ -84,7 +93,8 @@ public class PaintView extends View{
         setPaintColor(mySharedPreference.getUserColor());
         paint.setAntiAlias(true);
         paint.setDither(true);
-        paint.setStrokeWidth(mySharedPreference.getUserStyle());
+        paint.setStrokeWidth(mySharedPreference.getUserWidth());
+        paint.setPathEffect(mPathEffects[mySharedPreference.getUserStyle()]);
     }
 
     @Override
@@ -215,7 +225,11 @@ public class PaintView extends View{
     }
 
     public void setPenStyle(int user_style){
-        paint.setStrokeWidth(user_style);
+        paint.setPathEffect(mPathEffects[user_style]);
+    }
+
+    public void setPenWidth(int user_width){
+        paint.setStrokeWidth(user_width);
     }
 
     public void setPaintColor(int user_color){
@@ -265,5 +279,14 @@ public class PaintView extends View{
         float tempScale = (heightPixels/pictureHeight);
         if(debugmode) Log.e(TAG, "height tempScale="+String.valueOf(tempScale));
         return tempScale;
+    }
+
+    private void initPathEffects() {
+        //原版
+        mPathEffects[0] = null;
+        //虛線
+        mPathEffects[1] = new DashPathEffect(new float[]{20, 10}, mySharedPreference.getUserWidth());
+        //毛毧
+        mPathEffects[2] = new DiscretePathEffect(5.0f, 10.0f);
     }
 }

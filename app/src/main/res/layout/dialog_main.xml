@@ -7,7 +7,20 @@
         android:id="@+id/simpleListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#000"
-        android:dividerHeight="2dp"
+        android:layout_weight="1"
         android:choiceMode="singleChoice"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Size: 2dp"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:layout_weight="1"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="9"
+        android:layout_weight="1"/>
 </LinearLayout>

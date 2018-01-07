@@ -32,7 +32,7 @@ public class PenStyle_dialog {
                 context.getString(R.string.word_medium),context.getString(R.string.word_bold)};
         this.imageResource = new Integer[]{R.drawable.pen_fine,R.drawable.pen_medium,R.drawable.pen_bold};
         mySharedPreference = new MySharedPreference(context);
-        this.defaultItem = (mySharedPreference.getUserStyle()/3)-1;
+        this.defaultItem = (mySharedPreference.getUserStyle());
     }
 
     public void showPenStyleDialog(){
@@ -49,16 +49,16 @@ public class PenStyle_dialog {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
-                        mySharedPreference.saveUserStyle(3);
-                        paintView.setPenStyle(3);
+                        mySharedPreference.saveUserStyle(0);
+                        paintView.setPenStyle(0);
                         break;
                     case 1:
-                        mySharedPreference.saveUserStyle(6);
-                        paintView.setPenStyle(6);
+                        mySharedPreference.saveUserStyle(1);
+                        paintView.setPenStyle(1);
                         break;
                     case 2:
-                        mySharedPreference.saveUserStyle(10);
-                        paintView.setPenStyle(10);
+                        mySharedPreference.saveUserStyle(2);
+                        paintView.setPenStyle(2);
                         break;
                 }
             }

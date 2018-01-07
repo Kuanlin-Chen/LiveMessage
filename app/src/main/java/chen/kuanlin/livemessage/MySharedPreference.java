@@ -23,6 +23,7 @@ public class MySharedPreference {
     private static final String COLOR = "COLOR";
     private static final String BACKGROUND = "BACKGROUND";
     private static final String VERSION = "VERSION";
+    private static final String WIDTH = "WIDTH";
 
     public void setGuide(boolean hasRead){
         settings = context.getSharedPreferences(DATA,0);
@@ -63,6 +64,11 @@ public class MySharedPreference {
         settings.edit().putInt(VERSION, version).commit();
     }
 
+    public void saveUserWidth(int width){
+        settings = context.getSharedPreferences(DATA,0);
+        settings.edit().putInt(WIDTH, width).commit();
+    }
+
     public int getUserStyle(){
         settings = context.getSharedPreferences(DATA,0);
         return settings.getInt(STYLE, 0);
@@ -81,5 +87,10 @@ public class MySharedPreference {
     public int getUserVersion(){
         settings = context.getSharedPreferences(DATA,0);
         return settings.getInt(VERSION, 0);
+    }
+
+    public int getUserWidth(){
+        settings = context.getSharedPreferences(DATA,0);
+        return settings.getInt(WIDTH, 0);
     }
 }
