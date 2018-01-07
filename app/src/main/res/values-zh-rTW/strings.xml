@@ -69,16 +69,10 @@
     <string name="word_one_third">三分之一</string>
     <string name="word_quarter">四分之一</string>
     <string name="word_save_now">馬上儲存</string>
-    <string name="word_fine">精細</string>
-    <string name="word_medium">中庸</string>
-    <string name="word_bold">粗獷</string>
+    <string name="word_normal">實線</string>
+    <string name="word_dash">虛線</string>
+    <string name="word_discrete">離散</string>
 
     <string name="click_button_twice">點擊兩次返回鍵即可離開</string>
     <string name="give_me_permission">您尚未賦予儲存權限</string>
-
-    <string-array name="penstyle">
-        <item>精細</item>
-        <item>中庸</item>
-        <item>粗獷</item>
-    </string-array>
 </resources>

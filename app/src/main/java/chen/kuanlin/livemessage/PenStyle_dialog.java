@@ -28,9 +28,9 @@ public class PenStyle_dialog {
         this.activity = activity;
         this.context = context;
         this.paintView = paintView;
-        this.textResource = new String[]{context.getString(R.string.word_fine),
-                context.getString(R.string.word_medium),context.getString(R.string.word_bold)};
-        this.imageResource = new Integer[]{R.drawable.pen_fine,R.drawable.pen_medium,R.drawable.pen_bold};
+        this.textResource = new String[]{context.getString(R.string.word_normal),
+                context.getString(R.string.word_dash),context.getString(R.string.word_discrete)};
+        this.imageResource = new Integer[]{R.drawable.pen_normal,R.drawable.pen_dash,R.drawable.pen_discrete};
         mySharedPreference = new MySharedPreference(context);
         this.defaultItem = (mySharedPreference.getUserStyle());
     }
