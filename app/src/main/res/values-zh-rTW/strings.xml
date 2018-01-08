@@ -71,7 +71,7 @@
     <string name="word_save_now">馬上儲存</string>
     <string name="word_normal">實線</string>
     <string name="word_dash">虛線</string>
-    <string name="word_discrete">毛刺</string>
+    <string name="word_discrete">模糊</string>
     <string name="word_size">尺寸</string>
 
     <string name="click_button_twice">點擊兩次返回鍵即可離開</string>
