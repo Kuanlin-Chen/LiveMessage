@@ -6,6 +6,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 /**
  * Created by kuanlin on 2017/11/1.
@@ -26,11 +28,11 @@ public class PenStyle_dialog {
         this.activity = activity;
         this.context = context;
         this.paintView = paintView;
-        this.textResource = new String[]{context.getString(R.string.word_fine),
-                context.getString(R.string.word_medium),context.getString(R.string.word_bold)};
-        this.imageResource = new Integer[]{R.drawable.pen_fine,R.drawable.pen_medium,R.drawable.pen_bold};
+        this.textResource = new String[]{context.getString(R.string.word_normal),
+                context.getString(R.string.word_dash),context.getString(R.string.word_discrete)};
+        this.imageResource = new Integer[]{R.drawable.pen_normal,R.drawable.pen_dash,R.drawable.pen_discrete};
         mySharedPreference = new MySharedPreference(context);
-        this.defaultItem = (mySharedPreference.getUserStyle()/3)-1;
+        this.defaultItem = (mySharedPreference.getUserStyle());
     }
 
     public void showPenStyleDialog(){
@@ -47,18 +49,39 @@ public class PenStyle_dialog {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
-                        mySharedPreference.saveUserStyle(3);
-                        paintView.setPenStyle(3);
+                        mySharedPreference.saveUserStyle(0);
+                        paintView.setPenStyle(0);
                         break;
                     case 1:
-                        mySharedPreference.saveUserStyle(6);
-                        paintView.setPenStyle(6);
+                        mySharedPreference.saveUserStyle(1);
+                        paintView.setPenStyle(1);
                         break;
                     case 2:
-                        mySharedPreference.saveUserStyle(10);
-                        paintView.setPenStyle(10);
+                        mySharedPreference.saveUserStyle(2);
+                        paintView.setPenStyle(2);
                         break;
                 }
+            }
+        });
+        //Set up textView
+        final TextView textView_width = (TextView)dialogView.findViewById(R.id.textView_width);
+        textView_width.setText(context.getString(R.string.word_size)+":"+mySharedPreference.getUserWidth());
+        //Set up seekbar
+        final SeekBar seekBar_width = (SeekBar)dialogView.findViewById(R.id.seekBar_width);
+        seekBar_width.setProgress((mySharedPreference.getUserWidth()/2)-1);
+        seekBar_width.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textView_width.setText(context.getString(R.string.word_size)+":"+(progress+1)*2);
+                mySharedPreference.saveUserWidth((progress+1)*2);
+                paintView.setPenWidth((progress+1)*2);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
         //Create an instance of AlertDialog

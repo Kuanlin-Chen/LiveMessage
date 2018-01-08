@@ -282,10 +282,12 @@ public class MainActivity extends AppCompatActivity {
     private void setMySharedPreference(){
         int init_color = 0xffff0000;
         int init_background = 0xffffffff;
-        int init_style = 3;
+        int init_style = 0;
+        int init_width = 10;
         mySharedPreference.saveUserStyle(init_style);
         mySharedPreference.saveUserColor(init_color);
         mySharedPreference.saveUserBackground(init_background);
+        mySharedPreference.saveUserWidth(init_width);
     }
 
     @Override
