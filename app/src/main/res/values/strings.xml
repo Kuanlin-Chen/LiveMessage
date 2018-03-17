@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LiveMessage</string>
+    <string name="app_name">Gif Message</string>
 
     <string name="button_save_is_recording">Cannot Save While Recording</string>
     <string name="button_save_recorder_null">You Did Not Draw Anything</string>
@@ -16,12 +16,12 @@
     <string name="color_black">BLACK</string>
 
     <string name="crash_dialog_text">Oops! I have bugs, please report to developer to help fix the issue!</string>
-    <string name="crash_dialog_title">LiveMessage have some problem</string>
+    <string name="crash_dialog_title">Gif Message have some problem</string>
 
-    <string name="dialog_saved">Live Message Saved</string>
+    <string name="dialog_saved">Gif Message Saved</string>
     <string name="dialog_saving">Saving Data</string>
-    <string name="dialog_share">Share this Live Message ?</string>
-    <string name="dialog_sharing">Share Live Message</string>
+    <string name="dialog_share">Share this Gif Message ?</string>
+    <string name="dialog_sharing">Share Gif Message</string>
     <string name="dialog_select_pen_style">Select Pen Style</string>
     <string name="dialog_select_pen_color">Select Pen Color</string>
     <string name="dialog_select_bg_color">Select Background Color</string>
@@ -32,7 +32,7 @@
     <string name="feedback_email">kuanlin81625@gmail.com</string>
     <string name="feedback_subject">Thanks for your Feedback</string>
     <string name="feedback_message">Hi,
-\n\nYour LiveMessage app rocks! I would like to give you some feedback:</string>
+\n\nYour app rocks! I would like to give you some feedback:</string>
     <string name="feedback_crash">Please report this issue to the developer!</string>
 
     <string name="guide_next_step">Next Step</string>
@@ -40,9 +40,9 @@
     <string name="guide_record_title">[Record] and [Pause]</string>
     <string name="guide_record_text">Click here to start recording\nClick again to pause recording</string>
     <string name="guide_save_title">[Save]</string>
-    <string name="guide_save_text">Click here to save your live message\nPlease click pause before saving</string>
+    <string name="guide_save_text">Click here to save your gif message\nPlease click pause before saving</string>
     <string name="guide_share_title">[Share]</string>
-    <string name="guide_share_text">Click here to share your live message\nPlease click save before sharing</string>
+    <string name="guide_share_text">Click here to share your gif message\nPlease click save before sharing</string>
     <string name="guide_clear_title">[Clear]</string>
     <string name="guide_clear_text">Click here to clear your canvas</string>
     <string name="guide_style_title">[Style]</string>
@@ -75,5 +75,5 @@
     <string name="word_size">Size</string>
 
     <string name="click_button_twice">Click Back Button Twice to Exit</string>
-    <string name="give_me_permission">You Didn\'t Give LiveMessage Permission</string>
+    <string name="give_me_permission">You Didn\'t Give Gif Message Permission</string>
 </resources>
