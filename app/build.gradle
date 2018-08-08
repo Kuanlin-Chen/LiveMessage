@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "chen.kuanlin.livemessage"
         minSdkVersion 19
@@ -22,7 +22,17 @@ android {
                     def newName = output.outputFile.name
                     newName = newName.replace("app-", "$project.ext.appName-")
                     newName = newName.replace("-release", "" + formattedDate)
-                    output.outputFile = new File(output.outputFile.parent, newName)
+                    output.outputFileName = new File("./../../../../../build/", newName)
+                }
+            }
+        }
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '25.3.1'
                 }
             }
         }
