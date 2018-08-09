@@ -56,7 +56,9 @@ public class Preview_dialog {
                 @Override
                 public void onClick(DialogInterface dialog, int fix) {
                     Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    shareIntent.setType("image/gif");
+                    shareIntent.setDataAndType(uri,context.getContentResolver().getType(uri));
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    //shareIntent.setType("image/gif");
                     shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
                     context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.dialog_sharing)));
                 }

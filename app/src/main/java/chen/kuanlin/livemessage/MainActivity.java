@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -108,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if( (!isRecording) && (recorder!=null) && (isSaved)) {
-                    Uri uri = Uri.fromFile(recorder.getPictureFile());
+                    //Uri uri = Uri.fromFile(recorder.getPictureFile());
+                    Uri uri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID, recorder.getPictureFile());
                     Preview_dialog preview_dialog = new Preview_dialog(MainActivity.this, recorder, 1, uri);
                     preview_dialog.showPreviewDialog();
                 }else {
