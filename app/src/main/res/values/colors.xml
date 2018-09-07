@@ -17,4 +17,5 @@
     <color name="pencolor_white">#FFFFFF</color>
     <color name="pencolor_grey">#888888</color>
     <color name="pencolor_black">#000000</color>
+    <color name="pencolor_test">#000000</color>
 </resources>
