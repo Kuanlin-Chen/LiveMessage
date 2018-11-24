@@ -6,4 +6,4 @@
 
 ## Join development!
 
-**Build status:** master ![](https://api.travis-ci.org/owncloud/android.svg?branch=master) master-beta ![](https://api.travis-ci.org/owncloud/android.svg?branch=master-beta)
+**Start contributing:** Fork this repository and contribute back using pull requests to the master branch. Easy starting points are also reviewing [pull requests](https://github.com/Kuanlin-Chen/LiveMessage/pulls)
