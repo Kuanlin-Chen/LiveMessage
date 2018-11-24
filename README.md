@@ -1,6 +1,6 @@
 # LiveMessage
 
-<img src="readme_resources/logo.png" height="75"/> <a href="https://play.google.com/store/apps/details?id=chen.kuanlin.livemessage"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a>
+<a href="https://play.google.com/store/apps/details?id=chen.kuanlin.livemessage"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a>
 
 # Screen
 
@@ -8,7 +8,7 @@
 
 # Demo
 
-<img src="readme_resources/demo_1.gif" width="300" /> <img src="readme_resources/demo_2" width="300" />
+<img src="readme_resources/demo_1.gif" width="300" /> <img src="readme_resources/demo_2.gif" width="300" />
 
 ## Join development!
 
