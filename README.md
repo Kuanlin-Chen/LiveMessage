@@ -1,5 +1,14 @@
 # LiveMessage
 
+<a href="https://scan.coverity.com/projects/kuanlin-chen-livemessage">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/coverity/scan/18245.svg"/>
+</a>
+
+# Overview
+
+LiveMessage allows you to make your own animated GIFs. You can draw or write handwritten messages on canvas, and share to people you love.
+
 <a href="https://play.google.com/store/apps/details?id=chen.kuanlin.livemessage"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a>
 
 # Screen
